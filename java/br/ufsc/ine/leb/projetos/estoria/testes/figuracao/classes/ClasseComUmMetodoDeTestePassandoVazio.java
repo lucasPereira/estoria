@@ -4,10 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class ClasseDeTesteUmMetodoDeTestePassando {
+public class ClasseComUmMetodoDeTestePassandoVazio {
 
 	@Test
-	public void teste1Passando() {
+	public void testar() {
 		assertTrue(true);
 	}
 
