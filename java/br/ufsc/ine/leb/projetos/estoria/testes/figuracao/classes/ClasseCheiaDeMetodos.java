@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.Anotacao;
 
-public abstract class ClasseCheia {
+public abstract class ClasseCheiaDeMetodos {
 
 	public abstract void metodoAbstrato();
 
@@ -47,15 +47,15 @@ public abstract class ClasseCheia {
 	public void metodoAnotadoComIgnore() {}
 
 	@Ignore
-	@Test
-	public void metodoAnotadoComIgnoreTeste() {}
+	public @Test void metodoAnotadoComIgnoreTest() {}
 
 	@Test
-	@Ignore
-	public void metodoAnotadoComTesteIgnore() {}
+	public @Ignore void metodoAnotadoComTestIgnore() {}
 
 	public @Test void metodoAnotadoComTest() {}
 
+	@Test
+	@Ignore
 	@Anotacao(valor = "methodBeforeAccessModifier")
 	public @Anotacao(valor = "methodAfterAccessModifier") <@Anotacao(valor = "identifierOfTypeParameterOfMethod") T> @Anotacao(valor = "typeParameter") Object metodoAnotadoEmTudo(@Anotacao(valor = "parameter") Class<@Anotacao(valor = "identifierOfTypeParameterOfParameterType") T> parametro) throws @Anotacao(valor = "exception") Exception {
 		@Anotacao(valor = "variable") Object variavel = null;

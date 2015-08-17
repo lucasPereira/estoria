@@ -1,5 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Collections;
@@ -24,14 +25,51 @@ public final class FiltradorDeMetodos {
 	}
 
 	public void removerMetodosAbstratos() {
-		metodos.get(0).getAnnotation(null);
-		metodos.get(0).getAnnotations();
-		metodos.get(0).getAnnotationsByType(null);
-		metodos.get(0).getDeclaredAnnotation(null);
-		metodos.get(0).getDeclaredAnnotations();
-		metodos.get(0).getDeclaredAnnotationsByType(null);
-		metodos.get(0).getParameterAnnotations();
-		metodos.removeIf(metodo -> metodo.getDeclaredAnnotation(null) != null || Modifier.isAbstract(metodo.getModifiers()));
+		metodos.removeIf(metodo -> Modifier.isAbstract(metodo.getModifiers()));
+	}
+
+	public void removerMetodosEstaticos() {
+		metodos.removeIf(metodo -> Modifier.isStatic(metodo.getModifiers()));
+	}
+
+	public void removerMetodosNativos() {
+		metodos.removeIf(metodo -> Modifier.isNative(metodo.getModifiers()));
+	}
+
+	public void removerMetodosSincronizados() {
+		metodos.removeIf(metodo -> Modifier.isSynchronized(metodo.getModifiers()));
+	}
+
+	public void removerMetodosPrivados() {
+		metodos.removeIf(metodo -> Modifier.isPrivate(metodo.getModifiers()));
+	}
+
+	public void removerMetodosProtegidos() {
+		metodos.removeIf(metodo -> Modifier.isProtected(metodo.getModifiers()));
+	}
+
+	public void removerMetodosDefault() {
+		metodos.removeIf(metodo -> !(Modifier.isPublic(metodo.getModifiers()) || Modifier.isProtected(metodo.getModifiers()) || Modifier.isPrivate(metodo.getModifiers())));
+	}
+
+	public void removerMetodosComRetorno() {
+		metodos.removeIf(metodo -> !metodo.getReturnType().equals(Void.TYPE));
+	}
+
+	public void removerMetodosGenericos() {
+		metodos.removeIf(metodo -> metodo.getTypeParameters().length > 0);
+	}
+
+	public void removerMetodosParametrizados() {
+		metodos.removeIf(metodo -> metodo.getParameterCount() > 0);
+	}
+
+	public void removerMetodosNaoAnotadosCom(Class<? extends Annotation> classe) {
+		metodos.removeIf(metodo -> metodo.getDeclaredAnnotationsByType(classe).length == 0);
+	}
+
+	public void removerMetodosAnotadosCom(Class<? extends Annotation> classe) {
+		metodos.removeIf(metodo -> metodo.getDeclaredAnnotationsByType(classe).length > 0);
 	}
 
 }
