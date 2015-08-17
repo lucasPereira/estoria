@@ -91,10 +91,12 @@ public final class TesteAnotacao {
 		Anotacoes[] anotacoesAnotacoes = metodo.getAnnotationsByType(Anotacoes.class);
 		Annotation[] anotacoes = metodo.getAnnotations();
 
-		assertEquals(1, anotacoes.length);
+		assertEquals(3, anotacoes.length);
 		assertEquals(2, anotacoesAnotacao.length);
 		assertEquals(1, anotacoesAnotacoes.length);
-		assertEquals(Anotacoes.class, anotacoes[0].annotationType());
+		assertEquals(Test.class, anotacoes[0].annotationType());
+		assertEquals(Ignore.class, anotacoes[1].annotationType());
+		assertEquals(Anotacoes.class, anotacoes[2].annotationType());
 		assertEquals("methodBeforeAccessModifier", anotacoesAnotacao[0].valor());
 		assertEquals("methodAfterAccessModifier", anotacoesAnotacao[1].valor());
 		assertEquals("methodBeforeAccessModifier", anotacaoAnotacoes.value()[0].valor());
@@ -113,10 +115,12 @@ public final class TesteAnotacao {
 		Anotacoes[] anotacoesAnotacoes = metodo.getDeclaredAnnotationsByType(Anotacoes.class);
 		Annotation[] anotacoes = metodo.getDeclaredAnnotations();
 
-		assertEquals(1, anotacoes.length);
+		assertEquals(3, anotacoes.length);
 		assertEquals(2, anotacoesAnotacao.length);
 		assertEquals(1, anotacoesAnotacoes.length);
-		assertEquals(Anotacoes.class, anotacoes[0].annotationType());
+		assertEquals(Test.class, anotacoes[0].annotationType());
+		assertEquals(Ignore.class, anotacoes[1].annotationType());
+		assertEquals(Anotacoes.class, anotacoes[2].annotationType());
 		assertEquals("methodBeforeAccessModifier", anotacoesAnotacao[0].valor());
 		assertEquals("methodAfterAccessModifier", anotacoesAnotacao[1].valor());
 		assertEquals("methodBeforeAccessModifier", anotacaoAnotacoes.value()[0].valor());
