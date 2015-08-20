@@ -10,12 +10,11 @@ import org.junit.Test;
 public final class SeletorDeTestes {
 
 	private List<SelecaoDeTeste> selecoes;
-	
-	
+
 	public SeletorDeTestes() {
 		selecoes = new LinkedList<>();
 	}
-	
+
 	public void adicionarClasse(Class<?> classe) {
 		FiltradorDeMetodos filtrador = new FiltradorDeMetodos(classe);
 		filtrador.removerMetodosAbstratos();

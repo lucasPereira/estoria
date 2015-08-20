@@ -56,4 +56,17 @@ public final class TesteSeletorDeTestes {
 		assertEquals("metodoDeTesteFinal", seletor.obterSelecoes().get(3).obterMetodoDeTeste());
 	}
 
+	@Test
+	public void adicionarDuasClasses() throws Exception {
+		seletor.adicionarClasse(ClasseComDoisMetodosDeTestePassando.class);
+		seletor.adicionarClasse(ClasseComUmMetodoDeTestePassando.class);
+		assertEquals(3, seletor.obterSelecoes().size());
+		assertEquals(ClasseComDoisMetodosDeTestePassando.class, seletor.obterSelecoes().get(0).obterClasse());
+		assertEquals(ClasseComDoisMetodosDeTestePassando.class, seletor.obterSelecoes().get(1).obterClasse());
+		assertEquals(ClasseComUmMetodoDeTestePassando.class, seletor.obterSelecoes().get(2).obterClasse());
+		assertEquals("testar1", seletor.obterSelecoes().get(0).obterMetodoDeTeste());
+		assertEquals("testar2", seletor.obterSelecoes().get(1).obterMetodoDeTeste());
+		assertEquals("testar", seletor.obterSelecoes().get(2).obterMetodoDeTeste());
+	}
+
 }
