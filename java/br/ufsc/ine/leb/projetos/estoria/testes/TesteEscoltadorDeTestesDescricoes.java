@@ -70,6 +70,7 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertFalse(descricaoDoTeste.isEmpty());
 		assertEquals(0, descricaoDoTeste.getChildren().size());
 		assertEquals(1, descricaoDoTeste.testCount());
+		assertEquals(1, escoltador.testCount());
 	}
 
 	@Test
@@ -87,6 +88,7 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertFalse(descricaoDoSeletor.isEmpty());
 		assertEquals(2, descricaoDoSeletor.getChildren().size());
 		assertEquals(2, descricaoDoSeletor.testCount());
+		assertEquals(2, escoltador.testCount());
 
 		Description descricaoDoTeste1 = descricaoDoSeletor.getChildren().get(0);
 		assertEquals(ClasseComDoisMetodosDeTestePassando.class, descricaoDoTeste1.getTestClass());
@@ -125,6 +127,7 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertFalse(descricaoDoSeletor.isEmpty());
 		assertEquals(3, descricaoDoSeletor.getChildren().size());
 		assertEquals(3, descricaoDoSeletor.testCount());
+		assertEquals(3, escoltador.testCount());
 
 		Description descricaoDoTeste1 = descricaoDoSeletor.getChildren().get(0);
 		assertEquals(ClasseComUmMetodoDeTestePassando.class, descricaoDoTeste1.getTestClass());
