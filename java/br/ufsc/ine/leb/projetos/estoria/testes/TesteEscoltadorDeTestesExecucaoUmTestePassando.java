@@ -10,7 +10,7 @@ import org.junit.runner.notification.RunNotifier;
 
 import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
-import br.ufsc.ine.leb.projetos.estoria.OuvinteDeEscolta;
+import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmMetodoDeTestePassando;
@@ -25,10 +25,10 @@ public final class TesteEscoltadorDeTestesExecucaoUmTestePassando {
 		seletor.adicionarClasse(ClasseComUmMetodoDeTestePassando.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
 		RunNotifier mensageiroDeEscolta = new RunNotifier();
-		OuvinteDeEscolta ouvinteDeEscolta = new OuvinteDeEscolta();
-		mensageiroDeEscolta.addFirstListener(ouvinteDeEscolta);
+		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
+		mensageiroDeEscolta.addFirstListener(espiaoDeEscolta);
 		escoltador.run(mensageiroDeEscolta);
-		notificacoes = ouvinteDeEscolta.obterNotificacoes();
+		notificacoes = espiaoDeEscolta.obterNotificacoes();
 	}
 
 	@Test

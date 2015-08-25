@@ -8,11 +8,11 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 
-public class OuvinteDeEscolta extends RunListener {
+public class EspiaoDeEscolta extends RunListener {
 
 	private List<Notificacao> notificacoes;
 
-	public OuvinteDeEscolta() {
+	public EspiaoDeEscolta() {
 		notificacoes = new LinkedList<>();
 	}
 
@@ -43,14 +43,14 @@ public class OuvinteDeEscolta extends RunListener {
 		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_FINALIZADO, descricao);
 		notificacoes.add(notificacao);
 	}
-	
+
 	@Override
 	public void testFailure(Failure falha) throws Exception {
 		super.testFailure(falha);
 		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_FALHA, falha);
 		notificacoes.add(notificacao);
 	}
-	
+
 	public List<Notificacao> obterNotificacoes() {
 		return notificacoes;
 	}

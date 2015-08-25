@@ -1,14 +1,12 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Test;
 
-public class ClasseComUmMetodoDeTesteFalhando {
+public class ClasseComUmMetodoDeTesteFalhandoExcecaoLancada {
 
 	@Test
 	public void testar() {
-		fail();
+		throw new UnsupportedOperationException();
 	}
 
 }

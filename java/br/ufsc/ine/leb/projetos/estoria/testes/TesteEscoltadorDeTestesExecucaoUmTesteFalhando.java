@@ -10,7 +10,7 @@ import org.junit.runner.notification.RunNotifier;
 
 import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
-import br.ufsc.ine.leb.projetos.estoria.OuvinteDeEscolta;
+import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmMetodoDeTesteFalhando;
@@ -25,10 +25,10 @@ public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 		seletor.adicionarClasse(ClasseComUmMetodoDeTesteFalhando.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
 		RunNotifier mensageiroDeEscolta = new RunNotifier();
-		OuvinteDeEscolta ouvinteDeEscolta = new OuvinteDeEscolta();
-		mensageiroDeEscolta.addListener(ouvinteDeEscolta);
+		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
+		mensageiroDeEscolta.addListener(espiaoDeEscolta);
 		escoltador.run(mensageiroDeEscolta);
-		notificacoes = ouvinteDeEscolta.obterNotificacoes();
+		notificacoes = espiaoDeEscolta.obterNotificacoes();
 	}
 
 	@Test
@@ -72,6 +72,7 @@ public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 	public void classesDasDescricoes() throws Exception {
 		assertEquals(SeletorDeTestes.class.getName(), notificacoes.get(0).obterDescricao().getClassName());
 		assertEquals(ClasseComUmMetodoDeTesteFalhando.class.getName(), notificacoes.get(1).obterDescricao().getClassName());
+		assertEquals(ClasseComUmMetodoDeTesteFalhando.class.getName(), notificacoes.get(2).obterFalha().getDescription().getClassName());
 		assertEquals(ClasseComUmMetodoDeTesteFalhando.class.getName(), notificacoes.get(3).obterDescricao().getClassName());
 	}
 
@@ -79,12 +80,13 @@ public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 	public void metodosDasDescricoes() throws Exception {
 		assertEquals(null, notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(1).obterDescricao().getMethodName());
+		assertEquals("testar", notificacoes.get(2).obterFalha().getDescription().getMethodName());
 		assertEquals("testar", notificacoes.get(3).obterDescricao().getMethodName());
 	}
 
 	@Test
 	public void falhaDoTeste() throws Exception {
-
+		assertEquals(AssertionError.class, notificacoes.get(2).obterFalha().getException().getClass());
 	}
 
 	@Test
