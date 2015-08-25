@@ -51,6 +51,13 @@ public class EspiaoDeEscolta extends RunListener {
 		notificacoes.add(notificacao);
 	}
 
+	@Override
+	public void testAssumptionFailure(Failure falha) {
+		super.testAssumptionFailure(falha);
+		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_FALHA_SUPOSICAO, falha);
+		notificacoes.add(notificacao);
+	}
+
 	public List<Notificacao> obterNotificacoes() {
 		return notificacoes;
 	}

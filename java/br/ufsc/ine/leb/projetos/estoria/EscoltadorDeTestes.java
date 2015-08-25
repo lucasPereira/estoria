@@ -7,8 +7,6 @@ import org.junit.runner.Result;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 
-import br.ufsc.ine.leb.projetos.estoria.testes.ExecutorDeTeste;
-
 public final class EscoltadorDeTestes extends Runner {
 
 	private Description descricao;

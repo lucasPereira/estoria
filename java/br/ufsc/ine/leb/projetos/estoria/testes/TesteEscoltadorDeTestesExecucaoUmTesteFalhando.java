@@ -91,6 +91,7 @@ public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 
 	@Test
 	public void resultadoDosTestes() throws Exception {
+		assertEquals(1, notificacoes.get(4).obterResultado().getFailures().size());
 		assertEquals(1, notificacoes.get(4).obterResultado().getFailureCount());
 		assertEquals(0, notificacoes.get(4).obterResultado().getIgnoreCount());
 		assertEquals(1, notificacoes.get(4).obterResultado().getRunCount());

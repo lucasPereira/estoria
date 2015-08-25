@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.projetos.estoria.testes;
+package br.ufsc.ine.leb.projetos.estoria;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -44,7 +44,8 @@ public class ExecutorDeTeste {
 	private void terminarTesteSemExcecaoLancada(Description descricaoDoTeste, Class<? extends Throwable> excecaoEsperada) {
 		Boolean esperavaExcecao = !excecaoEsperada.equals(Test.None.class);
 		if (esperavaExcecao) {
-			Throwable excecaoLancada = new AssertionError("Expected exception: " + excecaoEsperada.getName());
+			String mensagemDeFalha = String.format("expected exception:<%s>", excecaoEsperada.getName());
+			Throwable excecaoLancada = new AssertionError(mensagemDeFalha);
 			Failure falha = new Failure(descricaoDoTeste, excecaoLancada);
 			mensageiroDeEscolta.fireTestFailure(falha);
 		}
@@ -54,7 +55,16 @@ public class ExecutorDeTeste {
 		Throwable excecaoLancada = excecao.getCause();
 		Boolean esperavaExcecao = !excecaoEsperada.equals(Test.None.class);
 		Boolean excecaoLancadaEraEsperada = excecaoEsperada.isInstance(excecaoLancada);
-		if ((esperavaExcecao && !excecaoLancadaEraEsperada) || !esperavaExcecao) {
+		Boolean falhaDeAssercao = AssertionError.class.isInstance(excecaoLancada);
+		if (esperavaExcecao && !excecaoLancadaEraEsperada) {
+			String mesagemDeFalha = String.format("unexpected exception, expected:<%s> but was:<%s>", excecaoEsperada.getName(), excecaoLancada.getClass().getName());
+			Throwable excecaoPaiLancada = new AssertionError(mesagemDeFalha, excecaoLancada);
+			Failure falha = new Failure(descricaoDoTeste, excecaoPaiLancada);
+			mensageiroDeEscolta.fireTestFailure(falha);
+		} else if (!esperavaExcecao && falhaDeAssercao) {
+			Failure falha = new Failure(descricaoDoTeste, excecaoLancada);
+			mensageiroDeEscolta.fireTestFailure(falha);
+		} else if (!esperavaExcecao && !falhaDeAssercao) {
 			Failure falha = new Failure(descricaoDoTeste, excecaoLancada);
 			mensageiroDeEscolta.fireTestFailure(falha);
 		}
