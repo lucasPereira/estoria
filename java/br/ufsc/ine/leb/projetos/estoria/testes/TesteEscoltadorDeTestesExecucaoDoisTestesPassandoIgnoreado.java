@@ -35,7 +35,7 @@ public final class TesteEscoltadorDeTestesExecucaoDoisTestesPassandoIgnoreado {
 	public void notificacoes() throws Exception {
 		assertEquals(5, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTES_INICIADOS, notificacoes.get(0).obterTipo());
-//		assertEquals(TipoDeNotificacao.TESTE_IGNORADO, notificacoes.get(1).obterTipo());
+		assertEquals(TipoDeNotificacao.TESTE_IGNORADO, notificacoes.get(1).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(1).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FALHA, notificacoes.get(2).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FINALIZADO, notificacoes.get(3).obterTipo());
