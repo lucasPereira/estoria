@@ -12,14 +12,16 @@ public final class EscoltadorDeTestes extends Runner {
 	private Description descricao;
 
 	public EscoltadorDeTestes(SeletorDeTestes seletor) {
-		List<SelecaoDeTeste> selecoes = seletor.obterSelecoes();
 		descricao = Description.createSuiteDescription(seletor.getClass().getName());
-		for (SelecaoDeTeste selecao : selecoes) {
-			Class<?> classeDoTeste = selecao.obterClasse();
-			String metodoDeTeste = selecao.obterMetodoDeTeste();
-			Description descricaoDoTeste = Description.createTestDescription(classeDoTeste, metodoDeTeste);
-			descricao.addChild(descricaoDoTeste);
-		}
+		seletor.obterSelecoesIgnoradas().forEach(selecao -> criarDescricaoDeTeste(selecao));
+		seletor.obterSelecoes().forEach(selecao -> criarDescricaoDeTeste(selecao));
+	}
+
+	private void criarDescricaoDeTeste(SelecaoDeTeste selecao) {
+		Class<?> classeDoTeste = selecao.obterClasse();
+		String metodoDeTeste = selecao.obterMetodoDeTeste();
+		Description descricaoDoTeste = Description.createTestDescription(classeDoTeste, metodoDeTeste);
+		descricao.addChild(descricaoDoTeste);
 	}
 
 	@Override

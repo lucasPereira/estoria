@@ -1,6 +1,5 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
-import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,9 +9,11 @@ import org.junit.Test;
 public final class SeletorDeTestes {
 
 	private List<SelecaoDeTeste> selecoes;
+	private List<SelecaoDeTeste> selecoesIgnoradas;
 
 	public SeletorDeTestes() {
 		selecoes = new LinkedList<>();
+		selecoesIgnoradas = new LinkedList<>();
 	}
 
 	public void adicionarClasse(Class<?> classe) {
@@ -20,7 +21,6 @@ public final class SeletorDeTestes {
 		filtrador.removerMetodosAbstratos();
 		filtrador.removerMetodosNativos();
 		filtrador.removerMetodosNaoAnotadosCom(Test.class);
-		filtrador.removerMetodosAnotadosCom(Ignore.class);
 		filtrador.removerMetodosComRetorno();
 		filtrador.removerMetodosPrivados();
 		filtrador.removerMetodosDefault();
@@ -29,12 +29,19 @@ public final class SeletorDeTestes {
 		filtrador.removerMetodosGenericos();
 		filtrador.removerMetodosParametrizados();
 		filtrador.removerMetodosSincronizados();
-		List<Method> metodos = filtrador.obterMetodos();
-		metodos.forEach(metodo -> selecoes.add(new SelecaoDeTeste(classe, metodo.getName())));
+		FiltradorDeMetodos filtradorDeIgnorados = filtrador.clonar();
+		filtrador.removerMetodosAnotadosCom(Ignore.class);
+		filtradorDeIgnorados.removerMetodosNaoAnotadosCom(Ignore.class);
+		filtrador.obterMetodos().forEach(metodo -> selecoes.add(new SelecaoDeTeste(classe, metodo.getName())));
+		filtradorDeIgnorados.obterMetodos().forEach(metodo -> selecoesIgnoradas.add(new SelecaoDeTeste(classe, metodo.getName())));
 	}
 
 	public List<SelecaoDeTeste> obterSelecoes() {
 		return selecoes;
+	}
+
+	public List<SelecaoDeTeste> obterSelecoesIgnoradas() {
+		return selecoesIgnoradas;
 	}
 
 }

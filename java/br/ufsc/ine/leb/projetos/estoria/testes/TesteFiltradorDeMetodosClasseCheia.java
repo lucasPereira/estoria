@@ -89,6 +89,21 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 	}
 
 	@Test
+	public void clonarFiltrador() throws Exception {
+		filtrador.removerMetodosNaoAnotadosCom(Test.class);
+		FiltradorDeMetodos filtradorClone = filtrador.clonar();
+		filtrador.removerMetodosAnotadosCom(Ignore.class);
+		filtradorClone.removerMetodosNaoAnotadosCom(Ignore.class);
+
+		assertEquals(1, filtrador.obterMetodos().size());
+		assertEquals("metodoAnotadoComTest", filtrador.obterMetodos().get(0).getName());
+		assertEquals(3, filtradorClone.obterMetodos().size());
+		assertEquals("metodoAnotadoComIgnoreTest", filtradorClone.obterMetodos().get(0).getName());
+		assertEquals("metodoAnotadoComTestIgnore", filtradorClone.obterMetodos().get(1).getName());
+		assertEquals("metodoAnotadoEmTudo", filtradorClone.obterMetodos().get(2).getName());
+	}
+
+	@Test
 	public void filtrarMetodosAnotadosComIgnore() throws Exception {
 		filtrador.removerMetodosAnotadosCom(Ignore.class);
 		List<Method> metodos = filtrador.obterMetodos();

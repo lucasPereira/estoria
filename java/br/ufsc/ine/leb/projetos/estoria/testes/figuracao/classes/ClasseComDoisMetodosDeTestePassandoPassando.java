@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class ClasseComDoisMetodosDeTestePassando {
+public class ClasseComDoisMetodosDeTestePassandoPassando {
 
 	@Test
 	public void testar1() {

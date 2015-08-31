@@ -18,6 +18,10 @@ public final class FiltradorDeMetodos {
 		}
 	}
 
+	private FiltradorDeMetodos(List<Method> metodos) {
+		this.metodos = new LinkedList<Method>(metodos);
+	}
+
 	public List<Method> obterMetodos() {
 		ComparadorDeMetodos comparador = new ComparadorDeMetodos();
 		Collections.sort(metodos, comparador);
@@ -70,6 +74,10 @@ public final class FiltradorDeMetodos {
 
 	public void removerMetodosAnotadosCom(Class<? extends Annotation> classe) {
 		metodos.removeIf(metodo -> metodo.getDeclaredAnnotationsByType(classe).length > 0);
+	}
+
+	public FiltradorDeMetodos clonar() {
+		return new FiltradorDeMetodos(metodos);
 	}
 
 }
