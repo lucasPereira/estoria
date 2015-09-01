@@ -28,52 +28,64 @@ public final class FiltradorDeMetodos {
 		return metodos;
 	}
 
-	public void removerMetodosAbstratos() {
+	public FiltradorDeMetodos removerMetodosAbstratos() {
 		metodos.removeIf(metodo -> Modifier.isAbstract(metodo.getModifiers()));
+		return this;
 	}
 
-	public void removerMetodosEstaticos() {
+	public FiltradorDeMetodos removerMetodosEstaticos() {
 		metodos.removeIf(metodo -> Modifier.isStatic(metodo.getModifiers()));
+		return this;
 	}
 
-	public void removerMetodosNativos() {
+	public FiltradorDeMetodos removerMetodosNativos() {
 		metodos.removeIf(metodo -> Modifier.isNative(metodo.getModifiers()));
+		return this;
 	}
 
-	public void removerMetodosSincronizados() {
+	public FiltradorDeMetodos removerMetodosSincronizados() {
 		metodos.removeIf(metodo -> Modifier.isSynchronized(metodo.getModifiers()));
+		return this;
 	}
 
-	public void removerMetodosPrivados() {
+	public FiltradorDeMetodos removerMetodosPrivados() {
 		metodos.removeIf(metodo -> Modifier.isPrivate(metodo.getModifiers()));
+		return this;
 	}
 
-	public void removerMetodosProtegidos() {
+	public FiltradorDeMetodos removerMetodosProtegidos() {
 		metodos.removeIf(metodo -> Modifier.isProtected(metodo.getModifiers()));
+		return this;
 	}
 
-	public void removerMetodosDefault() {
+	public FiltradorDeMetodos removerMetodosDefault() {
 		metodos.removeIf(metodo -> !(Modifier.isPublic(metodo.getModifiers()) || Modifier.isProtected(metodo.getModifiers()) || Modifier.isPrivate(metodo.getModifiers())));
+		return this;
 	}
 
-	public void removerMetodosComRetorno() {
+	public FiltradorDeMetodos removerMetodosComRetorno() {
 		metodos.removeIf(metodo -> !metodo.getReturnType().equals(Void.TYPE));
+		return this;
 	}
 
-	public void removerMetodosGenericos() {
+	public FiltradorDeMetodos removerMetodosGenericos() {
 		metodos.removeIf(metodo -> metodo.getTypeParameters().length > 0);
+		return this;
 	}
 
-	public void removerMetodosParametrizados() {
+	public FiltradorDeMetodos removerMetodosParametrizados() {
 		metodos.removeIf(metodo -> metodo.getParameterCount() > 0);
+		return this;
 	}
 
-	public void removerMetodosNaoAnotadosCom(Class<? extends Annotation> classe) {
+	public FiltradorDeMetodos removerMetodosNaoAnotadosCom(Class<? extends Annotation> classe) {
 		metodos.removeIf(metodo -> metodo.getDeclaredAnnotationsByType(classe).length == 0);
+		return this;
 	}
 
-	public void removerMetodosAnotadosCom(Class<? extends Annotation> classe) {
+	public FiltradorDeMetodos removerMetodosAnotadosCom(Class<? extends Annotation> classe) {
 		metodos.removeIf(metodo -> metodo.getDeclaredAnnotationsByType(classe).length > 0);
+		return this;
 	}
 
 	public FiltradorDeMetodos clonar() {

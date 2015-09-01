@@ -1,9 +1,26 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public abstract class VariosMetodosDeTeste {
+public abstract class ClasseCheiaDeMetodosDeTeste {
+
+	@Before
+	public void metodoDeConfiguracao() {}
+
+	@Ignore
+	@Before
+	public void metodoDeConfiguracaoComIgnore() {}
+
+	@Test
+	@Before
+	public void metodoDeConfiguracaoComTest() {}
+
+	@Ignore
+	@Test
+	@Before
+	public void metodoDeConfiguracaoComIgnoreTest() {}
 
 	@Test
 	public void metodoDeTeste() {}

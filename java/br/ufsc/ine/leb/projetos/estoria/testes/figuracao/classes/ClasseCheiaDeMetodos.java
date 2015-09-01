@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.Anotacao;
 
-public abstract class VariosMetodos {
+public abstract class ClasseCheiaDeMetodos {
 
 	public abstract void metodoAbstrato();
 

@@ -18,8 +18,8 @@ public final class EscoltadorDeTestes extends Runner {
 		descricoesDosIgnorados = new LinkedList<>();
 		descricoesDosExecutados = new LinkedList<>();
 		descricao = Description.createSuiteDescription(seletor.getClass().getName());
-		seletor.obterSelecoesIgnoradas().forEach(selecao -> criarDescricaoDeTeste(selecao, descricoesDosIgnorados));
-		seletor.obterSelecoes().forEach(selecao -> criarDescricaoDeTeste(selecao, descricoesDosExecutados));
+		seletor.obterSelecoesDeTesteIgnorados().forEach(selecao -> criarDescricaoDeTeste(selecao, descricoesDosIgnorados));
+		seletor.obterSelecoesDeTeste().forEach(selecao -> criarDescricaoDeTeste(selecao, descricoesDosExecutados));
 	}
 
 	private void criarDescricaoDeTeste(SelecaoDeTeste selecao, List<Description> descricoes) {

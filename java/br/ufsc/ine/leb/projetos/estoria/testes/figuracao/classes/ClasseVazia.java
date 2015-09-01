@@ -1,5 +1,5 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
 
-public class Vazia {
+public class ClasseVazia {
 
 }
