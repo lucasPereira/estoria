@@ -58,6 +58,13 @@ public class EspiaoDeEscolta extends RunListener {
 		notificacoes.add(notificacao);
 	}
 
+	@Override
+	public void testIgnored(Description descricao) throws Exception {
+		super.testIgnored(descricao);
+		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_IGNORADO, descricao);
+		notificacoes.add(notificacao);
+	}
+
 	public List<Notificacao> obterNotificacoes() {
 		return notificacoes;
 	}
