@@ -3,7 +3,7 @@ package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public abstract class ClasseCheiaDeMetodosDeTeste {
+public abstract class VariosMetodosDeTeste {
 
 	@Test
 	public void metodoDeTeste() {}

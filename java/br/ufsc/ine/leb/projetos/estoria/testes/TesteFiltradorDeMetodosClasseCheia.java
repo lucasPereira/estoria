@@ -11,7 +11,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.FiltradorDeMetodos;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseCheiaDeMetodos;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.VariosMetodos;
 
 public final class TesteFiltradorDeMetodosClasseCheia {
 
@@ -19,7 +19,7 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 
 	@Before
 	public void prepararCenario() {
-		filtrador = new FiltradorDeMetodos(ClasseCheiaDeMetodos.class);
+		filtrador = new FiltradorDeMetodos(VariosMetodos.class);
 	}
 
 	@Test

@@ -1,10 +1,10 @@
-package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
+package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ClasseComUmMetodoDeTesteFalhando {
+public class UmMetodoDeTesteFalhando {
 
 	@Test
 	public void testar() {

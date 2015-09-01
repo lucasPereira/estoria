@@ -8,13 +8,13 @@ import java.util.List;
 import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.FiltradorDeMetodos;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseVazia;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.Vazia;
 
 public final class TesteFiltradorDeMetodosClasseVazia {
 
 	@Test
 	public void classeVazia() throws Exception {
-		FiltradorDeMetodos filtrador = new FiltradorDeMetodos(ClasseVazia.class);
+		FiltradorDeMetodos filtrador = new FiltradorDeMetodos(Vazia.class);
 		List<Method> metodos = filtrador.obterMetodos();
 		assertEquals(0, metodos.size());
 	}

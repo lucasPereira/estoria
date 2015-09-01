@@ -13,7 +13,7 @@ import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmMetodoDeTesteFalhando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTesteFalhando;
 
 public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 
@@ -22,7 +22,7 @@ public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 	@Before
 	public void prepararCenario() {
 		SeletorDeTestes seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(ClasseComUmMetodoDeTesteFalhando.class);
+		seletor.adicionarClasse(UmMetodoDeTesteFalhando.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
 		RunNotifier mensageiroDeEscolta = new RunNotifier();
 		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
@@ -71,9 +71,9 @@ public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 	@Test
 	public void classesDasDescricoes() throws Exception {
 		assertEquals(SeletorDeTestes.class.getName(), notificacoes.get(0).obterDescricao().getClassName());
-		assertEquals(ClasseComUmMetodoDeTesteFalhando.class.getName(), notificacoes.get(1).obterDescricao().getClassName());
-		assertEquals(ClasseComUmMetodoDeTesteFalhando.class.getName(), notificacoes.get(2).obterFalha().getDescription().getClassName());
-		assertEquals(ClasseComUmMetodoDeTesteFalhando.class.getName(), notificacoes.get(3).obterDescricao().getClassName());
+		assertEquals(UmMetodoDeTesteFalhando.class.getName(), notificacoes.get(1).obterDescricao().getClassName());
+		assertEquals(UmMetodoDeTesteFalhando.class.getName(), notificacoes.get(2).obterFalha().getDescription().getClassName());
+		assertEquals(UmMetodoDeTesteFalhando.class.getName(), notificacoes.get(3).obterDescricao().getClassName());
 	}
 
 	@Test

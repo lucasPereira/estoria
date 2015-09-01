@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
+package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class ClasseComTresMetodosDeTestesPassandoIgnoradoFalhando {
+public class TresMetodosDeTestesPassandoIgnoradoFalhando {
 
 	@Test
 	public void testarPassando() {

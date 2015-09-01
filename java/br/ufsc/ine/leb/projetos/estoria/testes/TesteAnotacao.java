@@ -10,13 +10,13 @@ import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.Anotacao;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.Anotacoes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseCheiaDeMetodos;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.VariosMetodos;
 
 public final class TesteAnotacao {
 
 	@Test
 	public void anotacaoIgnore() throws Exception {
-		Method metodo = ClasseCheiaDeMetodos.class.getMethod("metodoAnotadoComIgnore");
+		Method metodo = VariosMetodos.class.getMethod("metodoAnotadoComIgnore");
 		Ignore anotacaoIgnore = metodo.getAnnotation(Ignore.class);
 		Ignore[] anotacoesIgnore = metodo.getAnnotationsByType(Ignore.class);
 		Annotation[] anotacoes = metodo.getAnnotations();
@@ -30,7 +30,7 @@ public final class TesteAnotacao {
 
 	@Test
 	public void anotacaoTest() throws Exception {
-		Method metodo = ClasseCheiaDeMetodos.class.getMethod("metodoAnotadoComTest");
+		Method metodo = VariosMetodos.class.getMethod("metodoAnotadoComTest");
 		Test anotacaoTest = metodo.getAnnotation(Test.class);
 		Test[] anotacoesTest = metodo.getAnnotationsByType(Test.class);
 		Annotation[] anotacoes = metodo.getAnnotations();
@@ -44,7 +44,7 @@ public final class TesteAnotacao {
 
 	@Test
 	public void anotacaoIgnoreTeste() throws Exception {
-		Method metodo = ClasseCheiaDeMetodos.class.getMethod("metodoAnotadoComIgnoreTest");
+		Method metodo = VariosMetodos.class.getMethod("metodoAnotadoComIgnoreTest");
 		Ignore anotacaoIgnore = metodo.getAnnotation(Ignore.class);
 		Ignore[] anotacoesIgnore = metodo.getAnnotationsByType(Ignore.class);
 		Test anotacaoTest = metodo.getAnnotation(Test.class);
@@ -64,7 +64,7 @@ public final class TesteAnotacao {
 
 	@Test
 	public void anotacaoDeclaradaTesteIgnore() throws Exception {
-		Method metodo = ClasseCheiaDeMetodos.class.getMethod("metodoAnotadoComTestIgnore");
+		Method metodo = VariosMetodos.class.getMethod("metodoAnotadoComTestIgnore");
 		Test anotacaoTest = metodo.getDeclaredAnnotation(Test.class);
 		Test[] anotacoesTest = metodo.getDeclaredAnnotationsByType(Test.class);
 		Ignore anotacaoIgnore = metodo.getDeclaredAnnotation(Ignore.class);
@@ -84,7 +84,7 @@ public final class TesteAnotacao {
 
 	@Test
 	public void anotacaoCompleta() throws Exception {
-		Method metodo = ClasseCheiaDeMetodos.class.getMethod("metodoAnotadoEmTudo", Class.class);
+		Method metodo = VariosMetodos.class.getMethod("metodoAnotadoEmTudo", Class.class);
 		Anotacao anotacaoAnotacao = metodo.getAnnotation(Anotacao.class);
 		Anotacoes anotacaoAnotacoes = metodo.getAnnotation(Anotacoes.class);
 		Anotacao[] anotacoesAnotacao = metodo.getAnnotationsByType(Anotacao.class);
@@ -108,7 +108,7 @@ public final class TesteAnotacao {
 
 	@Test
 	public void anotacaoCompletaDeclarada() throws Exception {
-		Method metodo = ClasseCheiaDeMetodos.class.getMethod("metodoAnotadoEmTudo", Class.class);
+		Method metodo = VariosMetodos.class.getMethod("metodoAnotadoEmTudo", Class.class);
 		Anotacao anotacaoAnotacao = metodo.getDeclaredAnnotation(Anotacao.class);
 		Anotacoes anotacaoAnotacoes = metodo.getDeclaredAnnotation(Anotacoes.class);
 		Anotacao[] anotacoesAnotacao = metodo.getDeclaredAnnotationsByType(Anotacao.class);

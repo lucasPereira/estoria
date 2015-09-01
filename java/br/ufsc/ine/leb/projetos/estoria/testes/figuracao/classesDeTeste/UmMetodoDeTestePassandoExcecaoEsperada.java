@@ -1,8 +1,8 @@
-package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
+package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste;
 
 import org.junit.Test;
 
-public class ClasseComUmMetodoDeTestePassandoExcecaoEsperada {
+public class UmMetodoDeTestePassandoExcecaoEsperada {
 
 	@Test(expected = UnsupportedOperationException.class)
 	public void testar() {
