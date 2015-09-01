@@ -52,7 +52,7 @@ public final class TesteEscoltadorDeTestesExecucaoTresTestesPassandoIgnoradoFalh
 		assertNotNull(notificacoes.get(0).obterDescricao());
 		assertNotNull(notificacoes.get(1).obterDescricao());
 		assertNotNull(notificacoes.get(2).obterDescricao());
-		assertNull(notificacoes.get(3).obterDescricao());
+		assertNotNull(notificacoes.get(3).obterDescricao());
 		assertNotNull(notificacoes.get(4).obterDescricao());
 		assertNotNull(notificacoes.get(5).obterDescricao());
 		assertNotNull(notificacoes.get(6).obterDescricao());
@@ -88,7 +88,7 @@ public final class TesteEscoltadorDeTestesExecucaoTresTestesPassandoIgnoradoFalh
 		assertEquals(SeletorDeTestes.class.getName(), notificacoes.get(0).obterDescricao().getClassName());
 		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(1).obterDescricao().getClassName());
 		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(2).obterDescricao().getClassName());
-		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(3).obterFalha().getDescription().getClassName());
+		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(3).obterDescricao().getClassName());
 		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(4).obterDescricao().getClassName());
 		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(5).obterDescricao().getClassName());
 		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(6).obterDescricao().getClassName());
@@ -99,7 +99,7 @@ public final class TesteEscoltadorDeTestesExecucaoTresTestesPassandoIgnoradoFalh
 		assertEquals(null, notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testarIgnorado", notificacoes.get(1).obterDescricao().getMethodName());
 		assertEquals("testarFalhando", notificacoes.get(2).obterDescricao().getMethodName());
-		assertEquals("testarFalhando", notificacoes.get(3).obterFalha().getDescription().getMethodName());
+		assertEquals("testarFalhando", notificacoes.get(3).obterDescricao().getMethodName());
 		assertEquals("testarFalhando", notificacoes.get(4).obterDescricao().getMethodName());
 		assertEquals("testarPassando", notificacoes.get(5).obterDescricao().getMethodName());
 		assertEquals("testarPassando", notificacoes.get(6).obterDescricao().getMethodName());

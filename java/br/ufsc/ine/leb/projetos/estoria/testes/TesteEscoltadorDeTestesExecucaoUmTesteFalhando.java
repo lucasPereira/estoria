@@ -45,7 +45,7 @@ public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 	public void descricoesDasNotificacoes() throws Exception {
 		assertNotNull(notificacoes.get(0).obterDescricao());
 		assertNotNull(notificacoes.get(1).obterDescricao());
-		assertNull(notificacoes.get(2).obterDescricao());
+		assertNotNull(notificacoes.get(2).obterDescricao());
 		assertNotNull(notificacoes.get(3).obterDescricao());
 		assertNull(notificacoes.get(4).obterDescricao());
 	}
@@ -72,7 +72,7 @@ public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 	public void classesDasDescricoes() throws Exception {
 		assertEquals(SeletorDeTestes.class.getName(), notificacoes.get(0).obterDescricao().getClassName());
 		assertEquals(UmTesteFalhando.class.getName(), notificacoes.get(1).obterDescricao().getClassName());
-		assertEquals(UmTesteFalhando.class.getName(), notificacoes.get(2).obterFalha().getDescription().getClassName());
+		assertEquals(UmTesteFalhando.class.getName(), notificacoes.get(2).obterDescricao().getClassName());
 		assertEquals(UmTesteFalhando.class.getName(), notificacoes.get(3).obterDescricao().getClassName());
 	}
 
@@ -80,7 +80,7 @@ public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 	public void metodosDasDescricoes() throws Exception {
 		assertEquals(null, notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(1).obterDescricao().getMethodName());
-		assertEquals("testar", notificacoes.get(2).obterFalha().getDescription().getMethodName());
+		assertEquals("testar", notificacoes.get(2).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(3).obterDescricao().getMethodName());
 	}
 

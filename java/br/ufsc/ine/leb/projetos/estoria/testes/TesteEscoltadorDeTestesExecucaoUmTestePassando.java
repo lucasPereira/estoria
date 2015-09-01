@@ -1,6 +1,9 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -9,8 +12,8 @@ import org.junit.Test;
 import org.junit.runner.notification.RunNotifier;
 
 import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
-import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
+import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;

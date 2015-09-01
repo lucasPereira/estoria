@@ -12,6 +12,13 @@ public class Notificacao {
 	private TipoDeNotificacao tipo;
 
 	public Notificacao(TipoDeNotificacao tipo, Description descricao) {
+		Contrato contrato = new Contrato();
+		contrato.assegureIguais(tipo, TipoDeNotificacao.TESTE_INICIADO).ou(TipoDeNotificacao.TESTE_FINALIZADO).ou(TipoDeNotificacao.TESTE_IGNORADO).ou(TipoDeNotificacao.TESTES_INICIADOS);
+		contrato.se(tipo.equals(TipoDeNotificacao.TESTES_INICIADOS)).assegureQue(descricao.isSuite());
+		contrato.se(tipo.equals(TipoDeNotificacao.TESTE_INICIADO)).assegureQue(descricao.isTest());
+		contrato.se(tipo.equals(TipoDeNotificacao.TESTE_FINALIZADO)).assegureQue(descricao.isTest());
+		contrato.se(tipo.equals(TipoDeNotificacao.TESTE_IGNORADO)).assegureQue(descricao.isTest());
+		contrato.garantir();
 		this.tipo = tipo;
 		this.descricao = descricao;
 	}
@@ -24,6 +31,7 @@ public class Notificacao {
 	public Notificacao(TipoDeNotificacao tipo, Failure falha) {
 		this.tipo = tipo;
 		this.falha = falha;
+		this.descricao = falha.getDescription();
 	}
 
 	public TipoDeNotificacao obterTipo() {
