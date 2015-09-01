@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste;
 
-public class ZeroMetodosDeTeste {
+public class ZeroTestes {
 
 	public void testar() {}
 

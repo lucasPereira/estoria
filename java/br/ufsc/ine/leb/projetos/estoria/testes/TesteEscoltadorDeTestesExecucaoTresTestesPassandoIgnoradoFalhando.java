@@ -16,7 +16,7 @@ import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.TresMetodosDeTestesPassandoIgnoradoFalhando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.TresTestesPassandoIgnoradoFalhando;
 
 public final class TesteEscoltadorDeTestesExecucaoTresTestesPassandoIgnoradoFalhando {
 
@@ -25,7 +25,7 @@ public final class TesteEscoltadorDeTestesExecucaoTresTestesPassandoIgnoradoFalh
 	@Before
 	public void prepararCenario() {
 		SeletorDeTestes seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(TresMetodosDeTestesPassandoIgnoradoFalhando.class);
+		seletor.adicionarClasse(TresTestesPassandoIgnoradoFalhando.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
 		RunNotifier mensageiroDeEscolta = new RunNotifier();
 		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
@@ -86,12 +86,12 @@ public final class TesteEscoltadorDeTestesExecucaoTresTestesPassandoIgnoradoFalh
 	@Test
 	public void classesDasDescricoes() throws Exception {
 		assertEquals(SeletorDeTestes.class.getName(), notificacoes.get(0).obterDescricao().getClassName());
-		assertEquals(TresMetodosDeTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(1).obterDescricao().getClassName());
-		assertEquals(TresMetodosDeTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(2).obterDescricao().getClassName());
-		assertEquals(TresMetodosDeTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(3).obterFalha().getDescription().getClassName());
-		assertEquals(TresMetodosDeTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(4).obterDescricao().getClassName());
-		assertEquals(TresMetodosDeTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(5).obterDescricao().getClassName());
-		assertEquals(TresMetodosDeTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(6).obterDescricao().getClassName());
+		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(1).obterDescricao().getClassName());
+		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(2).obterDescricao().getClassName());
+		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(3).obterFalha().getDescription().getClassName());
+		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(4).obterDescricao().getClassName());
+		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(5).obterDescricao().getClassName());
+		assertEquals(TresTestesPassandoIgnoradoFalhando.class.getName(), notificacoes.get(6).obterDescricao().getClassName());
 	}
 
 	@Test

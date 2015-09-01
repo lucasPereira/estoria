@@ -13,14 +13,14 @@ import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.ExecutorDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTesteFalhando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTesteFalhandoExcecaoEsperada;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTesteFalhandoExcecaoEsperadaExcecaoLancada;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTesteFalhandoExcecaoLancada;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTestePassandoExcecaoEsperada;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTestePassandoExcecaoEsperadaExcecaoLancada;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTestePassandoVazio;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTesteFalhando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTesteFalhandoExcecaoEsperada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTesteFalhandoExcecaoEsperadaExcecaoLancada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTesteFalhandoExcecaoLancada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoExcecaoEsperada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoExcecaoEsperadaExcecaoLancada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoVazio;
 
 public class TesteExecutorDeTeste {
 
@@ -37,67 +37,67 @@ public class TesteExecutorDeTeste {
 
 	@Test
 	public void passando() throws Exception {
-		executor.executar(Description.createTestDescription(UmMetodoDeTestePassando.class, "testar"));
+		executor.executar(Description.createTestDescription(UmTestePassando.class, "testar"));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(2, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FINALIZADO, notificacoes.get(1).obterTipo());
-		assertEquals(UmMetodoDeTestePassando.class, notificacoes.get(0).obterDescricao().getTestClass());
-		assertEquals(UmMetodoDeTestePassando.class, notificacoes.get(1).obterDescricao().getTestClass());
+		assertEquals(UmTestePassando.class, notificacoes.get(0).obterDescricao().getTestClass());
+		assertEquals(UmTestePassando.class, notificacoes.get(1).obterDescricao().getTestClass());
 		assertEquals("testar", notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(1).obterDescricao().getMethodName());
 	}
 
 	@Test
 	public void passandoVazio() throws Exception {
-		executor.executar(Description.createTestDescription(UmMetodoDeTestePassandoVazio.class, "testar"));
+		executor.executar(Description.createTestDescription(UmTestePassandoVazio.class, "testar"));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(2, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FINALIZADO, notificacoes.get(1).obterTipo());
-		assertEquals(UmMetodoDeTestePassandoVazio.class, notificacoes.get(0).obterDescricao().getTestClass());
-		assertEquals(UmMetodoDeTestePassandoVazio.class, notificacoes.get(1).obterDescricao().getTestClass());
+		assertEquals(UmTestePassandoVazio.class, notificacoes.get(0).obterDescricao().getTestClass());
+		assertEquals(UmTestePassandoVazio.class, notificacoes.get(1).obterDescricao().getTestClass());
 		assertEquals("testar", notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(1).obterDescricao().getMethodName());
 	}
 
 	@Test
 	public void passandoExcecaoEsperada() throws Exception {
-		executor.executar(Description.createTestDescription(UmMetodoDeTestePassandoExcecaoEsperada.class, "testar"));
+		executor.executar(Description.createTestDescription(UmTestePassandoExcecaoEsperada.class, "testar"));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(2, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FINALIZADO, notificacoes.get(1).obterTipo());
-		assertEquals(UmMetodoDeTestePassandoExcecaoEsperada.class, notificacoes.get(0).obterDescricao().getTestClass());
-		assertEquals(UmMetodoDeTestePassandoExcecaoEsperada.class, notificacoes.get(1).obterDescricao().getTestClass());
+		assertEquals(UmTestePassandoExcecaoEsperada.class, notificacoes.get(0).obterDescricao().getTestClass());
+		assertEquals(UmTestePassandoExcecaoEsperada.class, notificacoes.get(1).obterDescricao().getTestClass());
 		assertEquals("testar", notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(1).obterDescricao().getMethodName());
 	}
 
 	@Test
 	public void passandoExcecaoEsperadaExcecaoLancada() throws Exception {
-		executor.executar(Description.createTestDescription(UmMetodoDeTestePassandoExcecaoEsperadaExcecaoLancada.class, "testar"));
+		executor.executar(Description.createTestDescription(UmTestePassandoExcecaoEsperadaExcecaoLancada.class, "testar"));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(2, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FINALIZADO, notificacoes.get(1).obterTipo());
-		assertEquals(UmMetodoDeTestePassandoExcecaoEsperadaExcecaoLancada.class, notificacoes.get(0).obterDescricao().getTestClass());
-		assertEquals(UmMetodoDeTestePassandoExcecaoEsperadaExcecaoLancada.class, notificacoes.get(1).obterDescricao().getTestClass());
+		assertEquals(UmTestePassandoExcecaoEsperadaExcecaoLancada.class, notificacoes.get(0).obterDescricao().getTestClass());
+		assertEquals(UmTestePassandoExcecaoEsperadaExcecaoLancada.class, notificacoes.get(1).obterDescricao().getTestClass());
 		assertEquals("testar", notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(1).obterDescricao().getMethodName());
 	}
 
 	@Test
 	public void falhando() throws Exception {
-		executor.executar(Description.createTestDescription(UmMetodoDeTesteFalhando.class, "testar"));
+		executor.executar(Description.createTestDescription(UmTesteFalhando.class, "testar"));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(3, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FALHA, notificacoes.get(1).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FINALIZADO, notificacoes.get(2).obterTipo());
-		assertEquals(UmMetodoDeTesteFalhando.class, notificacoes.get(0).obterDescricao().getTestClass());
-		assertEquals(UmMetodoDeTesteFalhando.class, notificacoes.get(1).obterFalha().getDescription().getTestClass());
-		assertEquals(UmMetodoDeTesteFalhando.class, notificacoes.get(2).obterDescricao().getTestClass());
+		assertEquals(UmTesteFalhando.class, notificacoes.get(0).obterDescricao().getTestClass());
+		assertEquals(UmTesteFalhando.class, notificacoes.get(1).obterFalha().getDescription().getTestClass());
+		assertEquals(UmTesteFalhando.class, notificacoes.get(2).obterDescricao().getTestClass());
 		assertEquals("testar", notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(1).obterFalha().getDescription().getMethodName());
 		assertEquals("testar", notificacoes.get(2).obterDescricao().getMethodName());
@@ -108,15 +108,15 @@ public class TesteExecutorDeTeste {
 
 	@Test
 	public void falhandoExcecaoEsperada() throws Exception {
-		executor.executar(Description.createTestDescription(UmMetodoDeTesteFalhandoExcecaoEsperada.class, "testar"));
+		executor.executar(Description.createTestDescription(UmTesteFalhandoExcecaoEsperada.class, "testar"));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(3, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FALHA, notificacoes.get(1).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FINALIZADO, notificacoes.get(2).obterTipo());
-		assertEquals(UmMetodoDeTesteFalhandoExcecaoEsperada.class, notificacoes.get(0).obterDescricao().getTestClass());
-		assertEquals(UmMetodoDeTesteFalhandoExcecaoEsperada.class, notificacoes.get(1).obterFalha().getDescription().getTestClass());
-		assertEquals(UmMetodoDeTesteFalhandoExcecaoEsperada.class, notificacoes.get(2).obterDescricao().getTestClass());
+		assertEquals(UmTesteFalhandoExcecaoEsperada.class, notificacoes.get(0).obterDescricao().getTestClass());
+		assertEquals(UmTesteFalhandoExcecaoEsperada.class, notificacoes.get(1).obterFalha().getDescription().getTestClass());
+		assertEquals(UmTesteFalhandoExcecaoEsperada.class, notificacoes.get(2).obterDescricao().getTestClass());
 		assertEquals("testar", notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(1).obterFalha().getDescription().getMethodName());
 		assertEquals("testar", notificacoes.get(2).obterDescricao().getMethodName());
@@ -127,15 +127,15 @@ public class TesteExecutorDeTeste {
 
 	@Test
 	public void falhandoExcecaoEsperadaExcecaoLancada() throws Exception {
-		executor.executar(Description.createTestDescription(UmMetodoDeTesteFalhandoExcecaoEsperadaExcecaoLancada.class, "testar"));
+		executor.executar(Description.createTestDescription(UmTesteFalhandoExcecaoEsperadaExcecaoLancada.class, "testar"));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(3, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FALHA, notificacoes.get(1).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FINALIZADO, notificacoes.get(2).obterTipo());
-		assertEquals(UmMetodoDeTesteFalhandoExcecaoEsperadaExcecaoLancada.class, notificacoes.get(0).obterDescricao().getTestClass());
-		assertEquals(UmMetodoDeTesteFalhandoExcecaoEsperadaExcecaoLancada.class, notificacoes.get(1).obterFalha().getDescription().getTestClass());
-		assertEquals(UmMetodoDeTesteFalhandoExcecaoEsperadaExcecaoLancada.class, notificacoes.get(2).obterDescricao().getTestClass());
+		assertEquals(UmTesteFalhandoExcecaoEsperadaExcecaoLancada.class, notificacoes.get(0).obterDescricao().getTestClass());
+		assertEquals(UmTesteFalhandoExcecaoEsperadaExcecaoLancada.class, notificacoes.get(1).obterFalha().getDescription().getTestClass());
+		assertEquals(UmTesteFalhandoExcecaoEsperadaExcecaoLancada.class, notificacoes.get(2).obterDescricao().getTestClass());
 		assertEquals("testar", notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(1).obterFalha().getDescription().getMethodName());
 		assertEquals("testar", notificacoes.get(2).obterDescricao().getMethodName());
@@ -146,15 +146,15 @@ public class TesteExecutorDeTeste {
 
 	@Test
 	public void falhandoExcecaoLancada() throws Exception {
-		executor.executar(Description.createTestDescription(UmMetodoDeTesteFalhandoExcecaoLancada.class, "testar"));
+		executor.executar(Description.createTestDescription(UmTesteFalhandoExcecaoLancada.class, "testar"));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(3, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FALHA, notificacoes.get(1).obterTipo());
 		assertEquals(TipoDeNotificacao.TESTE_FINALIZADO, notificacoes.get(2).obterTipo());
-		assertEquals(UmMetodoDeTesteFalhandoExcecaoLancada.class, notificacoes.get(0).obterDescricao().getTestClass());
-		assertEquals(UmMetodoDeTesteFalhandoExcecaoLancada.class, notificacoes.get(1).obterFalha().getDescription().getTestClass());
-		assertEquals(UmMetodoDeTesteFalhandoExcecaoLancada.class, notificacoes.get(2).obterDescricao().getTestClass());
+		assertEquals(UmTesteFalhandoExcecaoLancada.class, notificacoes.get(0).obterDescricao().getTestClass());
+		assertEquals(UmTesteFalhandoExcecaoLancada.class, notificacoes.get(1).obterFalha().getDescription().getTestClass());
+		assertEquals(UmTesteFalhandoExcecaoLancada.class, notificacoes.get(2).obterDescricao().getTestClass());
 		assertEquals("testar", notificacoes.get(0).obterDescricao().getMethodName());
 		assertEquals("testar", notificacoes.get(1).obterFalha().getDescription().getMethodName());
 		assertEquals("testar", notificacoes.get(2).obterDescricao().getMethodName());

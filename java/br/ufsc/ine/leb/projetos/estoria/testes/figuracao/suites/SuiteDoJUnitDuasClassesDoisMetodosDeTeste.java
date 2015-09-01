@@ -4,13 +4,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTestePassandoVazio;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoVazio;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	UmMetodoDeTestePassandoVazio.class,
-	UmMetodoDeTestePassando.class
+	UmTestePassandoVazio.class,
+	UmTestePassando.class
 })
 public class SuiteDoJUnitDuasClassesDoisMetodosDeTeste {
 

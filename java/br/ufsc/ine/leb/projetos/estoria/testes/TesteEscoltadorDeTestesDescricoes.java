@@ -10,9 +10,9 @@ import org.junit.runner.Description;
 
 import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.DoisMetodosDeTestePassandoPassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.ZeroMetodosDeTeste;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.DoisTestesPassandoPassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.ZeroTestes;
 
 public final class TesteEscoltadorDeTestesDescricoes {
 
@@ -49,7 +49,7 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	@Test
 	public void zeroTestesDeUmaClasse() throws Exception {
 		SeletorDeTestes seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(ZeroMetodosDeTeste.class);
+		seletor.adicionarClasse(ZeroTestes.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
 
 		Description descricaoDoSeletor = escoltador.getDescription();
@@ -66,7 +66,7 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	@Test
 	public void umTesteDeUmaClasse() throws Exception {
 		SeletorDeTestes seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(UmMetodoDeTestePassando.class);
+		seletor.adicionarClasse(UmTestePassando.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
 
 		Description descricaoDoSeletor = escoltador.getDescription();
@@ -80,8 +80,8 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertEquals(1, descricaoDoSeletor.testCount());
 
 		Description descricaoDoTeste = descricaoDoSeletor.getChildren().get(0);
-		assertEquals(UmMetodoDeTestePassando.class, descricaoDoTeste.getTestClass());
-		assertEquals(UmMetodoDeTestePassando.class.getName(), descricaoDoTeste.getClassName());
+		assertEquals(UmTestePassando.class, descricaoDoTeste.getTestClass());
+		assertEquals(UmTestePassando.class.getName(), descricaoDoTeste.getClassName());
 		assertEquals("testar", descricaoDoTeste.getMethodName());
 		assertFalse(descricaoDoTeste.isSuite());
 		assertTrue(descricaoDoTeste.isTest());
@@ -94,7 +94,7 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	@Test
 	public void doisTestesDeUmaClasse() throws Exception {
 		SeletorDeTestes seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(DoisMetodosDeTestePassandoPassando.class);
+		seletor.adicionarClasse(DoisTestesPassandoPassando.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
 
 		Description descricaoDoSeletor = escoltador.getDescription();
@@ -109,8 +109,8 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertEquals(2, escoltador.testCount());
 
 		Description descricaoDoTeste1 = descricaoDoSeletor.getChildren().get(0);
-		assertEquals(DoisMetodosDeTestePassandoPassando.class, descricaoDoTeste1.getTestClass());
-		assertEquals(DoisMetodosDeTestePassandoPassando.class.getName(), descricaoDoTeste1.getClassName());
+		assertEquals(DoisTestesPassandoPassando.class, descricaoDoTeste1.getTestClass());
+		assertEquals(DoisTestesPassandoPassando.class.getName(), descricaoDoTeste1.getClassName());
 		assertEquals("testar1", descricaoDoTeste1.getMethodName());
 		assertFalse(descricaoDoTeste1.isSuite());
 		assertTrue(descricaoDoTeste1.isTest());
@@ -119,8 +119,8 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertEquals(1, descricaoDoTeste1.testCount());
 
 		Description descricaoDoTeste2 = descricaoDoSeletor.getChildren().get(1);
-		assertEquals(DoisMetodosDeTestePassandoPassando.class, descricaoDoTeste2.getTestClass());
-		assertEquals(DoisMetodosDeTestePassandoPassando.class.getName(), descricaoDoTeste2.getClassName());
+		assertEquals(DoisTestesPassandoPassando.class, descricaoDoTeste2.getTestClass());
+		assertEquals(DoisTestesPassandoPassando.class.getName(), descricaoDoTeste2.getClassName());
 		assertEquals("testar2", descricaoDoTeste2.getMethodName());
 		assertFalse(descricaoDoTeste2.isSuite());
 		assertTrue(descricaoDoTeste2.isTest());
@@ -132,8 +132,8 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	@Test
 	public void tresTestesDeDuasClasses() throws Exception {
 		SeletorDeTestes seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(UmMetodoDeTestePassando.class);
-		seletor.adicionarClasse(DoisMetodosDeTestePassandoPassando.class);
+		seletor.adicionarClasse(UmTestePassando.class);
+		seletor.adicionarClasse(DoisTestesPassandoPassando.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
 
 		Description descricaoDoSeletor = escoltador.getDescription();
@@ -148,8 +148,8 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertEquals(3, escoltador.testCount());
 
 		Description descricaoDoTeste1 = descricaoDoSeletor.getChildren().get(0);
-		assertEquals(UmMetodoDeTestePassando.class, descricaoDoTeste1.getTestClass());
-		assertEquals(UmMetodoDeTestePassando.class.getName(), descricaoDoTeste1.getClassName());
+		assertEquals(UmTestePassando.class, descricaoDoTeste1.getTestClass());
+		assertEquals(UmTestePassando.class.getName(), descricaoDoTeste1.getClassName());
 		assertEquals("testar", descricaoDoTeste1.getMethodName());
 		assertFalse(descricaoDoTeste1.isSuite());
 		assertTrue(descricaoDoTeste1.isTest());
@@ -158,8 +158,8 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertEquals(1, descricaoDoTeste1.testCount());
 
 		Description descricaoDoTeste2 = descricaoDoSeletor.getChildren().get(1);
-		assertEquals(DoisMetodosDeTestePassandoPassando.class, descricaoDoTeste2.getTestClass());
-		assertEquals(DoisMetodosDeTestePassandoPassando.class.getName(), descricaoDoTeste2.getClassName());
+		assertEquals(DoisTestesPassandoPassando.class, descricaoDoTeste2.getTestClass());
+		assertEquals(DoisTestesPassandoPassando.class.getName(), descricaoDoTeste2.getClassName());
 		assertEquals("testar1", descricaoDoTeste2.getMethodName());
 		assertFalse(descricaoDoTeste2.isSuite());
 		assertTrue(descricaoDoTeste2.isTest());
@@ -168,8 +168,8 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertEquals(1, descricaoDoTeste2.testCount());
 
 		Description descricaoDoTeste3 = descricaoDoSeletor.getChildren().get(2);
-		assertEquals(DoisMetodosDeTestePassandoPassando.class, descricaoDoTeste3.getTestClass());
-		assertEquals(DoisMetodosDeTestePassandoPassando.class.getName(), descricaoDoTeste3.getClassName());
+		assertEquals(DoisTestesPassandoPassando.class, descricaoDoTeste3.getTestClass());
+		assertEquals(DoisTestesPassandoPassando.class.getName(), descricaoDoTeste3.getClassName());
 		assertEquals("testar2", descricaoDoTeste3.getMethodName());
 		assertFalse(descricaoDoTeste3.isSuite());
 		assertTrue(descricaoDoTeste3.isTest());

@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.VariosMetodosDeTeste;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.DoisMetodosDeTestePassandoPassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmMetodoDeTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.DoisTestesPassandoPassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
 
 public final class TesteSeletorDeTestes {
 
@@ -27,20 +27,20 @@ public final class TesteSeletorDeTestes {
 
 	@Test
 	public void adicionarUmaClasseComUmMetodoDeTeste() throws Exception {
-		seletor.adicionarClasse(UmMetodoDeTestePassando.class);
+		seletor.adicionarClasse(UmTestePassando.class);
 		assertEquals(1, seletor.obterSelecoes().size());
 		assertEquals(0, seletor.obterSelecoesIgnoradas().size());
-		assertEquals(UmMetodoDeTestePassando.class, seletor.obterSelecoes().get(0).obterClasse());
+		assertEquals(UmTestePassando.class, seletor.obterSelecoes().get(0).obterClasse());
 		assertEquals("testar", seletor.obterSelecoes().get(0).obterMetodoDeTeste());
 	}
 
 	@Test
 	public void adicionarUmaClasseComDoisMetodosDeTeste() throws Exception {
-		seletor.adicionarClasse(DoisMetodosDeTestePassandoPassando.class);
+		seletor.adicionarClasse(DoisTestesPassandoPassando.class);
 		assertEquals(2, seletor.obterSelecoes().size());
 		assertEquals(0, seletor.obterSelecoesIgnoradas().size());
-		assertEquals(DoisMetodosDeTestePassandoPassando.class, seletor.obterSelecoes().get(0).obterClasse());
-		assertEquals(DoisMetodosDeTestePassandoPassando.class, seletor.obterSelecoes().get(1).obterClasse());
+		assertEquals(DoisTestesPassandoPassando.class, seletor.obterSelecoes().get(0).obterClasse());
+		assertEquals(DoisTestesPassandoPassando.class, seletor.obterSelecoes().get(1).obterClasse());
 		assertEquals("testar1", seletor.obterSelecoes().get(0).obterMetodoDeTeste());
 		assertEquals("testar2", seletor.obterSelecoes().get(1).obterMetodoDeTeste());
 	}
@@ -71,12 +71,12 @@ public final class TesteSeletorDeTestes {
 
 	@Test
 	public void adicionarDuasClasses() throws Exception {
-		seletor.adicionarClasse(DoisMetodosDeTestePassandoPassando.class);
-		seletor.adicionarClasse(UmMetodoDeTestePassando.class);
+		seletor.adicionarClasse(DoisTestesPassandoPassando.class);
+		seletor.adicionarClasse(UmTestePassando.class);
 		assertEquals(3, seletor.obterSelecoes().size());
-		assertEquals(DoisMetodosDeTestePassandoPassando.class, seletor.obterSelecoes().get(0).obterClasse());
-		assertEquals(DoisMetodosDeTestePassandoPassando.class, seletor.obterSelecoes().get(1).obterClasse());
-		assertEquals(UmMetodoDeTestePassando.class, seletor.obterSelecoes().get(2).obterClasse());
+		assertEquals(DoisTestesPassandoPassando.class, seletor.obterSelecoes().get(0).obterClasse());
+		assertEquals(DoisTestesPassandoPassando.class, seletor.obterSelecoes().get(1).obterClasse());
+		assertEquals(UmTestePassando.class, seletor.obterSelecoes().get(2).obterClasse());
 		assertEquals("testar1", seletor.obterSelecoes().get(0).obterMetodoDeTeste());
 		assertEquals("testar2", seletor.obterSelecoes().get(1).obterMetodoDeTeste());
 		assertEquals("testar", seletor.obterSelecoes().get(2).obterMetodoDeTeste());
