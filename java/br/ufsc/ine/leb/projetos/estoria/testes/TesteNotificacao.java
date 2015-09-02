@@ -30,6 +30,15 @@ public final class TesteNotificacao {
 	}
 
 	@Test
+	public void testesIniciados() throws Exception {
+		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTES_INICIADOS, descricaoDeSuite);
+		assertEquals(TipoDeNotificacao.TESTES_INICIADOS, notificacao.obterTipo());
+		assertSame(descricaoDeSuite, notificacao.obterDescricao());
+		assertNull(notificacao.obterResultado());
+		assertNull(notificacao.obterFalha());
+	}
+
+	@Test
 	public void testeIniciado() throws Exception {
 		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_INICIADO, descricaoDeTeste);
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacao.obterTipo());
@@ -57,12 +66,12 @@ public final class TesteNotificacao {
 	}
 
 	@Test
-	public void testesIniciados() throws Exception {
-		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTES_INICIADOS, descricaoDeSuite);
-		assertEquals(TipoDeNotificacao.TESTES_INICIADOS, notificacao.obterTipo());
-		assertSame(descricaoDeSuite, notificacao.obterDescricao());
+	public void testeFalha() throws Exception {
+		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_FALHA, falha);
+		assertEquals(TipoDeNotificacao.TESTE_FALHA, notificacao.obterTipo());
+		assertSame(descricaoDeTeste, notificacao.obterDescricao());
 		assertNull(notificacao.obterResultado());
-		assertNull(notificacao.obterFalha());
+		assertSame(falha, notificacao.obterFalha());
 	}
 
 	@Test
@@ -72,15 +81,6 @@ public final class TesteNotificacao {
 		assertNull(notificacao.obterDescricao());
 		assertSame(resultado, notificacao.obterResultado());
 		assertNull(notificacao.obterFalha());
-	}
-
-	@Test
-	public void testeFalha() throws Exception {
-		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_FALHA, falha);
-		assertEquals(TipoDeNotificacao.TESTE_FALHA, notificacao.obterTipo());
-		assertSame(descricaoDeTeste, notificacao.obterDescricao());
-		assertNull(notificacao.obterResultado());
-		assertSame(falha, notificacao.obterFalha());
 	}
 
 }

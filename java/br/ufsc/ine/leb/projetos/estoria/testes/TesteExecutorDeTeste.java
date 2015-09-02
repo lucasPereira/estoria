@@ -22,7 +22,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTesteP
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoExcecaoEsperadaExcecaoLancada;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoVazio;
 
-public class TesteExecutorDeTeste {
+public final class TesteExecutorDeTeste {
 
 	private ExecutorDeTeste executor;
 	private EspiaoDeEscolta espiaoDeEscolta;

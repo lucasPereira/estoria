@@ -24,13 +24,6 @@ public class EspiaoDeEscolta extends RunListener {
 	}
 
 	@Override
-	public void testRunFinished(Result resultado) throws Exception {
-		super.testRunFinished(resultado);
-		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTES_FINALIZADOS, resultado);
-		notificacoes.add(notificacao);
-	}
-
-	@Override
 	public void testStarted(Description descricao) throws Exception {
 		super.testStarted(descricao);
 		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_INICIADO, descricao);
@@ -45,6 +38,13 @@ public class EspiaoDeEscolta extends RunListener {
 	}
 
 	@Override
+	public void testIgnored(Description descricao) throws Exception {
+		super.testIgnored(descricao);
+		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_IGNORADO, descricao);
+		notificacoes.add(notificacao);
+	}
+
+	@Override
 	public void testFailure(Failure falha) throws Exception {
 		super.testFailure(falha);
 		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_FALHA, falha);
@@ -52,16 +52,16 @@ public class EspiaoDeEscolta extends RunListener {
 	}
 
 	@Override
-	public void testAssumptionFailure(Failure falha) {
-		super.testAssumptionFailure(falha);
-		notificacoes.add(null);
+	public void testRunFinished(Result resultado) throws Exception {
+		super.testRunFinished(resultado);
+		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTES_FINALIZADOS, resultado);
+		notificacoes.add(notificacao);
 	}
 
 	@Override
-	public void testIgnored(Description descricao) throws Exception {
-		super.testIgnored(descricao);
-		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_IGNORADO, descricao);
-		notificacoes.add(notificacao);
+	public void testAssumptionFailure(Failure falha) {
+		super.testAssumptionFailure(falha);
+		notificacoes.add(null);
 	}
 
 	public List<Notificacao> obterNotificacoes() {

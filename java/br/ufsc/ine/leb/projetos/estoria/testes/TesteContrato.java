@@ -6,7 +6,7 @@ import org.junit.Test;
 import br.ufsc.ine.leb.projetos.estoria.Contrato;
 import br.ufsc.ine.leb.projetos.estoria.ExcecaoClausulaDeContratoViolada;
 
-public class TesteContrato {
+public final class TesteContrato {
 
 	private Contrato contrato;
 

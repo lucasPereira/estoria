@@ -9,7 +9,7 @@ import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
 public final class TesteTipoDeNotificacao {
 
 	@Test
-	public void falharParaAdicionarTesteSeMudar() throws Exception {
+	public void adicionarTestesSeFalhar() throws Exception {
 		assertEquals(6, TipoDeNotificacao.values().length);
 	}
 
