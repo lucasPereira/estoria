@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public final class SeletorDeTestes {
+public class SeletorDeTestes {
 
 	private List<CasoDeTeste> casosDeTeste;
 	private List<CasoDeTeste> casosDeTesteIgnorados;
@@ -15,6 +15,11 @@ public final class SeletorDeTestes {
 	public SeletorDeTestes() {
 		casosDeTeste = new LinkedList<>();
 		casosDeTesteIgnorados = new LinkedList<>();
+	}
+
+	SeletorDeTestes(Class<?> classe) {
+		this();
+		adicionarClasse(classe);
 	}
 
 	public void adicionarClasse(Class<?> classe) {

@@ -8,10 +8,12 @@ import org.junit.Test;
 public class UmBeforePassandoUmTestePassando {
 
 	private int numero = 0;
+	public static int numeroEstatico;
 
 	@Before
 	public void configurar() {
 		numero = 10;
+		numeroEstatico = 30;
 	}
 
 	@Test

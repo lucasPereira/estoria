@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.suites;
+package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.suitesDoJunit;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

@@ -7,11 +7,19 @@ import org.junit.runner.Result;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 
-public final class EscoltadorDeTestes extends Runner {
+public class EscoltadorDeTestes extends Runner {
 
 	private Description descricao;
 	private List<CasoDeTeste> casosDeTeste;
 	private List<CasoDeTeste> casosDeTesteIgnorados;
+
+	private static SeletorDeTestes construirSeletor(Class<?> classe) throws InstantiationException, IllegalAccessException {
+		return SeletorDeTestes.class.isAssignableFrom(classe) ? (SeletorDeTestes) classe.newInstance() : new SeletorDeTestes(classe);
+	}
+
+	EscoltadorDeTestes(Class<?> classe) throws InstantiationException, IllegalAccessException {
+		this(construirSeletor(classe));
+	}
 
 	public EscoltadorDeTestes(SeletorDeTestes seletor) {
 		descricao = Description.createSuiteDescription(seletor.getClass().getName());
@@ -22,12 +30,12 @@ public final class EscoltadorDeTestes extends Runner {
 	}
 
 	@Override
-	public Description getDescription() {
+	public final Description getDescription() {
 		return descricao;
 	}
 
 	@Override
-	public void run(RunNotifier mensageiroDeEscolta) {
+	public final void run(RunNotifier mensageiroDeEscolta) {
 		Result resultado = new Result();
 		mensageiroDeEscolta.addListener(resultado.createListener());
 		mensageiroDeEscolta.fireTestRunStarted(descricao);
