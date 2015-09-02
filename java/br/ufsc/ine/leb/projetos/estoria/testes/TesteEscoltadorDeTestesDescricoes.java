@@ -41,6 +41,7 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertFalse(descricaoDoSeletor.isEmpty());
 		assertEquals(0, descricaoDoSeletor.getChildren().size());
 		assertEquals(1, descricaoDoSeletor.testCount());
+		assertEquals(1, escoltador.testCount());
 	}
 
 	@Test
@@ -58,6 +59,7 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertFalse(descricaoDoSeletor.isEmpty());
 		assertEquals(0, descricaoDoSeletor.getChildren().size());
 		assertEquals(1, descricaoDoSeletor.testCount());
+		assertEquals(1, escoltador.testCount());
 	}
 
 	@Test
