@@ -1,9 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.Description;
@@ -39,11 +36,11 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertEquals(seletor.getClass(), descricaoDoSeletor.getTestClass());
 		assertEquals(seletor.getClass().getName(), descricaoDoSeletor.getClassName());
 		assertNull(descricaoDoSeletor.getMethodName());
-		// assertTrue(descricaoDoSeletor.isSuite());
-		// assertFalse(descricaoDoSeletor.isTest());
-		// assertTrue(descricaoDoSeletor.isEmpty());
+		assertFalse(descricaoDoSeletor.isSuite());
+		assertTrue(descricaoDoSeletor.isTest());
+		assertFalse(descricaoDoSeletor.isEmpty());
 		assertEquals(0, descricaoDoSeletor.getChildren().size());
-		// assertEquals(0, descricaoDoSeletor.testCount());
+		assertEquals(1, descricaoDoSeletor.testCount());
 	}
 
 	@Test
@@ -56,11 +53,11 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertEquals(seletor.getClass(), descricaoDoSeletor.getTestClass());
 		assertEquals(seletor.getClass().getName(), descricaoDoSeletor.getClassName());
 		assertNull(descricaoDoSeletor.getMethodName());
-		// assertTrue(descricaoDoSeletor.isSuite());
-		// assertFalse(descricaoDoSeletor.isTest());
-		// assertTrue(descricaoDoSeletor.isEmpty());
+		assertFalse(descricaoDoSeletor.isSuite());
+		assertTrue(descricaoDoSeletor.isTest());
+		assertFalse(descricaoDoSeletor.isEmpty());
 		assertEquals(0, descricaoDoSeletor.getChildren().size());
-		// assertEquals(0, descricaoDoSeletor.testCount());
+		assertEquals(1, descricaoDoSeletor.testCount());
 	}
 
 	@Test

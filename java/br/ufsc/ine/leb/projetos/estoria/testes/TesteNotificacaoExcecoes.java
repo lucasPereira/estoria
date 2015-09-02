@@ -3,53 +3,85 @@ package br.ufsc.ine.leb.projetos.estoria.testes;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.Description;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 import br.ufsc.ine.leb.projetos.estoria.ExcecaoClausulaDeContratoViolada;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.suites.SuiteDoJUnitDuasClassesDoisMetodosDeTeste;
 
-public class TesteNotificacaoExcecoes {
+public final class TesteNotificacaoExcecoes {
 
-	private Description descricaoDeTeste;
-	private Description descricaoDeSuite;
+	private Failure falha;
+	private Result resultado;
+	private Description descricao;
 
 	@Before
 	public void prepararCenario() {
-		descricaoDeTeste = Description.createTestDescription(UmTestePassando.class, "testar");
-		descricaoDeSuite = Description.createSuiteDescription(SuiteDoJUnitDuasClassesDoisMetodosDeTeste.class);
-		descricaoDeSuite.addChild(descricaoDeTeste);
+		resultado = new Result();
+		descricao = Description.createTestDescription(UmTestePassando.class, "testar");
+		falha = new Failure(descricao, new AssertionError());
 	}
 
 	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
 	public void descricaoFalha() throws Exception {
-		new Notificacao(TipoDeNotificacao.TESTE_FALHA, descricaoDeTeste);
+		new Notificacao(TipoDeNotificacao.TESTE_FALHA, descricao);
 	}
 
 	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
 	public void descricaoFinalizados() throws Exception {
-		new Notificacao(TipoDeNotificacao.TESTES_FINALIZADOS, descricaoDeTeste);
+		new Notificacao(TipoDeNotificacao.TESTES_FINALIZADOS, descricao);
 	}
 
 	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
-	public void descricaoTestesIniciadosDeveSerDeSuite() throws Exception {
-		new Notificacao(TipoDeNotificacao.TESTES_INICIADOS, descricaoDeTeste);
+	public void falhaIniciados() throws Exception {
+		new Notificacao(TipoDeNotificacao.TESTES_INICIADOS, falha);
 	}
 
 	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
-	public void descricaoTesteIniciadoDeveSerDeTeste() throws Exception {
-		new Notificacao(TipoDeNotificacao.TESTE_INICIADO, descricaoDeSuite);
+	public void falhaIniciado() throws Exception {
+		new Notificacao(TipoDeNotificacao.TESTE_INICIADO, falha);
 	}
 
 	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
-	public void descricaoTesteFinalizadoDeveSerDeTeste() throws Exception {
-		new Notificacao(TipoDeNotificacao.TESTE_FINALIZADO, descricaoDeSuite);
+	public void falhaFinalizado() throws Exception {
+		new Notificacao(TipoDeNotificacao.TESTE_FINALIZADO, falha);
 	}
 
 	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
-	public void descricaoTesteIgnoradoDeveSerDeTeste() throws Exception {
-		new Notificacao(TipoDeNotificacao.TESTE_IGNORADO, descricaoDeSuite);
+	public void falhaIgnorado() throws Exception {
+		new Notificacao(TipoDeNotificacao.TESTE_IGNORADO, falha);
+	}
+
+	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
+	public void falhaFinalizados() throws Exception {
+		new Notificacao(TipoDeNotificacao.TESTES_FINALIZADOS, falha);
+	}
+
+	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
+	public void resultadoIniciados() throws Exception {
+		new Notificacao(TipoDeNotificacao.TESTES_INICIADOS, resultado);
+	}
+
+	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
+	public void resultadoIniciado() throws Exception {
+		new Notificacao(TipoDeNotificacao.TESTE_INICIADO, resultado);
+	}
+
+	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
+	public void resultadoFinalizado() throws Exception {
+		new Notificacao(TipoDeNotificacao.TESTE_FINALIZADO, resultado);
+	}
+
+	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
+	public void resultadoIgnorado() throws Exception {
+		new Notificacao(TipoDeNotificacao.TESTE_IGNORADO, resultado);
+	}
+
+	@Test(expected = ExcecaoClausulaDeContratoViolada.class)
+	public void resultadoFalha() throws Exception {
+		new Notificacao(TipoDeNotificacao.TESTE_FALHA, resultado);
 	}
 
 }

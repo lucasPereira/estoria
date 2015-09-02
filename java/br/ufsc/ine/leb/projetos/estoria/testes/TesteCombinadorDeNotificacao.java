@@ -19,14 +19,14 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.suites.SuiteDoJUnitUmaC
 
 public final class TesteCombinadorDeNotificacao {
 
+	private Notificacao testesIniciados;
 	private Notificacao testeIniciado;
 	private Notificacao testeFinalizado;
-	private Notificacao testesIniciados;
+	private Notificacao testeIgnorado;
 	private Notificacao testeFalha;
+	private Notificacao testesFinalizados;
 
 	@Rule public ExpectedException excecao = ExpectedException.none();
-	private Notificacao testeIgnorado;
-	private Notificacao testesFinalizados;
 
 	@Before
 	public void prepararCenario() {

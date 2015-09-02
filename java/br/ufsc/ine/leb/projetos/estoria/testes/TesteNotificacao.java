@@ -15,18 +15,18 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.suites.SuiteDoJUnitDuas
 
 public final class TesteNotificacao {
 
-	private Result resultadoDeTestes;
-	private Failure falhaDeTeste;
+	private Result resultado;
+	private Failure falha;
 	private Description descricaoDeTeste;
 	private Description descricaoDeSuite;
 
 	@Before
 	public void prepararCenario() {
+		resultado = new Result();
 		descricaoDeTeste = Description.createTestDescription(UmTestePassando.class, "testar");
 		descricaoDeSuite = Description.createSuiteDescription(SuiteDoJUnitDuasClassesDoisMetodosDeTeste.class);
 		descricaoDeSuite.addChild(descricaoDeTeste);
-		resultadoDeTestes = new Result();
-		falhaDeTeste = new Failure(descricaoDeTeste, null);
+		falha = new Failure(descricaoDeTeste, null);
 	}
 
 	@Test
@@ -67,20 +67,20 @@ public final class TesteNotificacao {
 
 	@Test
 	public void testesFinalizados() throws Exception {
-		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTES_FINALIZADOS, resultadoDeTestes);
+		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTES_FINALIZADOS, resultado);
 		assertEquals(TipoDeNotificacao.TESTES_FINALIZADOS, notificacao.obterTipo());
 		assertNull(notificacao.obterDescricao());
-		assertSame(resultadoDeTestes, notificacao.obterResultado());
+		assertSame(resultado, notificacao.obterResultado());
 		assertNull(notificacao.obterFalha());
 	}
 
 	@Test
 	public void testeFalha() throws Exception {
-		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_FALHA, falhaDeTeste);
+		Notificacao notificacao = new Notificacao(TipoDeNotificacao.TESTE_FALHA, falha);
 		assertEquals(TipoDeNotificacao.TESTE_FALHA, notificacao.obterTipo());
 		assertSame(descricaoDeTeste, notificacao.obterDescricao());
 		assertNull(notificacao.obterResultado());
-		assertSame(falhaDeTeste, notificacao.obterFalha());
+		assertSame(falha, notificacao.obterFalha());
 	}
 
 }
