@@ -1,10 +1,10 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
+import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
-public class CombinadorDeNotificacao extends TypeSafeMatcher<Notificacao> {
+public final class CombinadorDeNotificacao extends BaseMatcher<Notificacao> {
 
 	private TipoDeNotificacao tipoEsperado;
 	private Integer executadosEsperados;
@@ -14,6 +14,26 @@ public class CombinadorDeNotificacao extends TypeSafeMatcher<Notificacao> {
 	private String metodoEsperado;
 	private Class<?> classeEsperada;
 	private Class<? extends Throwable> excecaoEsperada;
+
+	private TipoDeNotificacao tipoRecebido;
+	private Integer executadosRecebidos;
+	private Integer falhasRecebidas;
+	private Integer ignoradosRecebidos;
+	private Boolean sucessoRecebido;
+	private String metodoRecebido;
+	private Class<?> classeRecebida;
+	private Class<? extends Throwable> excecaoRecebida;
+
+	private CombinadorDeNotificacao(TipoDeNotificacao tipoEsperado, Class<?> classeEsperada, String metodoEsperado, Class<? extends Throwable> excecaoEsperada, Integer executadosEsperados, Integer falhasEsperadas, Integer ignoradosEsperados, Boolean sucessoEsperado) {
+		this.tipoEsperado = tipoEsperado;
+		this.metodoEsperado = metodoEsperado;
+		this.classeEsperada = classeEsperada;
+		this.excecaoEsperada = excecaoEsperada;
+		this.executadosEsperados = executadosEsperados;
+		this.falhasEsperadas = falhasEsperadas;
+		this.ignoradosEsperados = ignoradosEsperados;
+		this.sucessoEsperado = sucessoEsperado;
+	}
 
 	public static Matcher<Notificacao> combinaComTestesIniciados(Class<?> classeEsperada) {
 		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTES_INICIADOS, classeEsperada, null, null, null, null, null, null);
@@ -39,110 +59,109 @@ public class CombinadorDeNotificacao extends TypeSafeMatcher<Notificacao> {
 		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTES_FINALIZADOS, null, null, null, executadosEsperados, falhasEsperadas, ignoradosEsperados, falhasEsperadas == 0);
 	}
 
-	private CombinadorDeNotificacao(TipoDeNotificacao tipoEsperado, Class<?> classeEsperada, String metodoEsperado, Class<? extends Throwable> excecaoEsperada, Integer executadosEsperados, Integer falhasEsperadas, Integer ignoradosEsperados, Boolean sucessoEsperado) {
-		this.tipoEsperado = tipoEsperado;
-		this.metodoEsperado = metodoEsperado;
-		this.classeEsperada = classeEsperada;
-		this.excecaoEsperada = excecaoEsperada;
-		this.executadosEsperados = executadosEsperados;
-		this.falhasEsperadas = falhasEsperadas;
-		this.ignoradosEsperados = ignoradosEsperados;
-		this.sucessoEsperado = sucessoEsperado;
-	}
-
 	@Override
 	public void describeTo(Description casamento) {
 		casamento.appendValue(tipoEsperado);
-		if (tipoEsperado.possuiDescricao()) {
-			adicionarRepresentacaoTextualDeDescricao(casamento, classeEsperada, metodoEsperado);
-		}
-		if (tipoEsperado.possuiFalha()) {
-			adicionarRepresentacaoTextualDeFalha(casamento, excecaoEsperada);
-		}
-		if (tipoEsperado.possuiResultado()) {
-			adicionarRepresentacaoTextualDeResultado(casamento, executadosEsperados, falhasEsperadas, ignoradosEsperados);
-		}
+		adicionarRepresentacaoTextualDeDescricao(casamento, classeEsperada, metodoEsperado);
+		adicionarRepresentacaoTextualDeFalha(casamento, excecaoEsperada);
+		adicionarRepresentacaoTextualDeResultado(casamento, executadosEsperados, falhasEsperadas, ignoradosEsperados);
 	}
 
 	@Override
-	protected void describeMismatchSafely(Notificacao notificacao, Description casamento) {
-		casamento.appendValue(notificacao.obterTipo());
-		if (notificacao.obterTipo().possuiDescricao()) {
-			adicionarRepresentacaoTextualDeDescricao(casamento, notificacao.obterDescricao().getTestClass(), notificacao.obterDescricao().getMethodName());
-		}
-		if (notificacao.obterTipo().possuiFalha()) {
-			adicionarRepresentacaoTextualDeFalha(casamento, notificacao.obterFalha().getException().getClass());
-		}
-		if (notificacao.obterTipo().possuiResultado()) {
-			adicionarRepresentacaoTextualDeResultado(casamento, notificacao.obterResultado().getRunCount(), notificacao.obterResultado().getFailureCount(), notificacao.obterResultado().getIgnoreCount());
-		}
+	public void describeMismatch(Object objeto, Description casamento) {
+		casamento.appendValue(tipoRecebido);
+		adicionarRepresentacaoTextualDeDescricao(casamento, classeRecebida, metodoRecebido);
+		adicionarRepresentacaoTextualDeFalha(casamento, excecaoRecebida);
+		adicionarRepresentacaoTextualDeResultado(casamento, executadosRecebidos, falhasRecebidas, ignoradosRecebidos);
 	}
 
 	@Override
-	protected boolean matchesSafely(Notificacao notificacao) {
-		return casarTipo(notificacao) && casarDescricao(notificacao) && casarFalha(notificacao) && casarResultado(notificacao);
+	public boolean matches(Object objeto) {
+		return extrairAtributos(objeto) && casarTipo() && casarDescricao() && casarFalha() && casarResultado();
 	}
 
-	private Boolean casarTipo(Notificacao notificacao) {
-		return notificacao.obterTipo().equals(tipoEsperado);
+	private Boolean casarTipo() {
+		return tipoEsperado.equals(tipoRecebido);
 	}
 
-	private Boolean casarDescricao(Notificacao notificacaoRecebida) {
-		return !tipoEsperado.possuiDescricao() || (casarClasse(notificacaoRecebida) && casarMetodo(notificacaoRecebida));
+	private Boolean casarDescricao() {
+		return !tipoEsperado.possuiDescricao() || (casarClasse() && casarMetodo());
 	}
 
-	private Boolean casarResultado(Notificacao notificacaoRecebida) {
-		return !tipoEsperado.possuiResultado() || (casarExecutados(notificacaoRecebida) && casarFalhas(notificacaoRecebida) && casarIgnorados(notificacaoRecebida) && casarSucesso(notificacaoRecebida));
+	private Boolean casarFalha() {
+		return !tipoEsperado.possuiFalha() || casarExcecao();
 	}
 
-	private Boolean casarFalha(Notificacao notificacaoRecebida) {
-		return !tipoEsperado.possuiFalha() || casarExcecao(notificacaoRecebida);
+	private Boolean casarResultado() {
+		return !tipoEsperado.possuiResultado() || (casarExecutados() && casarFalhas() && casarIgnorados() && casarSucesso());
 	}
 
-	private Boolean casarSucesso(Notificacao notificacaoRecebida) {
-		return notificacaoRecebida.obterResultado().wasSuccessful() == sucessoEsperado;
+	private Boolean casarClasse() {
+		return classeEsperada.equals(classeRecebida);
 	}
 
-	private Boolean casarExecutados(Notificacao notificacaoRecebida) {
-		return notificacaoRecebida.obterResultado().getRunCount() == executadosEsperados;
+	private Boolean casarMetodo() {
+		return (metodoEsperado == null && metodoRecebido == null) || metodoEsperado.equals(metodoRecebido);
 	}
 
-	private Boolean casarFalhas(Notificacao notificacaoRecebida) {
-		return notificacaoRecebida.obterResultado().getFailureCount() == falhasEsperadas;
+	private Boolean casarExcecao() {
+		return excecaoEsperada.equals(excecaoRecebida);
 	}
 
-	private Boolean casarIgnorados(Notificacao notificacaoRecebida) {
-		return notificacaoRecebida.obterResultado().getIgnoreCount() == ignoradosEsperados;
+	private Boolean casarExecutados() {
+		return executadosEsperados.equals(executadosRecebidos);
 	}
 
-	private Boolean casarExcecao(Notificacao notificacaoRecebida) {
-		return notificacaoRecebida.obterFalha().getException().getClass().equals(excecaoEsperada);
+	private Boolean casarFalhas() {
+		return falhasEsperadas.equals(falhasRecebidas);
 	}
 
-	private Boolean casarClasse(Notificacao notificacaoRecebida) {
-		return notificacaoRecebida.obterDescricao().getTestClass().equals(classeEsperada);
+	private Boolean casarIgnorados() {
+		return ignoradosEsperados.equals(ignoradosRecebidos);
 	}
 
-	private Boolean casarMetodo(Notificacao notificacaoRecebida) {
-		return (notificacaoRecebida.obterDescricao().getMethodName() == null && metodoEsperado == null) || notificacaoRecebida.obterDescricao().getMethodName().equals(metodoEsperado);
+	private Boolean casarSucesso() {
+		return sucessoEsperado.equals(sucessoRecebido);
 	}
 
-	private void adicionarRepresentacaoTextualDeDescricao(Description casamento, Class<?> classe, String metodo) {
-		String representacaoDaClasse = classe.getSimpleName();
-		String representacaoDoMetodo = metodo == null ? "class" : metodo;
-		String representacao = String.format(" %s.%s", representacaoDaClasse, representacaoDoMetodo);
-		casamento.appendText(representacao);
+	private Boolean extrairAtributos(Object objeto) {
+		if (objeto != null && objeto instanceof Notificacao) {
+			Notificacao notificacao = (Notificacao) objeto;
+			tipoRecebido = notificacao.obterTipo();
+			classeRecebida = (notificacao.obterDescricao() == null) ? null : notificacao.obterDescricao().getTestClass();
+			metodoRecebido = (notificacao.obterDescricao() == null) ? null : notificacao.obterDescricao().getMethodName();
+			excecaoRecebida = (notificacao.obterFalha() == null) ? null : notificacao.obterFalha().getException().getClass();
+			executadosRecebidos = (notificacao.obterResultado() == null) ? null : notificacao.obterResultado().getRunCount();
+			falhasRecebidas = (notificacao.obterResultado() == null) ? null : notificacao.obterResultado().getFailureCount();
+			ignoradosRecebidos = (notificacao.obterResultado() == null) ? null : notificacao.obterResultado().getIgnoreCount();
+			sucessoRecebido = (notificacao.obterResultado() == null) ? null : notificacao.obterResultado().wasSuccessful();
+			return true;
+		}
+		return false;
 	}
 
-	private void adicionarRepresentacaoTextualDeFalha(Description casamento, Class<? extends Throwable> excecao) {
-		String representacaoDaExcecao = excecao.getSimpleName();
-		String representacao = String.format(" lança %s.class", representacaoDaExcecao);
-		casamento.appendText(representacao);
+	private static void adicionarRepresentacaoTextualDeDescricao(Description casamento, Class<?> classe, String metodo) {
+		if (classe != null) {
+			String representacaoDaClasse = classe.getSimpleName();
+			String representacaoDoMetodo = (metodo == null) ? "class" : metodo;
+			String representacao = String.format(" %s.%s", representacaoDaClasse, representacaoDoMetodo);
+			casamento.appendText(representacao);
+		}
 	}
 
-	private void adicionarRepresentacaoTextualDeResultado(Description casamento, Integer executados, Integer falhas, Integer ignorados) {
-		String representacao = String.format(" %d executados, %d falhas, %d ignorados", executados, falhas, ignorados);
-		casamento.appendText(representacao);
+	private static void adicionarRepresentacaoTextualDeFalha(Description casamento, Class<? extends Throwable> excecao) {
+		if (excecao != null) {
+			String representacaoDaExcecao = excecao.getSimpleName();
+			String representacao = String.format(" lança %s.class", representacaoDaExcecao);
+			casamento.appendText(representacao);
+		}
+	}
+
+	private static void adicionarRepresentacaoTextualDeResultado(Description casamento, Integer executados, Integer falhas, Integer ignorados) {
+		if (executados != null && falhas != null && ignorados != null) {
+			String representacao = String.format(" %d executados, %d falhas, %d ignorados", executados, falhas, ignorados);
+			casamento.appendText(representacao);
+		}
 	}
 
 }

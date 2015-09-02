@@ -1,6 +1,5 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.runner.Description;
@@ -11,23 +10,15 @@ import org.junit.runner.notification.RunNotifier;
 public final class EscoltadorDeTestes extends Runner {
 
 	private Description descricao;
-	private List<Description> descricoesDosIgnorados;
-	private List<Description> descricoesDosExecutados;
+	private List<CasoDeTeste> casosDeTeste;
+	private List<CasoDeTeste> casosDeTesteIgnorados;
 
 	public EscoltadorDeTestes(SeletorDeTestes seletor) {
-		descricoesDosIgnorados = new LinkedList<>();
-		descricoesDosExecutados = new LinkedList<>();
 		descricao = Description.createSuiteDescription(seletor.getClass().getName());
-		seletor.obterSelecoesDeTesteIgnorados().forEach(selecao -> criarDescricaoDeTeste(selecao, descricoesDosIgnorados));
-		seletor.obterSelecoesDeTeste().forEach(selecao -> criarDescricaoDeTeste(selecao, descricoesDosExecutados));
-	}
-
-	private void criarDescricaoDeTeste(SelecaoDeTeste selecao, List<Description> descricoes) {
-		Class<?> classeDoTeste = selecao.obterClasse();
-		String metodoDeTeste = selecao.obterMetodoDeTeste();
-		Description descricaoDoTeste = Description.createTestDescription(classeDoTeste, metodoDeTeste);
-		descricao.addChild(descricaoDoTeste);
-		descricoes.add(descricaoDoTeste);
+		casosDeTeste = seletor.obterCasosDeTeste();
+		casosDeTesteIgnorados = seletor.obterCasosDeTesteIgnorados();
+		casosDeTesteIgnorados.forEach(casoDeTeste -> descricao.addChild(casoDeTeste.obterDescricao()));
+		casosDeTeste.forEach(casoDeTeste -> descricao.addChild(casoDeTeste.obterDescricao()));
 	}
 
 	@Override
@@ -41,8 +32,8 @@ public final class EscoltadorDeTestes extends Runner {
 		mensageiroDeEscolta.addListener(resultado.createListener());
 		mensageiroDeEscolta.fireTestRunStarted(descricao);
 		ExecutorDeTeste executor = new ExecutorDeTeste(mensageiroDeEscolta);
-		descricoesDosIgnorados.forEach(descricaoDoTeste -> mensageiroDeEscolta.fireTestIgnored(descricaoDoTeste));
-		descricoesDosExecutados.forEach(descricaoDoTeste -> executor.executar(descricaoDoTeste));
+		casosDeTesteIgnorados.forEach(casoDeTeste -> mensageiroDeEscolta.fireTestIgnored(casoDeTeste.obterDescricao()));
+		casosDeTeste.forEach(casoDeTeste -> executor.executar(casoDeTeste));
 		mensageiroDeEscolta.fireTestRunFinished(resultado);
 	}
 

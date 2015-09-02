@@ -5,18 +5,18 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-public class UmBeforePassandoUmTestePassando {
+public class UmBeforePassandoUmTesteFalhando {
 
 	private int numero = 0;
 
 	@Before
-	public void configurar() {
+	public void configurarDeTesteFalhando() {
 		numero = 10;
 	}
 
 	@Test
-	public void testar() {
-		assertEquals(10, numero);
+	public void testarDeTesteFalhando() {
+		assertEquals(0, numero);
 	}
 
 }

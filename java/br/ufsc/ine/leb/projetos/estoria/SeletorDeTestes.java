@@ -9,14 +9,12 @@ import org.junit.Test;
 
 public final class SeletorDeTestes {
 
-	private List<SelecaoDeTeste> selecoesDeTeste;
-	private List<SelecaoDeTeste> selecoesDeTesteIgnorados;
-	private List<SelecaoDeTeste> selecoesDeConfiguracao;
+	private List<CasoDeTeste> casosDeTeste;
+	private List<CasoDeTeste> casosDeTesteIgnorados;
 
 	public SeletorDeTestes() {
-		selecoesDeTeste = new LinkedList<>();
-		selecoesDeTesteIgnorados = new LinkedList<>();
-		selecoesDeConfiguracao = new LinkedList<>();
+		casosDeTeste = new LinkedList<>();
+		casosDeTesteIgnorados = new LinkedList<>();
 	}
 
 	public void adicionarClasse(Class<?> classe) {
@@ -24,9 +22,9 @@ public final class SeletorDeTestes {
 		FiltradorDeMetodos filtradorDeTestes = filtradorBase.clonar().removerMetodosNaoAnotadosCom(Test.class).removerMetodosAnotadosCom(Ignore.class);
 		FiltradorDeMetodos filtradorDeTestesIgnorados = filtradorBase.clonar().removerMetodosNaoAnotadosCom(Test.class).removerMetodosNaoAnotadosCom(Ignore.class);
 		FiltradorDeMetodos filtradorDeConfiguracao = filtradorBase.clonar().removerMetodosNaoAnotadosCom(Before.class);
-		adicionarSelecao(selecoesDeTeste, filtradorDeTestes, classe);
-		adicionarSelecao(selecoesDeTesteIgnorados, filtradorDeTestesIgnorados, classe);
-		adicionarSelecao(selecoesDeConfiguracao, filtradorDeConfiguracao, classe);
+		String metodoDeConfiguracao = filtradorDeConfiguracao.reduzir(metodo -> metodo.getName());
+		adicionarSelecao(casosDeTeste, filtradorDeTestes, classe, metodoDeConfiguracao);
+		adicionarSelecao(casosDeTesteIgnorados, filtradorDeTestesIgnorados, classe, metodoDeConfiguracao);
 	}
 
 	private FiltradorDeMetodos construirFiltradorBase(Class<?> classe) {
@@ -44,20 +42,16 @@ public final class SeletorDeTestes {
 		return filtradorBase;
 	}
 
-	private void adicionarSelecao(List<SelecaoDeTeste> container, FiltradorDeMetodos filtrador, Class<?> classe) {
-		filtrador.obterMetodos().forEach(metodo -> container.add(new SelecaoDeTeste(classe, metodo.getName())));
+	private void adicionarSelecao(List<CasoDeTeste> container, FiltradorDeMetodos filtrador, Class<?> classe, String metodoDeConfiguracao) {
+		filtrador.obterMetodos().forEach(metodo -> container.add(new CasoDeTeste(classe, metodo.getName(), metodoDeConfiguracao)));
 	}
 
-	public List<SelecaoDeTeste> obterSelecoesDeTeste() {
-		return selecoesDeTeste;
+	public List<CasoDeTeste> obterCasosDeTeste() {
+		return casosDeTeste;
 	}
 
-	public List<SelecaoDeTeste> obterSelecoesDeTesteIgnorados() {
-		return selecoesDeTesteIgnorados;
-	}
-
-	public List<SelecaoDeTeste> obterSelecoesDeConfiguracao() {
-		return selecoesDeConfiguracao;
+	public List<CasoDeTeste> obterCasosDeTesteIgnorados() {
+		return casosDeTesteIgnorados;
 	}
 
 }

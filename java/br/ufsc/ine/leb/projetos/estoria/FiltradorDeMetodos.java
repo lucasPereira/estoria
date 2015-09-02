@@ -6,6 +6,7 @@ import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Function;
 
 public final class FiltradorDeMetodos {
 
@@ -86,6 +87,22 @@ public final class FiltradorDeMetodos {
 	public FiltradorDeMetodos removerMetodosAnotadosCom(Class<? extends Annotation> classe) {
 		metodos.removeIf(metodo -> metodo.getDeclaredAnnotationsByType(classe).length > 0);
 		return this;
+	}
+
+	public <T> T reduzir(Function<Method, T> funcaoDeReducao) {
+		if (vazio()) {
+			metodos = new LinkedList<>();
+			return null;
+		} else {
+			Method primeiro = obterMetodos().iterator().next();
+			metodos = new LinkedList<>();
+			metodos.add(primeiro);
+			return funcaoDeReducao.apply(primeiro);
+		}
+	}
+
+	public Boolean vazio() {
+		return metodos.isEmpty();
 	}
 
 	public FiltradorDeMetodos clonar() {

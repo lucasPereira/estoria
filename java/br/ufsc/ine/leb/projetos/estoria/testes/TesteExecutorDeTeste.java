@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 
+import br.ufsc.ine.leb.projetos.estoria.CasoDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.ExecutorDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
@@ -37,7 +37,7 @@ public final class TesteExecutorDeTeste {
 
 	@Test
 	public void passando() throws Exception {
-		executor.executar(Description.createTestDescription(UmTestePassando.class, "testar"));
+		executor.executar(new CasoDeTeste(UmTestePassando.class, "testar", null));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(2, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
@@ -50,7 +50,7 @@ public final class TesteExecutorDeTeste {
 
 	@Test
 	public void passandoVazio() throws Exception {
-		executor.executar(Description.createTestDescription(UmTestePassandoVazio.class, "testar"));
+		executor.executar(new CasoDeTeste(UmTestePassandoVazio.class, "testar", null));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(2, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
@@ -63,7 +63,7 @@ public final class TesteExecutorDeTeste {
 
 	@Test
 	public void passandoExcecaoEsperada() throws Exception {
-		executor.executar(Description.createTestDescription(UmTestePassandoExcecaoEsperada.class, "testar"));
+		executor.executar(new CasoDeTeste(UmTestePassandoExcecaoEsperada.class, "testar", null));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(2, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
@@ -76,7 +76,7 @@ public final class TesteExecutorDeTeste {
 
 	@Test
 	public void passandoExcecaoEsperadaExcecaoLancada() throws Exception {
-		executor.executar(Description.createTestDescription(UmTestePassandoExcecaoEsperadaExcecaoLancada.class, "testar"));
+		executor.executar(new CasoDeTeste(UmTestePassandoExcecaoEsperadaExcecaoLancada.class, "testar", null));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(2, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
@@ -89,7 +89,7 @@ public final class TesteExecutorDeTeste {
 
 	@Test
 	public void falhando() throws Exception {
-		executor.executar(Description.createTestDescription(UmTesteFalhando.class, "testar"));
+		executor.executar(new CasoDeTeste(UmTesteFalhando.class, "testar", null));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(3, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
@@ -108,7 +108,7 @@ public final class TesteExecutorDeTeste {
 
 	@Test
 	public void falhandoExcecaoEsperada() throws Exception {
-		executor.executar(Description.createTestDescription(UmTesteFalhandoExcecaoEsperada.class, "testar"));
+		executor.executar(new CasoDeTeste(UmTesteFalhandoExcecaoEsperada.class, "testar", null));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(3, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
@@ -127,7 +127,7 @@ public final class TesteExecutorDeTeste {
 
 	@Test
 	public void falhandoExcecaoEsperadaExcecaoLancada() throws Exception {
-		executor.executar(Description.createTestDescription(UmTesteFalhandoExcecaoEsperadaExcecaoLancada.class, "testar"));
+		executor.executar(new CasoDeTeste(UmTesteFalhandoExcecaoEsperadaExcecaoLancada.class, "testar", null));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(3, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());
@@ -146,7 +146,7 @@ public final class TesteExecutorDeTeste {
 
 	@Test
 	public void falhandoExcecaoLancada() throws Exception {
-		executor.executar(Description.createTestDescription(UmTesteFalhandoExcecaoLancada.class, "testar"));
+		executor.executar(new CasoDeTeste(UmTesteFalhandoExcecaoLancada.class, "testar", null));
 		List<Notificacao> notificacoes = espiaoDeEscolta.obterNotificacoes();
 		assertEquals(3, notificacoes.size());
 		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(0).obterTipo());

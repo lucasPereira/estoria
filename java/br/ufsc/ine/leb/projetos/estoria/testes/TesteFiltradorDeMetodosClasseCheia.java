@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.Method;
 import java.util.Iterator;
@@ -47,6 +47,7 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		assertEquals("metodoPrivado", iterador.next().getName());
 		assertEquals("metodoProtegido", iterador.next().getName());
 		assertEquals("metodoSincronizado", iterador.next().getName());
+		assertFalse(filtrador.vazio());
 	}
 
 	@Test
@@ -363,6 +364,16 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		assertEquals("metodoParametrizado", iterador.next().getName());
 		assertEquals("metodoPrivado", iterador.next().getName());
 		assertEquals("metodoProtegido", iterador.next().getName());
+	}
+
+	@Test
+	public void reduzir() throws Exception {
+		String reduzido = filtrador.reduzir(metodo -> metodo.getName());
+		List<Method> metodos = filtrador.obterMetodos();
+		assertFalse(filtrador.vazio());
+		assertEquals(1, metodos.size());
+		assertEquals("metodoAbstrato", metodos.get(0).getName());
+		assertEquals("metodoAbstrato", reduzido);
 	}
 
 }
