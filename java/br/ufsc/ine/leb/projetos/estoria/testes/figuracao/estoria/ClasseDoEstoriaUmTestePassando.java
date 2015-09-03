@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.suitesDoEstoria;
+package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.estoria;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import br.ufsc.ine.leb.projetos.estoria.Estoria;
 
 @RunWith(Estoria.class)
-public class SuiteDoEstoriaUmaClasseUmMetodoDeTeste {
+public class ClasseDoEstoriaUmTestePassando {
 
 	@Test
 	public void testar() {

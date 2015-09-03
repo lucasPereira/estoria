@@ -7,9 +7,9 @@ import org.junit.runner.Description;
 
 import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmMetodo;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.DoisTestesPassandoPassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.ZeroTestes;
 
 public final class TesteEscoltadorDeTestesDescricoes {
 
@@ -47,7 +47,7 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	@Test
 	public void zeroTestesDeUmaClasse() throws Exception {
 		SeletorDeTestes seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(ZeroTestes.class);
+		seletor.adicionarClasse(ClasseComUmMetodo.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
 
 		Description descricaoDoSeletor = escoltador.getDescription();

@@ -15,7 +15,7 @@ import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoVazio;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.suitesDoJunit.SuiteDoJUnitUmaClasseUmMetodoDeTeste;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.jUnit.SuiteDoJUnitUmaClasseUmMetodoDeTeste;
 
 public final class TesteCombinadorDeNotificacao {
 

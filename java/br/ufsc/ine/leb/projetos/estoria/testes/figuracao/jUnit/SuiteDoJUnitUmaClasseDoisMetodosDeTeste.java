@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.suitesDoJunit;
+package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.jUnit;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -8,7 +8,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.DoisTest
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	DoisTestesPassandoPassando.class
+		DoisTestesPassandoPassando.class
 })
 public class SuiteDoJUnitUmaClasseDoisMetodosDeTeste {
 

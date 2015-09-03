@@ -13,14 +13,6 @@ public class EscoltadorDeTestes extends Runner {
 	private List<CasoDeTeste> casosDeTeste;
 	private List<CasoDeTeste> casosDeTesteIgnorados;
 
-	private static SeletorDeTestes construirSeletor(Class<?> classe) throws InstantiationException, IllegalAccessException {
-		return SeletorDeTestes.class.isAssignableFrom(classe) ? (SeletorDeTestes) classe.newInstance() : new SeletorDeTestes(classe);
-	}
-
-	EscoltadorDeTestes(Class<?> classe) throws InstantiationException, IllegalAccessException {
-		this(construirSeletor(classe));
-	}
-
 	public EscoltadorDeTestes(SeletorDeTestes seletor) {
 		descricao = Description.createSuiteDescription(seletor.getClass().getName());
 		casosDeTeste = seletor.obterCasosDeTeste();

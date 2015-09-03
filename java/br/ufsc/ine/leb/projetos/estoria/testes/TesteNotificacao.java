@@ -11,7 +11,7 @@ import org.junit.runner.notification.Failure;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.suitesDoJunit.SuiteDoJUnitDuasClassesDoisMetodosDeTeste;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.jUnit.SuiteDoJUnitDuasClassesDoisMetodosDeTeste;
 
 public final class TesteNotificacao {
 
