@@ -1,11 +1,11 @@
-package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTesteComBefore;
+package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class UmBeforePassandoUmTestePassando {
+public class UmaConfiguracaoPassandoUmTestePassando {
 
 	private int numero = 0;
 	public static int numeroEstatico;

@@ -13,9 +13,9 @@ import org.junit.runner.notification.Failure;
 
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoVazio;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.jUnit.SuiteDoJUnitUmaClasseUmMetodoDeTeste;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.jUnit.SuiteDoJUnitUmaClasseZeroConfiguracoesUmTeste;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassandoVazio;
 
 public final class TesteCombinadorDeNotificacao {
 
@@ -31,7 +31,7 @@ public final class TesteCombinadorDeNotificacao {
 	@Before
 	public void prepararCenario() {
 		Description descricaoDoTeste = Description.createTestDescription(UmTestePassando.class, "testar");
-		Description descricaoDaSuite = Description.createSuiteDescription(SuiteDoJUnitUmaClasseUmMetodoDeTeste.class);
+		Description descricaoDaSuite = Description.createSuiteDescription(SuiteDoJUnitUmaClasseZeroConfiguracoesUmTeste.class);
 		descricaoDaSuite.addChild(descricaoDoTeste);
 		Failure falha = new Failure(descricaoDoTeste, new AssertionError());
 		Result resultado = new Result();
@@ -45,7 +45,7 @@ public final class TesteCombinadorDeNotificacao {
 
 	@Test
 	public void combinaIniciados() throws Exception {
-		assertThat(testesIniciados, combinaComTestesIniciados(SuiteDoJUnitUmaClasseUmMetodoDeTeste.class));
+		assertThat(testesIniciados, combinaComTestesIniciados(SuiteDoJUnitUmaClasseZeroConfiguracoesUmTeste.class));
 	}
 
 	@Test

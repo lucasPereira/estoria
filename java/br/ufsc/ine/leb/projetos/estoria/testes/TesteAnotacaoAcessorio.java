@@ -6,8 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.Acessorio;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTesteComAcessorio.UmAcessorioPassandoUmBeforePassandoUmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTesteComBefore.UmBeforePassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
 
 public final class TesteAnotacaoAcessorio {
 
@@ -16,7 +16,7 @@ public final class TesteAnotacaoAcessorio {
 
 	@Before
 	public void prepararCenario() {
-		Class<?> classe = UmAcessorioPassandoUmBeforePassandoUmTestePassando.class;
+		Class<?> classe = UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class;
 		anotacao = classe.getDeclaredAnnotation(Acessorio.class);
 		anotacoes = classe.getDeclaredAnnotationsByType(Acessorio.class);
 	}
@@ -26,8 +26,8 @@ public final class TesteAnotacaoAcessorio {
 		assertEquals(1, anotacoes.length);
 		assertEquals(Acessorio.class, anotacoes[0].annotationType());
 		assertEquals(Acessorio.class, anotacao.annotationType());
-		assertEquals(UmBeforePassandoUmTestePassando.class, anotacoes[0].classe());
-		assertEquals(UmBeforePassandoUmTestePassando.class, anotacao.classe());
+		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, anotacoes[0].classe());
+		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, anotacao.classe());
 	}
 
 }

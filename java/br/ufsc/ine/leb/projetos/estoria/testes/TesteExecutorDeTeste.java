@@ -13,14 +13,14 @@ import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.ExecutorDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTesteFalhando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTesteFalhandoExcecaoEsperada;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTesteFalhandoExcecaoEsperadaExcecaoLancada;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTesteFalhandoExcecaoLancada;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoExcecaoEsperada;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoExcecaoEsperadaExcecaoLancada;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassandoVazio;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTesteFalhando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTesteFalhandoExcecaoEsperada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTesteFalhandoExcecaoEsperadaExcecaoLancada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTesteFalhandoExcecaoLancada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassandoExcecaoEsperada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassandoExcecaoEsperadaExcecaoLancada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassandoVazio;
 
 public final class TesteExecutorDeTeste {
 

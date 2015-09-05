@@ -10,8 +10,8 @@ import org.junit.runner.notification.Failure;
 
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.jUnit.SuiteDoJUnitDuasClassesDoisMetodosDeTeste;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.jUnit.SuiteDoJUnitDuasClassesZeroConfiguracoesDoisTestes;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
 
 public final class TesteNotificacao {
 
@@ -24,7 +24,7 @@ public final class TesteNotificacao {
 	public void prepararCenario() {
 		resultado = new Result();
 		descricaoDeTeste = Description.createTestDescription(UmTestePassando.class, "testar");
-		descricaoDeSuite = Description.createSuiteDescription(SuiteDoJUnitDuasClassesDoisMetodosDeTeste.class);
+		descricaoDeSuite = Description.createSuiteDescription(SuiteDoJUnitDuasClassesZeroConfiguracoesDoisTestes.class);
 		descricaoDeSuite.addChild(descricaoDeTeste);
 		falha = new Failure(descricaoDeTeste, null);
 	}

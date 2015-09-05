@@ -16,7 +16,7 @@ import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.TresTestesPassandoIgnoradoFalhando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.TresTestesPassandoIgnoradoFalhando;
 
 public final class TesteEscoltadorDeTestesExecucaoTresTestesPassandoIgnoradoFalhando {
 

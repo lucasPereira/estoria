@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.junit.runner.Description;
 
 import br.ufsc.ine.leb.projetos.estoria.CasoDeTeste;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTesteComBefore.UmBeforePassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
 
 public final class TesteCasoDeTeste {
 
@@ -30,13 +30,13 @@ public final class TesteCasoDeTeste {
 
 	@Test
 	public void comBefore() throws Exception {
-		CasoDeTeste casoDeTeste = new CasoDeTeste(UmBeforePassandoUmTestePassando.class, "testar", "configurar");
+		CasoDeTeste casoDeTeste = new CasoDeTeste(UmaConfiguracaoPassandoUmTestePassando.class, "testar", "configurar");
 		Description descricaoDoTeste = casoDeTeste.obterDescricao();
-		assertEquals(UmBeforePassandoUmTestePassando.class, casoDeTeste.obterClasse());
+		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, casoDeTeste.obterClasse());
 		assertEquals("testar", casoDeTeste.obterMetodoDeTeste());
 		assertEquals("configurar", casoDeTeste.obterMetodoDeConfiguracao());
-		assertEquals(UmBeforePassandoUmTestePassando.class, descricaoDoTeste.getTestClass());
-		assertEquals(UmBeforePassandoUmTestePassando.class.getName(), descricaoDoTeste.getClassName());
+		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, descricaoDoTeste.getTestClass());
+		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class.getName(), descricaoDoTeste.getClassName());
 		assertEquals("testar", descricaoDoTeste.getMethodName());
 		assertFalse(descricaoDoTeste.isSuite());
 		assertTrue(descricaoDoTeste.isTest());

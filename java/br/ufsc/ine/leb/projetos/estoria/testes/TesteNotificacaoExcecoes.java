@@ -9,7 +9,7 @@ import org.junit.runner.notification.Failure;
 import br.ufsc.ine.leb.projetos.estoria.ExcecaoClausulaDeContratoViolada;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
 
 public final class TesteNotificacaoExcecoes {
 

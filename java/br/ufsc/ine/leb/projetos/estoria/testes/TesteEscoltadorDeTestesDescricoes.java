@@ -8,8 +8,8 @@ import org.junit.runner.Description;
 import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmMetodo;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.DoisTestesPassandoPassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.DoisTestesPassandoPassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
 
 public final class TesteEscoltadorDeTestesDescricoes {
 

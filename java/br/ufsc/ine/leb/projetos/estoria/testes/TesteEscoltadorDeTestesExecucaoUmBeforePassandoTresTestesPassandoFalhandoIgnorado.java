@@ -13,7 +13,7 @@ import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTesteComBefore.UmBeforePassandoTresTestesPassandoFalhandoIgnorado;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado;
 
 public final class TesteEscoltadorDeTestesExecucaoUmBeforePassandoTresTestesPassandoFalhandoIgnorado {
 
@@ -22,7 +22,7 @@ public final class TesteEscoltadorDeTestesExecucaoUmBeforePassandoTresTestesPass
 	@Before
 	public void prepararCenario() {
 		SeletorDeTestes seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(UmBeforePassandoTresTestesPassandoFalhandoIgnorado.class);
+		seletor.adicionarClasse(UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
 		RunNotifier mensageiroDeEscolta = new RunNotifier();
 		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
@@ -34,12 +34,12 @@ public final class TesteEscoltadorDeTestesExecucaoUmBeforePassandoTresTestesPass
 	@Test
 	public void testar() throws Exception {
 		assertThat(notificacoes.get(0), combinaComTestesIniciados(SeletorDeTestes.class));
-		assertThat(notificacoes.get(1), combinaComTesteIgnorado(UmBeforePassandoTresTestesPassandoFalhandoIgnorado.class, "testar3"));
-		assertThat(notificacoes.get(2), combinaComTesteIniciado(UmBeforePassandoTresTestesPassandoFalhandoIgnorado.class, "testar1"));
-		assertThat(notificacoes.get(3), combinaComTesteFinalizado(UmBeforePassandoTresTestesPassandoFalhandoIgnorado.class, "testar1"));
-		assertThat(notificacoes.get(4), combinaComTesteIniciado(UmBeforePassandoTresTestesPassandoFalhandoIgnorado.class, "testar2"));
-		assertThat(notificacoes.get(5), combinaComTesteFalha(UmBeforePassandoTresTestesPassandoFalhandoIgnorado.class, "testar2", AssertionError.class));
-		assertThat(notificacoes.get(6), combinaComTesteFinalizado(UmBeforePassandoTresTestesPassandoFalhandoIgnorado.class, "testar2"));
+		assertThat(notificacoes.get(1), combinaComTesteIgnorado(UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado.class, "testar3"));
+		assertThat(notificacoes.get(2), combinaComTesteIniciado(UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado.class, "testar1"));
+		assertThat(notificacoes.get(3), combinaComTesteFinalizado(UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado.class, "testar1"));
+		assertThat(notificacoes.get(4), combinaComTesteIniciado(UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado.class, "testar2"));
+		assertThat(notificacoes.get(5), combinaComTesteFalha(UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado.class, "testar2", AssertionError.class));
+		assertThat(notificacoes.get(6), combinaComTesteFinalizado(UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado.class, "testar2"));
 		assertThat(notificacoes.get(7), combinaComTestesFinalizados(2, 1, 1));
 		assertEquals(8, notificacoes.size());
 	}

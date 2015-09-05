@@ -1,18 +1,12 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.estoria;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.Suite.SuiteClasses;
 
 import br.ufsc.ine.leb.projetos.estoria.Estoria;
 
 @RunWith(Estoria.class)
-public class ClasseDoEstoriaUmTestePassando {
-
-	@Test
-	public void testar() {
-		assertTrue(true);
-	}
+@SuiteClasses({})
+public class SuiteDoEstoriaZeroClasses {
 
 }

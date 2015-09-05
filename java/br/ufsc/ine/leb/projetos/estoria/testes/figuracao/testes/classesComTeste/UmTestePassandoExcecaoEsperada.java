@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste;
+package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste;
 
 import org.junit.Test;
 

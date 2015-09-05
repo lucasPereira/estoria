@@ -6,10 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.DoisTestesPassandoPassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTesteComBefore.UmBeforePassandoUmTesteFalhando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classesDeTesteComBefore.UmBeforePassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTesteFalhando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.DoisTestesPassandoPassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
 
 public final class TesteSeletorDeTestes {
 
@@ -68,12 +68,12 @@ public final class TesteSeletorDeTestes {
 
 	@Test
 	public void adicionarDuasClassesComBefore() throws Exception {
-		seletor.adicionarClasse(UmBeforePassandoUmTestePassando.class);
-		seletor.adicionarClasse(UmBeforePassandoUmTesteFalhando.class);
+		seletor.adicionarClasse(UmaConfiguracaoPassandoUmTestePassando.class);
+		seletor.adicionarClasse(UmaConfiguracaoPassandoUmTesteFalhando.class);
 		assertEquals(2, seletor.obterCasosDeTeste().size());
 		assertEquals(0, seletor.obterCasosDeTesteIgnorados().size());
-		assertEquals(UmBeforePassandoUmTestePassando.class, seletor.obterCasosDeTeste().get(0).obterClasse());
-		assertEquals(UmBeforePassandoUmTesteFalhando.class, seletor.obterCasosDeTeste().get(1).obterClasse());
+		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, seletor.obterCasosDeTeste().get(0).obterClasse());
+		assertEquals(UmaConfiguracaoPassandoUmTesteFalhando.class, seletor.obterCasosDeTeste().get(1).obterClasse());
 		assertEquals("testar", seletor.obterCasosDeTeste().get(0).obterMetodoDeTeste());
 		assertEquals("testarDeTesteFalhando", seletor.obterCasosDeTeste().get(1).obterMetodoDeTeste());
 		assertEquals("configurar", seletor.obterCasosDeTeste().get(0).obterMetodoDeConfiguracao());
