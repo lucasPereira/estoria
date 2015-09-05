@@ -12,7 +12,9 @@ public class EscoltadorDeTestes extends Runner {
 
 	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste) {
 		this.suiteDeTeste = suiteDeTeste;
-		this.descricaoDaSuite = Description.createSuiteDescription(suiteDeTeste.obterSuite().getName());
+		this.descricaoDaSuite = Description.createSuiteDescription(suiteDeTeste.obterSuite());
+		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste -> classeDeTeste.obterMetodosDeTesteIgnorados().forEach(metodoDeTeste -> descricaoDaSuite.addChild(metodoDeTeste.obterDescricao())));
+		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste -> classeDeTeste.obterMetodosDeTeste().forEach(metodoDeTeste -> descricaoDaSuite.addChild(metodoDeTeste.obterDescricao())));
 	}
 
 	@Override
@@ -33,14 +35,13 @@ public class EscoltadorDeTestes extends Runner {
 	private void rodarTestes(RunNotifier mensageiroDeEscolta) {
 		for (ClasseDeTeste classeDeteste : suiteDeTeste.obterClassesDeTeste()) {
 			for (MetodoDeTeste metodoDeTeste : classeDeteste.obterMetodosDeTeste()) {
-				Description descricaoDoTeste = criarDescricao(classeDeteste, metodoDeTeste);
-				TratadorDeInvocacao tratadorDeTeste = new TratadorDeInvocacaoDeTeste(descricaoDoTeste, mensageiroDeEscolta);
-				TratadorDeInvocacao tratadorDeConfiguracao = new TratadorDeInvocacaoDeConfiguracao(descricaoDoTeste, mensageiroDeEscolta);
+				TratadorDeInvocacao tratadorDeTeste = new TratadorDeInvocacaoDeTeste(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
+				TratadorDeInvocacao tratadorDeConfiguracao = new TratadorDeInvocacaoDeConfiguracao(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
 				InvocadorDeMetodo invocadorParaClasse = new InvocadorDeMetodo(classeDeteste.obterClasse());
-				mensageiroDeEscolta.fireTestStarted(descricaoDoTeste);
+				mensageiroDeEscolta.fireTestStarted(metodoDeTeste.obterDescricao());
 				classeDeteste.obterMetodosDeConfiguracao().forEach(metodoDeConfiguracao -> invocadorParaClasse.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao));
 				invocadorParaClasse.executar(metodoDeTeste.obterMetodo(), tratadorDeTeste);
-				mensageiroDeEscolta.fireTestFinished(descricaoDoTeste);
+				mensageiroDeEscolta.fireTestFinished(metodoDeTeste.obterDescricao());
 			}
 		}
 	}
@@ -48,16 +49,9 @@ public class EscoltadorDeTestes extends Runner {
 	private void rodarTestesIgnorados(RunNotifier mensageiroDeEscolta) {
 		for (ClasseDeTeste classeDeteste : suiteDeTeste.obterClassesDeTeste()) {
 			for (MetodoDeTeste metodoDeTeste : classeDeteste.obterMetodosDeTesteIgnorados()) {
-				Description descricaoDoTeste = criarDescricao(classeDeteste, metodoDeTeste);
-				mensageiroDeEscolta.fireTestIgnored(descricaoDoTeste);
+				mensageiroDeEscolta.fireTestIgnored(metodoDeTeste.obterDescricao());
 			}
 		}
-	}
-
-	private Description criarDescricao(ClasseDeTeste classeDeTeste, MetodoDeTeste metodoDeTeste) {
-		Description descricaoDoTeste = Description.createTestDescription(classeDeTeste.obterClasse(), metodoDeTeste.obterNome());
-		descricaoDaSuite.addChild(descricaoDoTeste);
-		return descricaoDoTeste;
 	}
 
 }

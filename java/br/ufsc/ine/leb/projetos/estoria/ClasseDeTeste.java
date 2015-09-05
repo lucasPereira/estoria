@@ -16,8 +16,8 @@ public final class ClasseDeTeste {
 		this.metodosDeTesteIgnorados = new LinkedList<>();
 		this.metodosDeConfiguracao = new LinkedList<>();
 		SeletorDeComponentesDeTestes seletor = new SeletorDeComponentesDeTestes(classe);
-		seletor.obterMetodosTeste().forEach(metodo -> metodosDeTeste.add(new MetodoDeTeste(metodo)));
-		seletor.obterMetodosDeTesteIgnorados().forEach(metodo -> metodosDeTesteIgnorados.add(new MetodoDeTeste(metodo)));
+		seletor.obterMetodosTeste().forEach(metodo -> metodosDeTeste.add(new MetodoDeTeste(this, metodo)));
+		seletor.obterMetodosDeTesteIgnorados().forEach(metodo -> metodosDeTesteIgnorados.add(new MetodoDeTeste(this, metodo)));
 		seletor.obterMetodosDeConfiguracao().forEach(metodo -> metodosDeConfiguracao.add(new MetodoDeConfiguracao(metodo)));
 	}
 
