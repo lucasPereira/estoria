@@ -14,6 +14,7 @@ public final class CombinadorDeNotificacao extends BaseMatcher<Notificacao> {
 	private String metodoEsperado;
 	private Class<?> classeEsperada;
 	private Class<? extends Throwable> excecaoEsperada;
+	private String mensagemDaExcecaoEsperada;
 
 	private TipoDeNotificacao tipoRecebido;
 	private Integer executadosRecebidos;
@@ -23,12 +24,14 @@ public final class CombinadorDeNotificacao extends BaseMatcher<Notificacao> {
 	private String metodoRecebido;
 	private Class<?> classeRecebida;
 	private Class<? extends Throwable> excecaoRecebida;
+	private String mensagemDaExcecaoRecebida;
 
-	private CombinadorDeNotificacao(TipoDeNotificacao tipoEsperado, Class<?> classeEsperada, String metodoEsperado, Class<? extends Throwable> excecaoEsperada, Integer executadosEsperados, Integer falhasEsperadas, Integer ignoradosEsperados, Boolean sucessoEsperado) {
+	private CombinadorDeNotificacao(TipoDeNotificacao tipoEsperado, Class<?> classeEsperada, String metodoEsperado, Class<? extends Throwable> excecaoEsperada, String mensagemDaExcecaoEsperada, Integer executadosEsperados, Integer falhasEsperadas, Integer ignoradosEsperados, Boolean sucessoEsperado) {
 		this.tipoEsperado = tipoEsperado;
 		this.metodoEsperado = metodoEsperado;
 		this.classeEsperada = classeEsperada;
 		this.excecaoEsperada = excecaoEsperada;
+		this.mensagemDaExcecaoEsperada = mensagemDaExcecaoEsperada;
 		this.executadosEsperados = executadosEsperados;
 		this.falhasEsperadas = falhasEsperadas;
 		this.ignoradosEsperados = ignoradosEsperados;
@@ -36,34 +39,38 @@ public final class CombinadorDeNotificacao extends BaseMatcher<Notificacao> {
 	}
 
 	public static Matcher<Notificacao> combinaComTestesIniciados(Class<?> classeEsperada) {
-		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTES_INICIADOS, classeEsperada, null, null, null, null, null, null);
+		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTES_INICIADOS, classeEsperada, null, null, null, null, null, null, null);
 	}
 
 	public static Matcher<Notificacao> combinaComTesteIniciado(Class<?> classeEsperada, String metodoEsperado) {
-		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTE_INICIADO, classeEsperada, metodoEsperado, null, null, null, null, null);
+		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTE_INICIADO, classeEsperada, metodoEsperado, null, null, null, null, null, null);
 	}
 
 	public static Matcher<Notificacao> combinaComTesteFinalizado(Class<?> classeEsperada, String metodoEsperado) {
-		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTE_FINALIZADO, classeEsperada, metodoEsperado, null, null, null, null, null);
+		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTE_FINALIZADO, classeEsperada, metodoEsperado, null, null, null, null, null, null);
 	}
 
 	public static Matcher<Notificacao> combinaComTesteIgnorado(Class<?> classeEsperada, String metodoEsperado) {
-		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTE_IGNORADO, classeEsperada, metodoEsperado, null, null, null, null, null);
+		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTE_IGNORADO, classeEsperada, metodoEsperado, null, null, null, null, null, null);
 	}
 
 	public static Matcher<Notificacao> combinaComTesteFalha(Class<?> classeEsperada, String metodoEsperado, Class<? extends Throwable> excecaoEsperada) {
-		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTE_FALHA, classeEsperada, metodoEsperado, excecaoEsperada, null, null, null, null);
+		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTE_FALHA, classeEsperada, metodoEsperado, excecaoEsperada, null, null, null, null, null);
+	}
+
+	public static Matcher<Notificacao> combinaComTesteFalha(Class<?> classeEsperada, String metodoEsperado, Class<? extends Throwable> excecaoEsperada, String mensagemDaExcecaoEsperada) {
+		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTE_FALHA, classeEsperada, metodoEsperado, excecaoEsperada, mensagemDaExcecaoEsperada, null, null, null, null);
 	}
 
 	public static Matcher<Notificacao> combinaComTestesFinalizados(Integer executadosEsperados, Integer falhasEsperadas, Integer ignoradosEsperados) {
-		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTES_FINALIZADOS, null, null, null, executadosEsperados, falhasEsperadas, ignoradosEsperados, falhasEsperadas == 0);
+		return new CombinadorDeNotificacao(TipoDeNotificacao.TESTES_FINALIZADOS, null, null, null, null, executadosEsperados, falhasEsperadas, ignoradosEsperados, falhasEsperadas == 0);
 	}
 
 	@Override
 	public void describeTo(Description casamento) {
 		casamento.appendValue(tipoEsperado);
 		adicionarRepresentacaoTextualDeDescricao(casamento, classeEsperada, metodoEsperado);
-		adicionarRepresentacaoTextualDeFalha(casamento, excecaoEsperada);
+		adicionarRepresentacaoTextualDeFalha(casamento, excecaoEsperada, mensagemDaExcecaoEsperada);
 		adicionarRepresentacaoTextualDeResultado(casamento, executadosEsperados, falhasEsperadas, ignoradosEsperados);
 	}
 
@@ -71,7 +78,7 @@ public final class CombinadorDeNotificacao extends BaseMatcher<Notificacao> {
 	public void describeMismatch(Object objeto, Description casamento) {
 		casamento.appendValue(tipoRecebido);
 		adicionarRepresentacaoTextualDeDescricao(casamento, classeRecebida, metodoRecebido);
-		adicionarRepresentacaoTextualDeFalha(casamento, excecaoRecebida);
+		adicionarRepresentacaoTextualDeFalha(casamento, excecaoRecebida, mensagemDaExcecaoRecebida);
 		adicionarRepresentacaoTextualDeResultado(casamento, executadosRecebidos, falhasRecebidas, ignoradosRecebidos);
 	}
 
@@ -89,7 +96,7 @@ public final class CombinadorDeNotificacao extends BaseMatcher<Notificacao> {
 	}
 
 	private Boolean casarFalha() {
-		return !tipoEsperado.possuiFalha() || casarExcecao();
+		return !tipoEsperado.possuiFalha() || (casarExcecao() && casarMensagemDaExcecao());
 	}
 
 	private Boolean casarResultado() {
@@ -106,6 +113,10 @@ public final class CombinadorDeNotificacao extends BaseMatcher<Notificacao> {
 
 	private Boolean casarExcecao() {
 		return excecaoEsperada.equals(excecaoRecebida);
+	}
+
+	private Boolean casarMensagemDaExcecao() {
+		return (mensagemDaExcecaoEsperada == null) || mensagemDaExcecaoEsperada.equals(mensagemDaExcecaoRecebida);
 	}
 
 	private Boolean casarExecutados() {
@@ -131,6 +142,7 @@ public final class CombinadorDeNotificacao extends BaseMatcher<Notificacao> {
 			classeRecebida = (notificacao.obterDescricao() == null) ? null : notificacao.obterDescricao().getTestClass();
 			metodoRecebido = (notificacao.obterDescricao() == null) ? null : notificacao.obterDescricao().getMethodName();
 			excecaoRecebida = (notificacao.obterFalha() == null) ? null : notificacao.obterFalha().getException().getClass();
+			mensagemDaExcecaoRecebida = (notificacao.obterFalha() == null) ? null : notificacao.obterFalha().getException().getMessage();
 			executadosRecebidos = (notificacao.obterResultado() == null) ? null : notificacao.obterResultado().getRunCount();
 			falhasRecebidas = (notificacao.obterResultado() == null) ? null : notificacao.obterResultado().getFailureCount();
 			ignoradosRecebidos = (notificacao.obterResultado() == null) ? null : notificacao.obterResultado().getIgnoreCount();
@@ -149,10 +161,11 @@ public final class CombinadorDeNotificacao extends BaseMatcher<Notificacao> {
 		}
 	}
 
-	private static void adicionarRepresentacaoTextualDeFalha(Description casamento, Class<? extends Throwable> excecao) {
+	private static void adicionarRepresentacaoTextualDeFalha(Description casamento, Class<? extends Throwable> excecao, String mensagem) {
 		if (excecao != null) {
 			String representacaoDaExcecao = excecao.getSimpleName();
-			String representacao = String.format(" lança %s.class", representacaoDaExcecao);
+			String reoresentacaoDaMensagem = (mensagem == null) ? "*" : mensagem;
+			String representacao = String.format(" lança %s.class [%s]", representacaoDaExcecao, reoresentacaoDaMensagem);
 			casamento.appendText(representacao);
 		}
 	}

@@ -2,7 +2,7 @@ package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste
 
 import org.junit.Test;
 
-public class UmTesteFalhandoExcecaoEsperadaExcecaoLancada {
+public class UmTesteFalhandoExcecaoEsperadaSubclasse {
 
 	@Test(expected = UnsupportedOperationException.class)
 	public void testar() {

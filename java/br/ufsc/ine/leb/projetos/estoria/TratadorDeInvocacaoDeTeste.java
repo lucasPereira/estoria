@@ -3,16 +3,17 @@ package br.ufsc.ine.leb.projetos.estoria;
 import java.lang.reflect.Method;
 
 import org.junit.Test;
+import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
-public class TratadorDeInvocacaoDeTeste implements TratadorDeInvocacao {
+public final class TratadorDeInvocacaoDeTeste implements TratadorDeInvocacao {
 
-	private CasoDeTeste casoDeTeste;
+	private Description descricao;
 	private RunNotifier mensageiroDeEscolta;
 
-	public TratadorDeInvocacaoDeTeste(CasoDeTeste casoDeTeste, RunNotifier mensageiroDeEscolta) {
-		this.casoDeTeste = casoDeTeste;
+	public TratadorDeInvocacaoDeTeste(Description descricao, RunNotifier mensageiroDeEscolta) {
+		this.descricao = descricao;
 		this.mensageiroDeEscolta = mensageiroDeEscolta;
 	}
 
@@ -53,21 +54,22 @@ public class TratadorDeInvocacaoDeTeste implements TratadorDeInvocacao {
 	}
 
 	private Failure criarFalhaDeExcecaoNaoEsperadaMasLancada(Throwable excecaoLancada) {
-		Failure falha = new Failure(casoDeTeste.obterDescricao(), excecaoLancada);
+		Failure falha = new Failure(descricao, excecaoLancada);
 		return falha;
 	}
 
 	private Failure criarFalhaDeExcecaoEsperadaMasNaoLancadaNenhuma(Class<?> excecaoEsperada) {
 		String mensagemDeFalha = String.format("expected exception:<%s>", excecaoEsperada.getName());
 		Throwable excecaoLancada = new AssertionError(mensagemDeFalha);
-		Failure falha = new Failure(casoDeTeste.obterDescricao(), excecaoLancada);
+		Failure falha = new Failure(descricao, excecaoLancada);
 		return falha;
 	}
 
 	private Failure criarFalhaDeExcecaoEsperadaMasLancadaOutra(Throwable excecaoLancada, Class<?> excecaoEsperada) {
 		String mesagemDeFalha = String.format("unexpected exception, expected:<%s> but was:<%s>", excecaoEsperada.getName(), excecaoLancada.getClass().getName());
 		Throwable excecaoPaiLancada = new AssertionError(mesagemDeFalha, excecaoLancada);
-		Failure falha = new Failure(casoDeTeste.obterDescricao(), excecaoPaiLancada);
+		Failure falha = new Failure(descricao, excecaoPaiLancada);
 		return falha;
 	}
+
 }

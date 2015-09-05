@@ -12,18 +12,17 @@ import org.junit.runner.notification.RunNotifier;
 import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
-import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
+import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTesteFalhando;
 
-public final class TesteEscoltadorDeTestesExecucaoUmBeforePassandoUmTesteFalhando {
+public final class TesteEscoltadorDeTestesExecucaoUmaConfiguracaoPassandoUmTesteFalhando {
 
 	private List<Notificacao> notificacoes;
 
 	@Before
 	public void prepararCenario() {
-		SeletorDeTestes seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(UmaConfiguracaoPassandoUmTesteFalhando.class);
-		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
+		SuiteDeTeste suite = new SuiteDeTeste(UmaConfiguracaoPassandoUmTesteFalhando.class);
+		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suite);
 		RunNotifier mensageiroDeEscolta = new RunNotifier();
 		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
 		mensageiroDeEscolta.addFirstListener(espiaoDeEscolta);
@@ -33,7 +32,7 @@ public final class TesteEscoltadorDeTestesExecucaoUmBeforePassandoUmTesteFalhand
 
 	@Test
 	public void testar() throws Exception {
-		assertThat(notificacoes.get(0), combinaComTestesIniciados(SeletorDeTestes.class));
+		assertThat(notificacoes.get(0), combinaComTestesIniciados(UmaConfiguracaoPassandoUmTesteFalhando.class));
 		assertThat(notificacoes.get(1), combinaComTesteIniciado(UmaConfiguracaoPassandoUmTesteFalhando.class, "testarDeTesteFalhando"));
 		assertThat(notificacoes.get(2), combinaComTesteFalha(UmaConfiguracaoPassandoUmTesteFalhando.class, "testarDeTesteFalhando", AssertionError.class));
 		assertThat(notificacoes.get(3), combinaComTesteFinalizado(UmaConfiguracaoPassandoUmTesteFalhando.class, "testarDeTesteFalhando"));

@@ -33,7 +33,7 @@ public final class TesteCombinadorDeNotificacao {
 		Description descricaoDoTeste = Description.createTestDescription(UmTestePassando.class, "testar");
 		Description descricaoDaSuite = Description.createSuiteDescription(SuiteDoJUnitUmaClasseZeroConfiguracoesUmTeste.class);
 		descricaoDaSuite.addChild(descricaoDoTeste);
-		Failure falha = new Failure(descricaoDoTeste, new AssertionError());
+		Failure falha = new Failure(descricaoDoTeste, new AssertionError("mensagem da exceção"));
 		Result resultado = new Result();
 		testesIniciados = new Notificacao(TipoDeNotificacao.TESTES_INICIADOS, descricaoDaSuite);
 		testeIniciado = new Notificacao(TipoDeNotificacao.TESTE_INICIADO, descricaoDoTeste);
@@ -69,6 +69,11 @@ public final class TesteCombinadorDeNotificacao {
 	}
 
 	@Test
+	public void combinaFalhaComMensagem() throws Exception {
+		assertThat(testeFalha, combinaComTesteFalha(UmTestePassando.class, "testar", AssertionError.class, "mensagem da exceção"));
+	}
+
+	@Test
 	public void combinaFinalizados() throws Exception {
 		assertThat(testesFinalizados, combinaComTestesFinalizados(0, 0, 0));
 	}
@@ -93,7 +98,7 @@ public final class TesteCombinadorDeNotificacao {
 	public void naoCombinaIniciadoComIniciados() throws Exception {
 		excecao.expect(AssertionError.class);
 		excecao.expectMessage("Expected: <TESTE_INICIADO> UmTestePassando.testar");
-		excecao.expectMessage("but: <TESTES_INICIADOS> SuiteDoJUnitUmaClasseUmMetodoDeTeste.class");
+		excecao.expectMessage("but: <TESTES_INICIADOS> SuiteDoJUnitUmaClasseZeroConfiguracoesUmTeste.class");
 		assertThat(testesIniciados, combinaComTesteIniciado(UmTestePassando.class, "testar"));
 	}
 
@@ -116,31 +121,39 @@ public final class TesteCombinadorDeNotificacao {
 	@Test
 	public void naoCombinaFalhaComFalhaDeOutraClasse() throws Exception {
 		excecao.expect(AssertionError.class);
-		excecao.expectMessage("Expected: <TESTE_FALHA> UmTestePassandoVazio.testar lança AssertionError.class");
-		excecao.expectMessage("but: <TESTE_FALHA> UmTestePassando.testar lança AssertionError.class");
+		excecao.expectMessage("Expected: <TESTE_FALHA> UmTestePassandoVazio.testar lança AssertionError.class [*]");
+		excecao.expectMessage("but: <TESTE_FALHA> UmTestePassando.testar lança AssertionError.class [mensagem da exceção]");
 		assertThat(testeFalha, combinaComTesteFalha(UmTestePassandoVazio.class, "testar", AssertionError.class));
 	}
 
 	@Test
 	public void naoCombinaFalhaComFalhaDeOutroMetodo() throws Exception {
 		excecao.expect(AssertionError.class);
-		excecao.expectMessage("Expected: <TESTE_FALHA> UmTestePassando.testarFalhando lança AssertionError.class");
-		excecao.expectMessage("but: <TESTE_FALHA> UmTestePassando.testar lança AssertionError.class");
+		excecao.expectMessage("Expected: <TESTE_FALHA> UmTestePassando.testarFalhando lança AssertionError.class [*]");
+		excecao.expectMessage("but: <TESTE_FALHA> UmTestePassando.testar lança AssertionError.class [mensagem da exceção]");
 		assertThat(testeFalha, combinaComTesteFalha(UmTestePassando.class, "testarFalhando", AssertionError.class));
 	}
 
 	@Test
 	public void naoCombinaFalhaComFalhaDeOutraExcecao() throws Exception {
 		excecao.expect(AssertionError.class);
-		excecao.expectMessage("Expected: <TESTE_FALHA> UmTestePassando.testar lança RuntimeException.class");
-		excecao.expectMessage("but: <TESTE_FALHA> UmTestePassando.testar lança AssertionError.class");
+		excecao.expectMessage("Expected: <TESTE_FALHA> UmTestePassando.testar lança RuntimeException.class [*]");
+		excecao.expectMessage("but: <TESTE_FALHA> UmTestePassando.testar lança AssertionError.class [mensagem da exceção]");
 		assertThat(testeFalha, combinaComTesteFalha(UmTestePassando.class, "testar", RuntimeException.class));
+	}
+
+	@Test
+	public void naoCombinaFalhaComFalhaDeOutraExcecaoMensagemErrada() throws Exception {
+		excecao.expect(AssertionError.class);
+		excecao.expectMessage("Expected: <TESTE_FALHA> UmTestePassando.testar lança AssertionError.class [mensagem]");
+		excecao.expectMessage("but: <TESTE_FALHA> UmTestePassando.testar lança AssertionError.class [mensagem da exceção]");
+		assertThat(testeFalha, combinaComTesteFalha(UmTestePassando.class, "testar", AssertionError.class, "mensagem"));
 	}
 
 	@Test
 	public void naoCombinaFalhaComIniciado() throws Exception {
 		excecao.expect(AssertionError.class);
-		excecao.expectMessage("Expected: <TESTE_FALHA> UmTestePassando.testar lança AssertionError.class");
+		excecao.expectMessage("Expected: <TESTE_FALHA> UmTestePassando.testar lança AssertionError.class [*]");
 		excecao.expectMessage("but: <TESTE_INICIADO> UmTestePassando.testar");
 		assertThat(testeIniciado, combinaComTesteFalha(UmTestePassando.class, "testar", AssertionError.class));
 	}

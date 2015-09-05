@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
-public class Booleano {
+public final class Booleano {
 
 	private Boolean valorReduzido;
 

@@ -4,7 +4,7 @@ import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-public class Notificacao {
+public final class Notificacao {
 
 	private Failure falha;
 	private Result resultado;

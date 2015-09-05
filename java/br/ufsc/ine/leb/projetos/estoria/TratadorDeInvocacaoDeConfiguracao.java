@@ -2,16 +2,17 @@ package br.ufsc.ine.leb.projetos.estoria;
 
 import java.lang.reflect.Method;
 
+import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
-public class TratadorDeInvocacaoDeConfiguracao implements TratadorDeInvocacao {
+public final class TratadorDeInvocacaoDeConfiguracao implements TratadorDeInvocacao {
 
-	private CasoDeTeste casoDeTeste;
+	private Description descricao;
 	private RunNotifier mensageiroDeEscolta;
 
-	public TratadorDeInvocacaoDeConfiguracao(CasoDeTeste casoDeTeste, RunNotifier mensageiroDeEscolta) {
-		this.casoDeTeste = casoDeTeste;
+	public TratadorDeInvocacaoDeConfiguracao(Description descricao, RunNotifier mensageiroDeEscolta) {
+		this.descricao = descricao;
 		this.mensageiroDeEscolta = mensageiroDeEscolta;
 	}
 
@@ -20,7 +21,7 @@ public class TratadorDeInvocacaoDeConfiguracao implements TratadorDeInvocacao {
 
 	@Override
 	public void tratarInvocacaoComExcecao(Method metodo, Throwable excecaoLancada) {
-		Failure falha = new Failure(casoDeTeste.obterDescricao(), excecaoLancada);
+		Failure falha = new Failure(descricao, excecaoLancada);
 		mensageiroDeEscolta.fireTestFailure(falha);
 	}
 

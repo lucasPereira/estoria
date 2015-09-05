@@ -8,7 +8,7 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 
-public class EspiaoDeEscolta extends RunListener {
+public final class EspiaoDeEscolta extends RunListener {
 
 	private List<Notificacao> notificacoes;
 

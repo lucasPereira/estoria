@@ -2,82 +2,96 @@ package br.ufsc.ine.leb.projetos.estoria.testes;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTesteFalhando;
+import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeTestes;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseSemMetodos;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.DoisTestesPassandoPassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTesteIgnorado;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassandoVazio;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.DuasClassesZeroAcessoriosZeroConfiguracoesDoisTestes;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.ZeroClasses;;
 
 public final class TesteSeletorDeTestes {
 
-	private SeletorDeTestes seletor;
-
-	@Before
-	public void prepararCenario() {
-		seletor = new SeletorDeTestes();
-	}
-
 	@Test
 	public void vazio() throws Exception {
-		assertEquals(0, seletor.obterCasosDeTeste().size());
-		assertEquals(0, seletor.obterCasosDeTesteIgnorados().size());
+		SeletorDeComponentesDeTestes seletor = new SeletorDeComponentesDeTestes(ClasseSemMetodos.class);
+		assertEquals(0, seletor.obterMetodosTeste().size());
+		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
+		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
+		assertEquals(0, seletor.obterClassesDeSuite().size());
+		assertFalse(seletor.possuiAnotacaoClassesDeSuite());
 	}
 
 	@Test
-	public void adicionarUmaClasseComUmMetodoDeTeste() throws Exception {
-		seletor.adicionarClasse(UmTestePassando.class);
-		assertEquals(1, seletor.obterCasosDeTeste().size());
-		assertEquals(0, seletor.obterCasosDeTesteIgnorados().size());
-		assertEquals(UmTestePassando.class, seletor.obterCasosDeTeste().get(0).obterClasse());
-		assertEquals("testar", seletor.obterCasosDeTeste().get(0).obterMetodoDeTeste());
-		assertNull(seletor.obterCasosDeTeste().get(0).obterMetodoDeConfiguracao());
+	public void UmTeste() throws Exception {
+		SeletorDeComponentesDeTestes seletor = new SeletorDeComponentesDeTestes(UmTestePassando.class);
+		assertEquals(1, seletor.obterMetodosTeste().size());
+		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
+		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
+		assertEquals(0, seletor.obterClassesDeSuite().size());
+		assertFalse(seletor.possuiAnotacaoClassesDeSuite());
+		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 	}
 
 	@Test
-	public void adicionarUmaClasseComDoisMetodosDeTeste() throws Exception {
-		seletor.adicionarClasse(DoisTestesPassandoPassando.class);
-		assertEquals(2, seletor.obterCasosDeTeste().size());
-		assertEquals(0, seletor.obterCasosDeTesteIgnorados().size());
-		assertEquals(DoisTestesPassandoPassando.class, seletor.obterCasosDeTeste().get(0).obterClasse());
-		assertEquals(DoisTestesPassandoPassando.class, seletor.obterCasosDeTeste().get(1).obterClasse());
-		assertEquals("testar1", seletor.obterCasosDeTeste().get(0).obterMetodoDeTeste());
-		assertEquals("testar2", seletor.obterCasosDeTeste().get(1).obterMetodoDeTeste());
-		assertNull(seletor.obterCasosDeTeste().get(0).obterMetodoDeConfiguracao());
-		assertNull(seletor.obterCasosDeTeste().get(1).obterMetodoDeConfiguracao());
+	public void UmTesteIgnorado() throws Exception {
+		SeletorDeComponentesDeTestes seletor = new SeletorDeComponentesDeTestes(UmTesteIgnorado.class);
+		assertEquals(0, seletor.obterMetodosTeste().size());
+		assertEquals(1, seletor.obterMetodosDeTesteIgnorados().size());
+		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
+		assertEquals(0, seletor.obterClassesDeSuite().size());
+		assertFalse(seletor.possuiAnotacaoClassesDeSuite());
+		assertEquals("testar", seletor.obterMetodosDeTesteIgnorados().get(0).getName());
 	}
 
 	@Test
-	public void adicionarDuasClasses() throws Exception {
-		seletor.adicionarClasse(DoisTestesPassandoPassando.class);
-		seletor.adicionarClasse(UmTestePassando.class);
-		assertEquals(3, seletor.obterCasosDeTeste().size());
-		assertEquals(0, seletor.obterCasosDeTesteIgnorados().size());
-		assertEquals(DoisTestesPassandoPassando.class, seletor.obterCasosDeTeste().get(0).obterClasse());
-		assertEquals(DoisTestesPassandoPassando.class, seletor.obterCasosDeTeste().get(1).obterClasse());
-		assertEquals(UmTestePassando.class, seletor.obterCasosDeTeste().get(2).obterClasse());
-		assertEquals("testar1", seletor.obterCasosDeTeste().get(0).obterMetodoDeTeste());
-		assertEquals("testar2", seletor.obterCasosDeTeste().get(1).obterMetodoDeTeste());
-		assertEquals("testar", seletor.obterCasosDeTeste().get(2).obterMetodoDeTeste());
-		assertNull(seletor.obterCasosDeTeste().get(0).obterMetodoDeConfiguracao());
-		assertNull(seletor.obterCasosDeTeste().get(1).obterMetodoDeConfiguracao());
-		assertNull(seletor.obterCasosDeTeste().get(2).obterMetodoDeConfiguracao());
+	public void doisTestes() throws Exception {
+		SeletorDeComponentesDeTestes seletor = new SeletorDeComponentesDeTestes(DoisTestesPassandoPassando.class);
+		assertEquals(2, seletor.obterMetodosTeste().size());
+		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
+		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
+		assertEquals(0, seletor.obterClassesDeSuite().size());
+		assertFalse(seletor.possuiAnotacaoClassesDeSuite());
+		assertEquals("testar1", seletor.obterMetodosTeste().get(0).getName());
+		assertEquals("testar2", seletor.obterMetodosTeste().get(1).getName());
 	}
 
 	@Test
-	public void adicionarDuasClassesComBefore() throws Exception {
-		seletor.adicionarClasse(UmaConfiguracaoPassandoUmTestePassando.class);
-		seletor.adicionarClasse(UmaConfiguracaoPassandoUmTesteFalhando.class);
-		assertEquals(2, seletor.obterCasosDeTeste().size());
-		assertEquals(0, seletor.obterCasosDeTesteIgnorados().size());
-		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, seletor.obterCasosDeTeste().get(0).obterClasse());
-		assertEquals(UmaConfiguracaoPassandoUmTesteFalhando.class, seletor.obterCasosDeTeste().get(1).obterClasse());
-		assertEquals("testar", seletor.obterCasosDeTeste().get(0).obterMetodoDeTeste());
-		assertEquals("testarDeTesteFalhando", seletor.obterCasosDeTeste().get(1).obterMetodoDeTeste());
-		assertEquals("configurar", seletor.obterCasosDeTeste().get(0).obterMetodoDeConfiguracao());
-		assertEquals("configurarDeTesteFalhando", seletor.obterCasosDeTeste().get(1).obterMetodoDeConfiguracao());
+	public void umaConfiguracaoUmTeste() throws Exception {
+		SeletorDeComponentesDeTestes seletor = new SeletorDeComponentesDeTestes(UmaConfiguracaoPassandoUmTestePassando.class);
+		assertEquals(1, seletor.obterMetodosTeste().size());
+		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
+		assertEquals(1, seletor.obterMetodosDeConfiguracao().size());
+		assertEquals(0, seletor.obterClassesDeSuite().size());
+		assertFalse(seletor.possuiAnotacaoClassesDeSuite());
+		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
+		assertEquals("configurar", seletor.obterMetodosDeConfiguracao().get(0).getName());
+	}
+
+	@Test
+	public void umaClasseDeSuiteTeste() throws Exception {
+		SeletorDeComponentesDeTestes seletor = new SeletorDeComponentesDeTestes(DuasClassesZeroAcessoriosZeroConfiguracoesDoisTestes.class);
+		assertEquals(0, seletor.obterMetodosTeste().size());
+		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
+		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
+		assertEquals(2, seletor.obterClassesDeSuite().size());
+		assertTrue(seletor.possuiAnotacaoClassesDeSuite());
+		assertEquals(UmTestePassando.class, seletor.obterClassesDeSuite().get(0));
+		assertEquals(UmTestePassandoVazio.class, seletor.obterClassesDeSuite().get(1));
+	}
+
+	@Test
+	public void zeroClassesDeSuiteTeste() throws Exception {
+		SeletorDeComponentesDeTestes seletor = new SeletorDeComponentesDeTestes(ZeroClasses.class);
+		assertEquals(0, seletor.obterMetodosTeste().size());
+		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
+		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
+		assertEquals(0, seletor.obterClassesDeSuite().size());
+		assertTrue(seletor.possuiAnotacaoClassesDeSuite());
 	}
 
 }

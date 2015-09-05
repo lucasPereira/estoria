@@ -1,60 +1,59 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.CasoDeTeste;
-import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
+import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseCheiaDeMetodosDeTeste;
 
 public final class TesteSeletorDeTestesClasseCheia {
 
-	private SeletorDeTestes seletor;
+	private SeletorDeComponentesDeTestes seletor;
 
 	@Before
 	public void prepararCenario() {
-		seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(ClasseCheiaDeMetodosDeTeste.class);
+		seletor = new SeletorDeComponentesDeTestes(ClasseCheiaDeMetodosDeTeste.class);
 	}
 
 	@Test
-	public void selecoesDeTeste() throws Exception {
-		List<CasoDeTeste> casosDeTeste = seletor.obterCasosDeTeste();
-		assertEquals(5, casosDeTeste.size());
-		assertEquals(ClasseCheiaDeMetodosDeTeste.class, casosDeTeste.get(0).obterClasse());
-		assertEquals(ClasseCheiaDeMetodosDeTeste.class, casosDeTeste.get(1).obterClasse());
-		assertEquals(ClasseCheiaDeMetodosDeTeste.class, casosDeTeste.get(2).obterClasse());
-		assertEquals(ClasseCheiaDeMetodosDeTeste.class, casosDeTeste.get(3).obterClasse());
-		assertEquals(ClasseCheiaDeMetodosDeTeste.class, casosDeTeste.get(4).obterClasse());
-		assertEquals("metodoDeConfiguracaoComTest", casosDeTeste.get(0).obterMetodoDeTeste());
-		assertEquals("metodoDeTeste", casosDeTeste.get(1).obterMetodoDeTeste());
-		assertEquals("metodoDeTesteComExcecao", casosDeTeste.get(2).obterMetodoDeTeste());
-		assertEquals("metodoDeTesteEstritoDePontoFlutuante", casosDeTeste.get(3).obterMetodoDeTeste());
-		assertEquals("metodoDeTesteFinal", casosDeTeste.get(4).obterMetodoDeTeste());
-		assertEquals("metodoDeConfiguracao", casosDeTeste.get(0).obterMetodoDeConfiguracao());
-		assertEquals("metodoDeConfiguracao", casosDeTeste.get(1).obterMetodoDeConfiguracao());
-		assertEquals("metodoDeConfiguracao", casosDeTeste.get(2).obterMetodoDeConfiguracao());
-		assertEquals("metodoDeConfiguracao", casosDeTeste.get(3).obterMetodoDeConfiguracao());
-		assertEquals("metodoDeConfiguracao", casosDeTeste.get(4).obterMetodoDeConfiguracao());
+	public void metodosDeTeste() throws Exception {
+		List<Method> metodos = seletor.obterMetodosTeste();
+		assertEquals(5, metodos.size());
+		assertEquals("metodoDeConfiguracaoComTest", metodos.get(0).getName());
+		assertEquals("metodoDeTeste", metodos.get(1).getName());
+		assertEquals("metodoDeTesteComExcecao", metodos.get(2).getName());
+		assertEquals("metodoDeTesteEstritoDePontoFlutuante", metodos.get(3).getName());
+		assertEquals("metodoDeTesteFinal", metodos.get(4).getName());
 	}
 
 	@Test
-	public void selecoesDeTesteIgnorados() throws Exception {
-		List<CasoDeTeste> casosDeTeste = seletor.obterCasosDeTesteIgnorados();
-		assertEquals(3, casosDeTeste.size());
-		assertEquals(ClasseCheiaDeMetodosDeTeste.class, casosDeTeste.get(0).obterClasse());
-		assertEquals(ClasseCheiaDeMetodosDeTeste.class, casosDeTeste.get(1).obterClasse());
-		assertEquals(ClasseCheiaDeMetodosDeTeste.class, casosDeTeste.get(2).obterClasse());
-		assertEquals("metodoDeConfiguracaoComIgnoreTest", casosDeTeste.get(0).obterMetodoDeTeste());
-		assertEquals("metodoNaoTesteAnotadoComIgnoreTest", casosDeTeste.get(1).obterMetodoDeTeste());
-		assertEquals("metodoNaoTesteAnotadoComTestIgnore", casosDeTeste.get(2).obterMetodoDeTeste());
-		assertEquals("metodoDeConfiguracao", casosDeTeste.get(0).obterMetodoDeConfiguracao());
-		assertEquals("metodoDeConfiguracao", casosDeTeste.get(1).obterMetodoDeConfiguracao());
-		assertEquals("metodoDeConfiguracao", casosDeTeste.get(2).obterMetodoDeConfiguracao());
+	public void metodosDeTesteIgnorados() throws Exception {
+		List<Method> metodos = seletor.obterMetodosDeTesteIgnorados();
+		assertEquals(3, metodos.size());
+		assertEquals("metodoDeConfiguracaoComIgnoreTest", metodos.get(0).getName());
+		assertEquals("metodoNaoTesteAnotadoComIgnoreTest", metodos.get(1).getName());
+		assertEquals("metodoNaoTesteAnotadoComTestIgnore", metodos.get(2).getName());
+	}
+
+	@Test
+	public void metodosDeConfiguracao() throws Exception {
+		List<Method> metodos = seletor.obterMetodosDeConfiguracao();
+		assertEquals(4, metodos.size());
+		assertEquals("metodoDeConfiguracao", metodos.get(0).getName());
+		assertEquals("metodoDeConfiguracaoComIgnore", metodos.get(1).getName());
+		assertEquals("metodoDeConfiguracaoComIgnoreTest", metodos.get(2).getName());
+		assertEquals("metodoDeConfiguracaoComTest", metodos.get(3).getName());
+	}
+
+	@Test
+	public void classesDeSuite() throws Exception {
+		assertEquals(0, seletor.obterClassesDeSuite().size());
+		assertFalse(seletor.possuiAnotacaoClassesDeSuite());
 	}
 
 }

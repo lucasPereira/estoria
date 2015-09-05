@@ -1,9 +1,7 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.*;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -14,8 +12,7 @@ import org.junit.runner.notification.RunNotifier;
 import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
-import br.ufsc.ine.leb.projetos.estoria.SeletorDeTestes;
-import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
+import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
 
 public final class TesteEscoltadorDeTestesExecucaoUmTestePassando {
@@ -24,9 +21,8 @@ public final class TesteEscoltadorDeTestesExecucaoUmTestePassando {
 
 	@Before
 	public void prepararCenario() {
-		SeletorDeTestes seletor = new SeletorDeTestes();
-		seletor.adicionarClasse(UmTestePassando.class);
-		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(seletor);
+		SuiteDeTeste suite = new SuiteDeTeste(UmTestePassando.class);
+		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suite);
 		RunNotifier mensageiroDeEscolta = new RunNotifier();
 		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
 		mensageiroDeEscolta.addFirstListener(espiaoDeEscolta);
@@ -35,50 +31,12 @@ public final class TesteEscoltadorDeTestesExecucaoUmTestePassando {
 	}
 
 	@Test
-	public void notificacoes() throws Exception {
+	public void testar() throws Exception {
 		assertEquals(4, notificacoes.size());
-		assertEquals(TipoDeNotificacao.TESTES_INICIADOS, notificacoes.get(0).obterTipo());
-		assertEquals(TipoDeNotificacao.TESTE_INICIADO, notificacoes.get(1).obterTipo());
-		assertEquals(TipoDeNotificacao.TESTE_FINALIZADO, notificacoes.get(2).obterTipo());
-		assertEquals(TipoDeNotificacao.TESTES_FINALIZADOS, notificacoes.get(3).obterTipo());
-	}
-
-	@Test
-	public void descricoesDasNotificacoes() throws Exception {
-		assertNotNull(notificacoes.get(0).obterDescricao());
-		assertNotNull(notificacoes.get(1).obterDescricao());
-		assertNotNull(notificacoes.get(2).obterDescricao());
-		assertNull(notificacoes.get(3).obterDescricao());
-	}
-
-	@Test
-	public void resultadosDasNotificacoes() throws Exception {
-		assertNull(notificacoes.get(0).obterResultado());
-		assertNull(notificacoes.get(1).obterResultado());
-		assertNull(notificacoes.get(2).obterResultado());
-		assertNotNull(notificacoes.get(3).obterResultado());
-	}
-
-	@Test
-	public void classesDasDescricoes() throws Exception {
-		assertEquals(SeletorDeTestes.class.getName(), notificacoes.get(0).obterDescricao().getClassName());
-		assertEquals(UmTestePassando.class.getName(), notificacoes.get(1).obterDescricao().getClassName());
-		assertEquals(UmTestePassando.class.getName(), notificacoes.get(2).obterDescricao().getClassName());
-	}
-
-	@Test
-	public void metodosDasDescricoes() throws Exception {
-		assertEquals(null, notificacoes.get(0).obterDescricao().getMethodName());
-		assertEquals("testar", notificacoes.get(1).obterDescricao().getMethodName());
-		assertEquals("testar", notificacoes.get(2).obterDescricao().getMethodName());
-	}
-
-	@Test
-	public void resultadoDosTestes() throws Exception {
-		assertEquals(0, notificacoes.get(3).obterResultado().getFailureCount());
-		assertEquals(0, notificacoes.get(3).obterResultado().getIgnoreCount());
-		assertEquals(1, notificacoes.get(3).obterResultado().getRunCount());
-		assertTrue(notificacoes.get(3).obterResultado().wasSuccessful());
+		assertThat(notificacoes.get(0), combinaComTestesIniciados(UmTestePassando.class));
+		assertThat(notificacoes.get(1), combinaComTesteIniciado(UmTestePassando.class, "testar"));
+		assertThat(notificacoes.get(2), combinaComTesteFinalizado(UmTestePassando.class, "testar"));
+		assertThat(notificacoes.get(3), combinaComTestesFinalizados(1, 0, 0));
 	}
 
 }

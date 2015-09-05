@@ -2,7 +2,7 @@ package br.ufsc.ine.leb.projetos.estoria;
 
 import java.lang.reflect.Method;
 
-public class EspiaoDeInvocacao implements TratadorDeInvocacao {
+public final class EspiaoDeInvocacao implements TratadorDeInvocacao {
 
 	private Boolean executouSemExcecao;
 	private Boolean executouComExcecao;

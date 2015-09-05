@@ -13,15 +13,15 @@ import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTesteFalhando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTesteFalhandoExcecaoLancada;
 
-public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
+public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhandoExcecaoLancada {
 
 	private List<Notificacao> notificacoes;
 
 	@Before
 	public void prepararCenario() {
-		SuiteDeTeste suite = new SuiteDeTeste(UmTesteFalhando.class);
+		SuiteDeTeste suite = new SuiteDeTeste(UmTesteFalhandoExcecaoLancada.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suite);
 		RunNotifier mensageiroDeEscolta = new RunNotifier();
 		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
@@ -33,10 +33,10 @@ public final class TesteEscoltadorDeTestesExecucaoUmTesteFalhando {
 	@Test
 	public void testar() throws Exception {
 		assertEquals(5, notificacoes.size());
-		assertThat(notificacoes.get(0), combinaComTestesIniciados(UmTesteFalhando.class));
-		assertThat(notificacoes.get(1), combinaComTesteIniciado(UmTesteFalhando.class, "testar"));
-		assertThat(notificacoes.get(2), combinaComTesteFalha(UmTesteFalhando.class, "testar", AssertionError.class));
-		assertThat(notificacoes.get(3), combinaComTesteFinalizado(UmTesteFalhando.class, "testar"));
+		assertThat(notificacoes.get(0), combinaComTestesIniciados(UmTesteFalhandoExcecaoLancada.class));
+		assertThat(notificacoes.get(1), combinaComTesteIniciado(UmTesteFalhandoExcecaoLancada.class, "testar"));
+		assertThat(notificacoes.get(2), combinaComTesteFalha(UmTesteFalhandoExcecaoLancada.class, "testar", UnsupportedOperationException.class));
+		assertThat(notificacoes.get(3), combinaComTesteFinalizado(UmTesteFalhandoExcecaoLancada.class, "testar"));
 		assertThat(notificacoes.get(4), combinaComTestesFinalizados(1, 1, 0));
 	}
 
