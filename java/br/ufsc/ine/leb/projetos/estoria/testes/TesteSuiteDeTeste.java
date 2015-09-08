@@ -6,7 +6,9 @@ import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseSemMetodos;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.TresTestesPassandoIgnoradoFalhando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.DuasClassesZeroAcessoriosUmaConfiguracaoSeisTestes;
@@ -88,6 +90,22 @@ public final class TesteSuiteDeTeste {
 		assertEquals("testar1", suite.obterClassesDeTeste().get(1).obterMetodosDeTeste().get(0).obterNome());
 		assertEquals("testar2", suite.obterClassesDeTeste().get(1).obterMetodosDeTeste().get(1).obterNome());
 		assertEquals("testar3", suite.obterClassesDeTeste().get(1).obterMetodosDeTesteIgnorados().get(0).obterNome());
+	}
+
+	@Test
+	public void classeUmAcessoriosUmaConfiguracaoUmTestes() throws Exception {
+		SuiteDeTeste suite = new SuiteDeTeste(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class);
+		assertEquals(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class, suite.obterSuite());
+		assertEquals(1, suite.obterClassesDeTeste().size());
+
+		assertEquals(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(1, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
+		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().size());
+		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
+		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
+		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(0).obterClasse());
+		assertEquals("configurar", suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().get(0).obterNome());
+		assertEquals("testar", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(0).obterNome());
 	}
 
 }

@@ -6,12 +6,14 @@ import java.util.List;
 public final class ClasseDeTeste {
 
 	private Class<?> classe;
+	private List<ClasseDeTeste> acessorios;
 	private List<MetodoDeTeste> metodosDeTeste;
 	private List<MetodoDeTeste> metodosDeTesteIgnorados;
 	private List<MetodoDeConfiguracao> metodosDeConfiguracao;
 
 	public ClasseDeTeste(Class<?> classe) {
 		this.classe = classe;
+		this.acessorios = new LinkedList<>();
 		this.metodosDeTeste = new LinkedList<>();
 		this.metodosDeTesteIgnorados = new LinkedList<>();
 		this.metodosDeConfiguracao = new LinkedList<>();
@@ -19,6 +21,7 @@ public final class ClasseDeTeste {
 		seletor.obterMetodosTeste().forEach(metodo -> metodosDeTeste.add(new MetodoDeTeste(this, metodo)));
 		seletor.obterMetodosDeTesteIgnorados().forEach(metodo -> metodosDeTesteIgnorados.add(new MetodoDeTeste(this, metodo)));
 		seletor.obterMetodosDeConfiguracao().forEach(metodo -> metodosDeConfiguracao.add(new MetodoDeConfiguracao(metodo)));
+		seletor.obterAcessorios().forEach(classeDoAcessorio -> acessorios.add(new ClasseDeTeste(classeDoAcessorio)));
 	}
 
 	public Class<?> obterClasse() {
@@ -38,7 +41,7 @@ public final class ClasseDeTeste {
 	}
 
 	public List<ClasseDeTeste> obterAcessorios() {
-		return new LinkedList<>();
+		return acessorios;
 	}
 
 }

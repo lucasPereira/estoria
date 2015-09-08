@@ -33,14 +33,22 @@ public class EscoltadorDeTestes extends Runner {
 	}
 
 	private void rodarTestes(RunNotifier mensageiroDeEscolta) {
-		for (ClasseDeTeste classeDeteste : suiteDeTeste.obterClassesDeTeste()) {
-			for (MetodoDeTeste metodoDeTeste : classeDeteste.obterMetodosDeTeste()) {
+		for (ClasseDeTeste classeDeTeste : suiteDeTeste.obterClassesDeTeste()) {
+			for (MetodoDeTeste metodoDeTeste : classeDeTeste.obterMetodosDeTeste()) {
 				TratadorDeInvocacao tratadorDeTeste = new TratadorDeInvocacaoDeTeste(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
 				TratadorDeInvocacao tratadorDeConfiguracao = new TratadorDeInvocacaoDeConfiguracao(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
-				InvocadorDeMetodo invocadorParaClasse = new InvocadorDeMetodo(classeDeteste.obterClasse());
+				InvocadorDeMetodo invocadorParaClasseDeTeste = new InvocadorDeMetodo(classeDeTeste.obterClasse());
 				mensageiroDeEscolta.fireTestStarted(metodoDeTeste.obterDescricao());
-				classeDeteste.obterMetodosDeConfiguracao().forEach(metodoDeConfiguracao -> invocadorParaClasse.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao));
-				invocadorParaClasse.executar(metodoDeTeste.obterMetodo(), tratadorDeTeste);
+				for (ClasseDeTeste acessorio : classeDeTeste.obterAcessorios()) {
+					InvocadorDeMetodo invocadorParaAcessorio = new InvocadorDeMetodo(acessorio.obterClasse());
+					for (MetodoDeConfiguracao metodoDeConfiguracao : acessorio.obterMetodosDeConfiguracao()) {
+						invocadorParaAcessorio.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao);
+					}
+				}
+				for (MetodoDeConfiguracao metodoDeConfiguracao : classeDeTeste.obterMetodosDeConfiguracao()) {
+					invocadorParaClasseDeTeste.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao);
+				}
+				invocadorParaClasseDeTeste.executar(metodoDeTeste.obterMetodo(), tratadorDeTeste);
 				mensageiroDeEscolta.fireTestFinished(metodoDeTeste.obterDescricao());
 			}
 		}

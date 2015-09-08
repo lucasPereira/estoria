@@ -2,6 +2,7 @@ package br.ufsc.ine.leb.projetos.estoria;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
@@ -54,6 +55,12 @@ public final class SeletorDeComponentesDeTestes {
 
 	public Boolean possuiAnotacaoClassesDeSuite() {
 		return classe.getDeclaredAnnotation(SuiteClasses.class) != null;
+	}
+
+	public List<Class<?>> obterAcessorios() {
+		List<Class<?>> acessorios = new LinkedList<>();
+		Arrays.asList(classe.getDeclaredAnnotationsByType(Acessorio.class)).forEach(acessorio -> acessorios.add(acessorio.value()));
+		return acessorios;
 	}
 
 }
