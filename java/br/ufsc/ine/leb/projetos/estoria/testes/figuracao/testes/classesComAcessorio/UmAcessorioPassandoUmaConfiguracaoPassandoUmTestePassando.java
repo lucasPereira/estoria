@@ -8,7 +8,7 @@ import org.junit.Test;
 import br.ufsc.ine.leb.projetos.estoria.Acessorio;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
 
-@Acessorio(classe = UmaConfiguracaoPassandoUmTestePassando.class)
+@Acessorio(UmaConfiguracaoPassandoUmTestePassando.class)
 public class UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando {
 
 	private int numero = 0;
