@@ -16,13 +16,13 @@ import org.junit.runner.notification.*;
 import br.ufsc.ine.leb.projetos.estoria.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.*;
 
-public final class TesteEscoltadorDeTestesExecucaoUmaConfiguracaoPassandoUmTesteFalhando {
+public final class TesteEscoltadorDeTestesExecucaoDuasConfiguracoesFalhandoPassandoUmTestePassando {
 
 	private Iterator<Notificacao> notificacoes;
 
 	@Before
 	public void prepararCenario() {
-		SuiteDeTeste suite = new SuiteDeTeste(UmaConfiguracaoPassandoUmTesteFalhando.class);
+		SuiteDeTeste suite = new SuiteDeTeste(DuasConfiguracoesFalhandoPassandoUmTestePassando.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suite);
 		RunNotifier mensageiroDeEscolta = new RunNotifier();
 		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
@@ -33,10 +33,10 @@ public final class TesteEscoltadorDeTestesExecucaoUmaConfiguracaoPassandoUmTeste
 
 	@Test
 	public void testar() throws Exception {
-		assertThat(notificacoes.next(), combinaComTestesIniciados(UmaConfiguracaoPassandoUmTesteFalhando.class));
-		assertThat(notificacoes.next(), combinaComTesteIniciado(UmaConfiguracaoPassandoUmTesteFalhando.class, "testarDeTesteFalhando"));
-		assertThat(notificacoes.next(), combinaComTesteFalha(UmaConfiguracaoPassandoUmTesteFalhando.class, "testarDeTesteFalhando", AssertionError.class));
-		assertThat(notificacoes.next(), combinaComTesteFinalizado(UmaConfiguracaoPassandoUmTesteFalhando.class, "testarDeTesteFalhando"));
+		assertThat(notificacoes.next(), combinaComTestesIniciados(DuasConfiguracoesFalhandoPassandoUmTestePassando.class));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(DuasConfiguracoesFalhandoPassandoUmTestePassando.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(DuasConfiguracoesFalhandoPassandoUmTestePassando.class, "testar", AssertionError.class, "Falha no before 1"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(DuasConfiguracoesFalhandoPassandoUmTestePassando.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 1, 0));
 		assertFalse(notificacoes.hasNext());
 	}

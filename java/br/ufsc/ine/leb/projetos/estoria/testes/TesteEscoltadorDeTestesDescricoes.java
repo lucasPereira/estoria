@@ -1,20 +1,16 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
-import org.junit.runner.Description;
-import org.junit.runner.notification.RunNotifier;
+import org.junit.*;
+import org.junit.runner.*;
 
-import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
-import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.DoisTestesPassandoPassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.DuasClassesZeroAcessoriosZeroConfiguracoesTresTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.UmaClasseZeroAcessoriosZeroConfiguracoesDoisTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.UmaClasseZeroAcessoriosZeroConfiguracoesUmTeste;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.UmaClasseZeroAcessoriosZeroConfiguracoesZeroTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.ZeroClasses;
+import br.ufsc.ine.leb.projetos.estoria.*;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.*;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.*;
 
 public final class TesteEscoltadorDeTestesDescricoes {
 
@@ -36,7 +32,6 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	public void zeroClasses() throws Exception {
 		SuiteDeTeste suite = new SuiteDeTeste(ZeroClasses.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suite);
-		escoltador.run(new RunNotifier());
 
 		Description descricaoDoSeletor = escoltador.getDescription();
 		assertEquals(ZeroClasses.class, descricaoDoSeletor.getTestClass());
@@ -54,7 +49,6 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	public void zeroTestesDeUmaClasse() throws Exception {
 		SuiteDeTeste suite = new SuiteDeTeste(UmaClasseZeroAcessoriosZeroConfiguracoesZeroTestes.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suite);
-		escoltador.run(new RunNotifier());
 
 		Description descricaoDoSeletor = escoltador.getDescription();
 		assertEquals(UmaClasseZeroAcessoriosZeroConfiguracoesZeroTestes.class, descricaoDoSeletor.getTestClass());
@@ -72,7 +66,6 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	public void umTesteDeUmaClasse() throws Exception {
 		SuiteDeTeste suite = new SuiteDeTeste(UmaClasseZeroAcessoriosZeroConfiguracoesUmTeste.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suite);
-		escoltador.run(new RunNotifier());
 
 		Description descricaoDoSeletor = escoltador.getDescription();
 		assertEquals(UmaClasseZeroAcessoriosZeroConfiguracoesUmTeste.class, descricaoDoSeletor.getTestClass());
@@ -100,7 +93,6 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	public void doisTestesDeUmaClasse() throws Exception {
 		SuiteDeTeste suite = new SuiteDeTeste(UmaClasseZeroAcessoriosZeroConfiguracoesDoisTestes.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suite);
-		escoltador.run(new RunNotifier());
 
 		Description descricaoDoSeletor = escoltador.getDescription();
 		assertEquals(UmaClasseZeroAcessoriosZeroConfiguracoesDoisTestes.class, descricaoDoSeletor.getTestClass());
@@ -138,7 +130,6 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	public void doisTesteDeUmaClasseSemSuite() throws Exception {
 		SuiteDeTeste suite = new SuiteDeTeste(DoisTestesPassandoPassando.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suite);
-		escoltador.run(new RunNotifier());
 
 		Description descricaoDoSeletor = escoltador.getDescription();
 		assertEquals(DoisTestesPassandoPassando.class, descricaoDoSeletor.getTestClass());
@@ -176,7 +167,6 @@ public final class TesteEscoltadorDeTestesDescricoes {
 	public void tresTestesDeDuasClasses() throws Exception {
 		SuiteDeTeste suite = new SuiteDeTeste(DuasClassesZeroAcessoriosZeroConfiguracoesTresTestes.class);
 		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suite);
-		escoltador.run(new RunNotifier());
 
 		Description descricaoDoSeletor = escoltador.getDescription();
 		assertEquals(DuasClassesZeroAcessoriosZeroConfiguracoesTresTestes.class, descricaoDoSeletor.getTestClass());

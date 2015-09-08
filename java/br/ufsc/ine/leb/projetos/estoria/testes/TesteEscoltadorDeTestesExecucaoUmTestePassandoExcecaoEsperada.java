@@ -3,7 +3,7 @@ package br.ufsc.ine.leb.projetos.estoria.testes;
 import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.*;
 import static org.junit.Assert.*;
 
-import java.util.List;
+import java.util.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.
 
 public final class TesteEscoltadorDeTestesExecucaoUmTestePassandoExcecaoEsperada {
 
-	private List<Notificacao> notificacoes;
+	private Iterator<Notificacao> notificacoes;
 
 	@Before
 	public void prepararCenario() {
@@ -27,16 +27,16 @@ public final class TesteEscoltadorDeTestesExecucaoUmTestePassandoExcecaoEsperada
 		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
 		mensageiroDeEscolta.addFirstListener(espiaoDeEscolta);
 		escoltador.run(mensageiroDeEscolta);
-		notificacoes = espiaoDeEscolta.obterNotificacoes();
+		notificacoes = espiaoDeEscolta.obterNotificacoes().iterator();
 	}
 
 	@Test
 	public void testar() throws Exception {
-		assertEquals(4, notificacoes.size());
-		assertThat(notificacoes.get(0), combinaComTestesIniciados(UmTestePassandoExcecaoEsperada.class));
-		assertThat(notificacoes.get(1), combinaComTesteIniciado(UmTestePassandoExcecaoEsperada.class, "testar"));
-		assertThat(notificacoes.get(2), combinaComTesteFinalizado(UmTestePassandoExcecaoEsperada.class, "testar"));
-		assertThat(notificacoes.get(3), combinaComTestesFinalizados(1, 0, 0));
+		assertThat(notificacoes.next(), combinaComTestesIniciados(UmTestePassandoExcecaoEsperada.class));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(UmTestePassandoExcecaoEsperada.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(UmTestePassandoExcecaoEsperada.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 0, 0));
+		assertFalse(notificacoes.hasNext());
 	}
 
 }

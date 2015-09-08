@@ -1,23 +1,25 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.*;
-import static org.junit.Assert.*;
+import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteFalha;
+import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteFinalizado;
+import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteIgnorado;
+import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteIniciado;
+import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTestesFinalizados;
+import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTestesIniciados;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 
-import java.util.List;
+import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.notification.RunNotifier;
+import org.junit.*;
+import org.junit.runner.notification.*;
 
-import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
-import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
-import br.ufsc.ine.leb.projetos.estoria.Notificacao;
-import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.TresTestesPassandoIgnoradoFalhando;
+import br.ufsc.ine.leb.projetos.estoria.*;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.*;
 
 public final class TesteEscoltadorDeTestesExecucaoTresTestesPassandoIgnoradoFalhando {
 
-	private List<Notificacao> notificacoes;
+	private Iterator<Notificacao> notificacoes;
 
 	@Before
 	public void prepararCenario() {
@@ -27,20 +29,20 @@ public final class TesteEscoltadorDeTestesExecucaoTresTestesPassandoIgnoradoFalh
 		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
 		mensageiroDeEscolta.addListener(espiaoDeEscolta);
 		escoltador.run(mensageiroDeEscolta);
-		notificacoes = espiaoDeEscolta.obterNotificacoes();
+		notificacoes = espiaoDeEscolta.obterNotificacoes().iterator();
 	}
 
 	@Test
 	public void testar() throws Exception {
-		assertThat(notificacoes.get(0), combinaComTestesIniciados(TresTestesPassandoIgnoradoFalhando.class));
-		assertThat(notificacoes.get(1), combinaComTesteIgnorado(TresTestesPassandoIgnoradoFalhando.class, "testarIgnorado"));
-		assertThat(notificacoes.get(2), combinaComTesteIniciado(TresTestesPassandoIgnoradoFalhando.class, "testarFalhando"));
-		assertThat(notificacoes.get(3), combinaComTesteFalha(TresTestesPassandoIgnoradoFalhando.class, "testarFalhando", AssertionError.class));
-		assertThat(notificacoes.get(4), combinaComTesteFinalizado(TresTestesPassandoIgnoradoFalhando.class, "testarFalhando"));
-		assertThat(notificacoes.get(5), combinaComTesteIniciado(TresTestesPassandoIgnoradoFalhando.class, "testarPassando"));
-		assertThat(notificacoes.get(6), combinaComTesteFinalizado(TresTestesPassandoIgnoradoFalhando.class, "testarPassando"));
-		assertThat(notificacoes.get(7), combinaComTestesFinalizados(2, 1, 1));
-		assertEquals(8, notificacoes.size());
+		assertThat(notificacoes.next(), combinaComTestesIniciados(TresTestesPassandoIgnoradoFalhando.class));
+		assertThat(notificacoes.next(), combinaComTesteIgnorado(TresTestesPassandoIgnoradoFalhando.class, "testarIgnorado"));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(TresTestesPassandoIgnoradoFalhando.class, "testarFalhando"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(TresTestesPassandoIgnoradoFalhando.class, "testarFalhando", AssertionError.class));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(TresTestesPassandoIgnoradoFalhando.class, "testarFalhando"));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(TresTestesPassandoIgnoradoFalhando.class, "testarPassando"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(TresTestesPassandoIgnoradoFalhando.class, "testarPassando"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(2, 1, 1));
+		assertFalse(notificacoes.hasNext());
 	}
 
 }
