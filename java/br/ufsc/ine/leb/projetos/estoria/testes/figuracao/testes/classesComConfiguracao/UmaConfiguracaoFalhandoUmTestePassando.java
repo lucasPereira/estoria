@@ -10,9 +10,7 @@ public class UmaConfiguracaoFalhandoUmTestePassando {
 
 	@Before
 	public void configurar() {
-		assertTrue(true);
 		fail("Falha no before");
-		assertTrue(true);
 	}
 
 	@Test

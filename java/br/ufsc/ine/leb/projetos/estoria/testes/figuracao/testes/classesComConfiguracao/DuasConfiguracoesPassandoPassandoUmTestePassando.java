@@ -8,7 +8,7 @@ import org.junit.Test;
 public class DuasConfiguracoesPassandoPassandoUmTestePassando {
 
 	private int numero = 10;
-	
+
 	@Before
 	public void configurar2() {
 		numero = numero + 10;

@@ -9,16 +9,12 @@ public class UmaConfiguracaoFalhandoUmTesteFalhando {
 
 	@Before
 	public void configurar() {
-		assertTrue(true);
 		fail("Falha no before");
-		assertTrue(true);
 	}
 
 	@Test
 	public void testar() {
-		assertTrue(true);
 		fail("Falha no test");
-		assertTrue(true);
 	}
 
 }

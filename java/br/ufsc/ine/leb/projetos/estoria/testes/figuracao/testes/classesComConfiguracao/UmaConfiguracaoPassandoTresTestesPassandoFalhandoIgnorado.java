@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado {
 
-	private int numero = 0;
+	private int numero;
 
 	@Before
 	public void configurar() {

@@ -1,13 +1,11 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
-import br.ufsc.ine.leb.projetos.estoria.Acessorio;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoFalhandoUmTesteFalhando;
+import br.ufsc.ine.leb.projetos.estoria.*;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.*;
 
 @Acessorio(UmaConfiguracaoFalhandoUmTesteFalhando.class)
 public class UmAcessorioFalhandoUmaConfiguracaoFalhandoUmTesteFalhando {
@@ -18,16 +16,12 @@ public class UmAcessorioFalhandoUmaConfiguracaoFalhandoUmTesteFalhando {
 
 	@Before
 	public void configurar() {
-		assertTrue(true);
 		fail("Falha no super before");
-		assertTrue(true);
 	}
 
 	@Test
 	public void testar() {
-		assertTrue(true);
 		fail("Falha no super test");
-		assertTrue(true);
 	}
 
 }
