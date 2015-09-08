@@ -13,9 +13,6 @@ public final class SuiteDeTeste {
 		this.suite = suite;
 		SeletorDeComponentesDeTestes seletor = new SeletorDeComponentesDeTestes(suite);
 		seletor.obterClassesDeSuite().forEach(classe -> adicionarClasse(classe));
-		if (!seletor.possuiAnotacaoClassesDeSuite()) {
-			adicionarClasse(suite);
-		}
 	}
 
 	private void adicionarClasse(Class<?> suite) {

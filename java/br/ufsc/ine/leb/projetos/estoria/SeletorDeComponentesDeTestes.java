@@ -50,11 +50,7 @@ public final class SeletorDeComponentesDeTestes {
 
 	public List<Class<?>> obterClassesDeSuite() {
 		SuiteClasses anotacao = classe.getDeclaredAnnotation(SuiteClasses.class);
-		return (anotacao == null) ? Arrays.<Class<?>> asList() : Arrays.asList(anotacao.value());
-	}
-
-	public Boolean possuiAnotacaoClassesDeSuite() {
-		return classe.getDeclaredAnnotation(SuiteClasses.class) != null;
+		return (anotacao == null) ? Arrays.asList(classe) : Arrays.asList(anotacao.value());
 	}
 
 	public List<Class<?>> obterAcessorios() {

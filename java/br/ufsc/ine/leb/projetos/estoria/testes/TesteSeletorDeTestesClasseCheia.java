@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -52,8 +52,13 @@ public final class TesteSeletorDeTestesClasseCheia {
 
 	@Test
 	public void classesDeSuite() throws Exception {
-		assertEquals(0, seletor.obterClassesDeSuite().size());
-		assertFalse(seletor.possuiAnotacaoClassesDeSuite());
+		assertEquals(1, seletor.obterClassesDeSuite().size());
+		assertEquals(ClasseCheiaDeMetodosDeTeste.class, seletor.obterClassesDeSuite().get(0));
+	}
+
+	@Test
+	public void acessorios() throws Exception {
+		assertEquals(0, seletor.obterAcessorios().size());
 	}
 
 }
