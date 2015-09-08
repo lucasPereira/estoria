@@ -11,7 +11,6 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.
 @RunWith(Estoria.class)
 @SuiteClasses({
 		UmTestePassando.class,
-//		UmaConfiguracaoPassandoUmTestePassando.class,
 		DuasConfiguracoesPassandoPassandoUmTestePassando.class,
 		UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class,
 		DoisAcessoriosPassandoPassandoUmTestePassando.class
