@@ -1,9 +1,8 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class UmaConfiguracaoPassandoUmTestePassando {
 
@@ -26,7 +25,7 @@ public class UmaConfiguracaoPassandoUmTestePassando {
 	public void testar() {
 		numeroTest = 30;
 		numeroBeforeTest = 20;
-		numeroEstaticoBeforeTest = 53;
+		numeroEstaticoBeforeTest = 50;
 		numeroEstaticoTest = 60;
 		assertEquals(10, numeroBefore);
 		assertEquals(20, numeroBeforeTest);

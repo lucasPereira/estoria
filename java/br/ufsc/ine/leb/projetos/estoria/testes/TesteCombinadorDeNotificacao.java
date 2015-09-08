@@ -7,9 +7,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.Description;
-import org.junit.runner.Result;
+import org.junit.runner.*;
 import org.junit.runner.notification.Failure;
+import org.junit.runners.*;
 
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
@@ -17,6 +17,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.jUnit.SuiteDoJUnitUmaCl
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassandoVazio;
 
+@RunWith(JUnit4.class)
 public final class TesteCombinadorDeNotificacao {
 
 	private Notificacao testesIniciados;
