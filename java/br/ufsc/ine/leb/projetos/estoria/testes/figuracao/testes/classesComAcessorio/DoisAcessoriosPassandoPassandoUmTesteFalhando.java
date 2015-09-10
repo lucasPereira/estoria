@@ -7,8 +7,7 @@ import org.junit.*;
 import br.ufsc.ine.leb.projetos.estoria.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.*;
 
-@Acessorio(UmaConfiguracaoPassandoUmTesteFalhando.class)
-@Acessorio(UmaConfiguracaoPassandoUmTestePassando.class)
+@Acessorios({ UmaConfiguracaoPassandoUmTesteFalhando.class, UmaConfiguracaoPassandoUmTestePassando.class })
 public class DoisAcessoriosPassandoPassandoUmTesteFalhando {
 
 	@Test

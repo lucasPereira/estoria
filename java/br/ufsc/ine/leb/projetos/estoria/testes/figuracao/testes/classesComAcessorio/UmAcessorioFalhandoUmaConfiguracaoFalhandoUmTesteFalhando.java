@@ -7,12 +7,8 @@ import org.junit.*;
 import br.ufsc.ine.leb.projetos.estoria.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.*;
 
-@Acessorio(UmaConfiguracaoFalhandoUmTesteFalhando.class)
+@Acessorios(UmaConfiguracaoFalhandoUmTesteFalhando.class)
 public class UmAcessorioFalhandoUmaConfiguracaoFalhandoUmTesteFalhando {
-
-	public static int numeroEstaticoBefore;
-	public static int numeroEstaticoBeforeTest;
-	public static int numeroEstaticoTest;
 
 	@Before
 	public void configurar() {

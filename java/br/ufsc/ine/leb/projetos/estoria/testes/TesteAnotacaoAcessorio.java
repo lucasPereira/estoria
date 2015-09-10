@@ -1,96 +1,58 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.lang.annotation.Annotation;
+import org.junit.*;
 
-import org.junit.Test;
-
-import br.ufsc.ine.leb.projetos.estoria.Acessorio;
-import br.ufsc.ine.leb.projetos.estoria.Acessorios;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComDuasAnotacoesAcessorio;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmMetodo;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmaAnotacaoAcessorio;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseSemMetodos;
+import br.ufsc.ine.leb.projetos.estoria.*;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.*;
 
 public final class TesteAnotacaoAcessorio {
 
 	@Test
 	public void umAcessorioAnotacoesDeclaradas() throws Exception {
-		Class<?> classe = ClasseComUmaAnotacaoAcessorio.class;
-		Acessorio anotacaoAcessorio = classe.getDeclaredAnnotation(Acessorio.class);
-		Acessorios anotacaoAcessorios = classe.getDeclaredAnnotation(Acessorios.class);
-		Acessorio[] anotacoesAcessorio = classe.getDeclaredAnnotationsByType(Acessorio.class);
-		Acessorios[] anotacoesAcessorios = classe.getDeclaredAnnotationsByType(Acessorios.class);
-		Annotation[] anotacoes = classe.getDeclaredAnnotations();
-		assertNotNull(anotacaoAcessorio);
-		assertNull(anotacaoAcessorios);
-		assertEquals(1, anotacoes.length);
-		assertEquals(1, anotacoesAcessorio.length);
-		assertEquals(0, anotacoesAcessorios.length);
-		assertEquals(Acessorio.class, anotacoes[0].annotationType());
-		assertEquals(ClasseComUmMetodo.class, anotacoesAcessorio[0].value());
+		Class<?> classe = ClasseComUmaClasseAcessorioUmAtributoAcessorio.class;
+		assertEquals(2, classe.getFields().length);
+		assertEquals("atributo1", classe.getFields()[0].getName());
+		assertEquals("atributo2", classe.getFields()[1].getName());
+		assertEquals(1, classe.getFields()[0].getDeclaredAnnotations().length);
+		assertEquals(0, classe.getFields()[1].getDeclaredAnnotations().length);
+		assertEquals(Acessorio.class, classe.getFields()[0].getDeclaredAnnotations()[0].annotationType());
 	}
 
 	@Test
-	public void umAcessorioAnotacoesclaradas() throws Exception {
-		Class<?> classe = ClasseComUmaAnotacaoAcessorio.class;
-		Acessorio anotacaoAcessorio = classe.getAnnotation(Acessorio.class);
-		Acessorios anotacaoAcessorios = classe.getAnnotation(Acessorios.class);
-		Acessorio[] anotacoesAcessorio = classe.getAnnotationsByType(Acessorio.class);
-		Acessorios[] anotacoesAcessorios = classe.getAnnotationsByType(Acessorios.class);
-		Annotation[] anotacoes = classe.getAnnotations();
-		assertNotNull(anotacaoAcessorio);
-		assertNull(anotacaoAcessorios);
-		assertEquals(1, anotacoes.length);
-		assertEquals(1, anotacoesAcessorio.length);
-		assertEquals(0, anotacoesAcessorios.length);
-		assertEquals(Acessorio.class, anotacoes[0].annotationType());
-		assertEquals(ClasseComUmMetodo.class, anotacoesAcessorio[0].value());
+	public void umAcessorioAnotacoes() throws Exception {
+		Class<?> classe = ClasseComUmaClasseAcessorioUmAtributoAcessorio.class;
+		assertEquals(2, classe.getFields().length);
+		assertEquals("atributo1", classe.getFields()[0].getName());
+		assertEquals("atributo2", classe.getFields()[1].getName());
+		assertEquals(1, classe.getFields()[0].getAnnotations().length);
+		assertEquals(0, classe.getFields()[1].getAnnotations().length);
+		assertEquals(Acessorio.class, classe.getFields()[0].getAnnotations()[0].annotationType());
 	}
 
 	@Test
 	public void doisAcessoriosAnotacoesDeclaradas() throws Exception {
-		Class<?> classe = ClasseComDuasAnotacoesAcessorio.class;
-		Acessorio anotacaoAcessorio = classe.getDeclaredAnnotation(Acessorio.class);
-		Acessorios anotacaoAcessorios = classe.getDeclaredAnnotation(Acessorios.class);
-		Acessorio[] anotacoesAcessorio = classe.getDeclaredAnnotationsByType(Acessorio.class);
-		Acessorios[] anotacoesAcessorios = classe.getDeclaredAnnotationsByType(Acessorios.class);
-		Annotation[] anotacoes = classe.getDeclaredAnnotations();
-		assertNull(anotacaoAcessorio);
-		assertNotNull(anotacaoAcessorios);
-		assertEquals(1, anotacoes.length);
-		assertEquals(2, anotacoesAcessorio.length);
-		assertEquals(1, anotacoesAcessorios.length);
-		assertEquals(Acessorios.class, anotacoes[0].annotationType());
-		assertEquals(ClasseComUmMetodo.class, anotacoesAcessorio[0].value());
-		assertEquals(ClasseSemMetodos.class, anotacoesAcessorio[1].value());
-		assertEquals(ClasseComUmMetodo.class, anotacoesAcessorios[0].value()[0].value());
-		assertEquals(ClasseSemMetodos.class, anotacoesAcessorios[0].value()[1].value());
-		assertEquals(ClasseComUmMetodo.class, anotacaoAcessorios.value()[0].value());
-		assertEquals(ClasseSemMetodos.class, anotacaoAcessorios.value()[1].value());
+		Class<?> classe = ClasseComDuasClassesAcessorioDoisAtributosAcessorios.class;
+		assertEquals(2, classe.getFields().length);
+		assertEquals("atributo1", classe.getFields()[0].getName());
+		assertEquals("atributo2", classe.getFields()[1].getName());
+		assertEquals(1, classe.getFields()[0].getAnnotations().length);
+		assertEquals(1, classe.getFields()[1].getAnnotations().length);
+		assertEquals(Acessorio.class, classe.getFields()[0].getAnnotations()[0].annotationType());
+		assertEquals(Acessorio.class, classe.getFields()[1].getAnnotations()[0].annotationType());
 	}
 
 	@Test
 	public void doisAcessoriosAnotacoes() throws Exception {
-		Class<?> classe = ClasseComDuasAnotacoesAcessorio.class;
-		Acessorio anotacaoAcessorio = classe.getAnnotation(Acessorio.class);
-		Acessorios anotacaoAcessorios = classe.getAnnotation(Acessorios.class);
-		Acessorio[] anotacoesAcessorio = classe.getAnnotationsByType(Acessorio.class);
-		Acessorios[] anotacoesAcessorios = classe.getAnnotationsByType(Acessorios.class);
-		Annotation[] anotacoes = classe.getAnnotations();
-		assertNull(anotacaoAcessorio);
-		assertNotNull(anotacaoAcessorios);
-		assertEquals(1, anotacoes.length);
-		assertEquals(2, anotacoesAcessorio.length);
-		assertEquals(1, anotacoesAcessorios.length);
-		assertEquals(Acessorios.class, anotacoes[0].annotationType());
-		assertEquals(ClasseComUmMetodo.class, anotacoesAcessorio[0].value());
-		assertEquals(ClasseSemMetodos.class, anotacoesAcessorio[1].value());
-		assertEquals(ClasseComUmMetodo.class, anotacoesAcessorios[0].value()[0].value());
-		assertEquals(ClasseSemMetodos.class, anotacoesAcessorios[0].value()[1].value());
-		assertEquals(ClasseComUmMetodo.class, anotacaoAcessorios.value()[0].value());
-		assertEquals(ClasseSemMetodos.class, anotacaoAcessorios.value()[1].value());
+		Class<?> classe = ClasseComDuasClassesAcessorioDoisAtributosAcessorios.class;
+		assertEquals(2, classe.getFields().length);
+		assertEquals("atributo1", classe.getFields()[0].getName());
+		assertEquals("atributo2", classe.getFields()[1].getName());
+		assertEquals(1, classe.getFields()[0].getAnnotations().length);
+		assertEquals(1, classe.getFields()[1].getAnnotations().length);
+		assertEquals(Acessorio.class, classe.getFields()[0].getAnnotations()[0].annotationType());
+		assertEquals(Acessorio.class, classe.getFields()[1].getAnnotations()[0].annotationType());
 	}
 
 }

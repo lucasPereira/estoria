@@ -1,16 +1,15 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import java.lang.annotation.*;
+import java.lang.reflect.*;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.Anotacao;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.Anotacoes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseCheiaDeMetodos;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.*;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.*;
 
 public final class TesteAnotacao {
 

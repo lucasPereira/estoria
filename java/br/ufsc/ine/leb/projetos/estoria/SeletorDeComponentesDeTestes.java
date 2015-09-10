@@ -1,13 +1,9 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.lang.reflect.*;
+import java.util.*;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.Suite.SuiteClasses;
 
 public final class SeletorDeComponentesDeTestes {
@@ -55,7 +51,8 @@ public final class SeletorDeComponentesDeTestes {
 
 	public List<Class<?>> obterAcessorios() {
 		List<Class<?>> acessorios = new LinkedList<>();
-		Arrays.asList(classe.getDeclaredAnnotationsByType(Acessorio.class)).forEach(acessorio -> acessorios.add(acessorio.value()));
+		List<Acessorios> anotacoesAcessorios = Arrays.asList(classe.getDeclaredAnnotationsByType(Acessorios.class));
+		anotacoesAcessorios.forEach(anotacaoAcessorio -> Arrays.asList(anotacaoAcessorio.value()).forEach(classeAcessorio -> acessorios.add(classeAcessorio)));
 		return acessorios;
 	}
 
