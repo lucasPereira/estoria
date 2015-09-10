@@ -1,10 +1,9 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 
 public class UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado {
 
@@ -17,19 +16,23 @@ public class UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado {
 
 	@Test
 	public void testar1() {
+		assertEquals(10, numero);
 		numero = 20;
-		assertEquals(20, numero);
 	}
 
 	@Test
 	public void testar2() {
-		assertEquals(20, numero);
+		assertEquals(10, numero);
+		numero = 20;
+		fail("falha induzida");
 	}
 
 	@Ignore
 	@Test
 	public void testar3() {
-		assertEquals(20, numero);
+		assertEquals(10, numero);
+		numero = 20;
+		fail("falha ignorada");
 	}
 
 }

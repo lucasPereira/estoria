@@ -9,12 +9,13 @@ public class UmaConfiguracaoFalhandoUmTesteFalhando {
 
 	@Before
 	public void configurar() {
-		fail("Falha no before");
+		fail("falha configurada");
 	}
 
 	@Test
 	public void testar() {
-		fail("Falha no test");
+		assertTrue(true);
+		fail("falha induzida");
 	}
 
 }

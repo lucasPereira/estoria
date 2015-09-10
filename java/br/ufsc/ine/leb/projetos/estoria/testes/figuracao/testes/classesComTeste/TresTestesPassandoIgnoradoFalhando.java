@@ -1,9 +1,9 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 
 public class TresTestesPassandoIgnoradoFalhando {
 
@@ -14,11 +14,13 @@ public class TresTestesPassandoIgnoradoFalhando {
 
 	@Ignore
 	@Test
-	public void testarIgnorado() {}
+	public void testarIgnorado() {
+		fail("falha ignorada");
+	}
 
 	@Test
 	public void testarFalhando() {
-		assertEquals(10, 20);
+		fail("falha induzida");
 	}
 
 }

@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste;
 
-import org.junit.Test;
+import org.junit.*;
 
 public class UmTestePassandoExcecaoEsperadaSuperClasse {
 

@@ -15,9 +15,9 @@ public class DoisAcessoriosPassandoPassandoUmTestePassando {
 		assertEquals(40, UmaConfiguracaoPassandoUmTestePassando.numeroEstaticoBefore);
 		assertEquals(45, UmaConfiguracaoPassandoUmTestePassando.numeroEstaticoBeforeTest);
 		assertEquals(0, UmaConfiguracaoPassandoUmTestePassando.numeroEstaticoTest);
-		assertEquals(80, UmaConfiguracaoPassandoUmTesteFalhando.numeroEstaticoBefore);
-		assertEquals(90, UmaConfiguracaoPassandoUmTesteFalhando.numeroEstaticoBeforeTest);
-		assertEquals(0, UmaConfiguracaoPassandoUmTesteFalhando.numeroEstaticoTest);
+		assertEquals(80, UmaConfiguracaoPassandoUmTesteFalhando.meuBefore20);
+		assertEquals(90, UmaConfiguracaoPassandoUmTesteFalhando.meuBefore40Test40);
+		assertEquals(0, UmaConfiguracaoPassandoUmTesteFalhando.meuTest);
 	}
 
 }

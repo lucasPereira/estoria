@@ -10,7 +10,7 @@ public class UmaConfiguracaoFalhandoUmTestePassando {
 
 	@Before
 	public void configurar() {
-		fail("Falha no before");
+		fail("falha configurada");
 	}
 
 	@Test

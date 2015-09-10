@@ -1,14 +1,10 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import org.junit.*;
 
 public class UmTestePassandoVazio {
 
 	@Test
-	public void testar() {
-		assertTrue(true);
-	}
+	public void testar() {}
 
 }

@@ -18,7 +18,7 @@ public class DuasConfiguracoesFalhandoPassandoUmTestePassando {
 	@Before
 	public void configurar1() {
 		numero = numero * 5;
-		fail("Falha no before 1");
+		fail("falha configurada");
 	}
 
 	@Test

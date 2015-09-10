@@ -11,7 +11,13 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfig
 @Acessorios(UmaConfiguracaoPassandoUmTestePassando.class)
 public class UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando {
 
-	@Rule private String herdado;
+	@Acessorio private int meuBefore10;
+	@Acessorio private int meuBefore20Test30;
+	@Acessorio private int meuTest40;
+	
+	private int acessorioBefore10;
+	private int acessorioBefore20Test30;
+	private int acessorioTest40;
 
 	@Before
 	public void configurar() {

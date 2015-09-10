@@ -1,14 +1,14 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
-import org.junit.Test;
+import org.junit.*;
 
 public class UmTesteFalhando {
 
 	@Test
 	public void testar() {
-		assertEquals(10, 20);
+		fail("falha induzida");
 	}
 
 }
