@@ -2,8 +2,7 @@ package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites;
 
 import org.junit.runners.Suite.SuiteClasses;
 
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.TresTestesPassandoIgnoradoFalhando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.*;
 
 @SuiteClasses({
 		TresTestesPassandoIgnoradoFalhando.class,

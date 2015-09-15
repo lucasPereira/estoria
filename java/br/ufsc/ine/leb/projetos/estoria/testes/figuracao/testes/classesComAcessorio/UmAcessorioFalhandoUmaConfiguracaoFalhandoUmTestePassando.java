@@ -1,6 +1,7 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.*;
 
@@ -8,7 +9,7 @@ import br.ufsc.ine.leb.projetos.estoria.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.*;
 
 @Acessorios(UmaConfiguracaoFalhandoUmTesteFalhando.class)
-public class UmAcessorioFalhandoUmaConfiguracaoPassandoUmTestePassando {
+public class UmAcessorioFalhandoUmaConfiguracaoFalhandoUmTestePassando {
 
 	private int meuAcessorioBefore10;
 	private int meuAcessorioBefore20Test30;
@@ -28,6 +29,7 @@ public class UmAcessorioFalhandoUmaConfiguracaoPassandoUmTestePassando {
 		assertEquals(10, acessorioBefore10);
 		assertEquals(20, acessorioBefore20Test30);
 		assertEquals(0, acessorioTest40);
+		fail("falha pai configurada");
 	}
 
 	@Test

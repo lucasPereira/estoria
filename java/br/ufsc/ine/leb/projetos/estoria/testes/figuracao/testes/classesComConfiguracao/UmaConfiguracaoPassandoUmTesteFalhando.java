@@ -15,6 +15,9 @@ public class UmaConfiguracaoPassandoUmTesteFalhando {
 	public void configurar() {
 		acessorioBefore10 = 10;
 		acessorioBefore20Test30 = 20;
+		assertEquals(10, acessorioBefore10);
+		assertEquals(20, acessorioBefore20Test30);
+		assertEquals(0, acessorioTest40);
 	}
 
 	@Test

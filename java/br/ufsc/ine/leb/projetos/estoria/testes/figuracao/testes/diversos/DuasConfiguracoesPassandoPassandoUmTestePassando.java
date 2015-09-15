@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao;
+package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos;
 
 import static org.junit.Assert.*;
 

@@ -8,16 +8,14 @@ import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseSemMetodos;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.DoisTestesPassandoPassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTesteIgnorado;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassandoVazio;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.DuasClassesZeroAcessoriosZeroConfiguracoesDoisTestes;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.ZeroClasses;
 
 ;
 
-public final class TesteSeletorDeTestes {
+public final class TesteSeletorDeComponentesDeTestes {
 
 	@Test
 	public void vazio() throws Exception {

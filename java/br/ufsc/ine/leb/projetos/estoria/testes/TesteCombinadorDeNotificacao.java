@@ -15,7 +15,7 @@ import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.jUnit.SuiteDoJUnitUmaClasseZeroConfiguracoesUmTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassandoVazio;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.*;
 
 @RunWith(JUnit4.class)
 public final class TesteCombinadorDeNotificacao {

@@ -11,7 +11,7 @@ import org.junit.Test;
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseCheiaDeMetodosDeTeste;
 
-public final class TesteSeletorDeTestesClasseCheia {
+public final class TesteSeletorDeComponentesDeTestesClasseCheia {
 
 	private SeletorDeComponentesDeTestes seletor;
 

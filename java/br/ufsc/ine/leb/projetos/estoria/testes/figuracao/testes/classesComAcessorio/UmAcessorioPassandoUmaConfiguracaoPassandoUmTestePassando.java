@@ -1,7 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.*;
 
@@ -11,24 +10,36 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfig
 @Acessorios(UmaConfiguracaoPassandoUmTestePassando.class)
 public class UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando {
 
-	@Acessorio private int meuBefore10;
-	@Acessorio private int meuBefore20Test30;
-	@Acessorio private int meuTest40;
+	private int meuAcessorioBefore10;
+	private int meuAcessorioBefore20Test30;
+	private int meuAcessorioTest40;
 	
-	private int acessorioBefore10;
-	private int acessorioBefore20Test30;
-	private int acessorioTest40;
+	@Acessorio private int acessorioBefore10;
+	@Acessorio private int acessorioBefore20Test30;
+	@Acessorio private int acessorioTest40;
 
 	@Before
 	public void configurar() {
-		assertTrue(true);
+		meuAcessorioBefore10 = 10;
+		meuAcessorioBefore20Test30 = 20;
+		assertEquals(10, meuAcessorioBefore10);
+		assertEquals(20, meuAcessorioBefore20Test30);
+		assertEquals(0, meuAcessorioTest40);
+		assertEquals(10, acessorioBefore10);
+		assertEquals(20, acessorioBefore20Test30);
+		assertEquals(0, acessorioTest40);
 	}
 
 	@Test
 	public void testar() {
-		assertEquals(40, UmaConfiguracaoPassandoUmTestePassando.numeroEstaticoBefore);
-		assertEquals(45, UmaConfiguracaoPassandoUmTestePassando.numeroEstaticoBeforeTest);
-		assertEquals(0, UmaConfiguracaoPassandoUmTestePassando.numeroEstaticoTest);
+		meuAcessorioBefore20Test30 = 30;
+		meuAcessorioTest40 = 40;
+		assertEquals(10, meuAcessorioBefore10);
+		assertEquals(30, meuAcessorioBefore20Test30);
+		assertEquals(40, meuAcessorioTest40);
+		assertEquals(10, acessorioBefore10);
+		assertEquals(20, acessorioBefore20Test30);
+		assertEquals(0, acessorioTest40);
 	}
 
 }

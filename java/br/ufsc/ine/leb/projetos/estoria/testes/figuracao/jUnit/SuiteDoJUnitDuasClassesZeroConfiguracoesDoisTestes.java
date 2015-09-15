@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassandoVazio;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.*;
 
 @RunWith(Suite.class)
 @SuiteClasses({

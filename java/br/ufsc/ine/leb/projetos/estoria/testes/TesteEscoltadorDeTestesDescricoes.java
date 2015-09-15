@@ -10,6 +10,7 @@ import org.junit.runner.*;
 
 import br.ufsc.ine.leb.projetos.estoria.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.*;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.*;
 
 public final class TesteEscoltadorDeTestesDescricoes {
