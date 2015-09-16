@@ -3,7 +3,7 @@ package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.Acessorio;
+import br.ufsc.ine.leb.projetos.estoria.Fixture;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.Anotacao;
 
 public abstract class ClasseCheia {
@@ -16,7 +16,7 @@ public abstract class ClasseCheia {
 
 	public int atributoPublico;
 
-	@Acessorio private int atributoAnotadoComAcessorio;
+	@Fixture private int atributoAnotadoComAcessorio;
 
 	public abstract void metodoAbstrato();
 

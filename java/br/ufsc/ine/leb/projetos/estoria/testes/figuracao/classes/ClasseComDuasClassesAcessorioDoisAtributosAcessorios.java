@@ -2,11 +2,11 @@ package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
 
 import br.ufsc.ine.leb.projetos.estoria.*;
 
-@Acessorios({ ClasseComUmMetodo.class, ClasseVazia.class })
+@FixtureSetup({ ClasseComUmMetodo.class, ClasseVazia.class })
 public class ClasseComDuasClassesAcessorioDoisAtributosAcessorios {
 
-	@Acessorio public String atributo1;
-	@Acessorio public String atributo2;
+	@Fixture public String atributo1;
+	@Fixture public String atributo2;
 
 	public void testar() {}
 

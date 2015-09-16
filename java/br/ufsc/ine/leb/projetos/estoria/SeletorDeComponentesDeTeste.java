@@ -53,11 +53,11 @@ public final class SeletorDeComponentesDeTeste {
 	}
 
 	public List<Field> obterAtributosProprios() {
-		return construirFiltradorDeAtributosBase().removerAtributosAnotadosCom(Acessorio.class).obterAtributos();
+		return construirFiltradorDeAtributosBase().removerAtributosAnotadosCom(Fixture.class).obterAtributos();
 	}
 
 	public List<Field> obterAtributosAcessorios() {
-		return construirFiltradorDeAtributosBase().removerAtributosNaoAnotadosCom(Acessorio.class).obterAtributos();
+		return construirFiltradorDeAtributosBase().removerAtributosNaoAnotadosCom(Fixture.class).obterAtributos();
 	}
 
 	public List<Class<?>> obterClassesDeSuite() {
@@ -67,7 +67,7 @@ public final class SeletorDeComponentesDeTeste {
 
 	public List<Class<?>> obterAcessorios() {
 		List<Class<?>> acessorios = new LinkedList<>();
-		List<Acessorios> anotacoesAcessorios = Arrays.asList(classe.getDeclaredAnnotationsByType(Acessorios.class));
+		List<FixtureSetup> anotacoesAcessorios = Arrays.asList(classe.getDeclaredAnnotationsByType(FixtureSetup.class));
 		anotacoesAcessorios.forEach(anotacaoAcessorio -> Arrays.asList(anotacaoAcessorio.value()).forEach(classeAcessorio -> acessorios.add(classeAcessorio)));
 		return acessorios;
 	}

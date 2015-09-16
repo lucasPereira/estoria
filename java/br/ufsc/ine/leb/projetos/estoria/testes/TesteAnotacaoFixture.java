@@ -7,7 +7,7 @@ import org.junit.*;
 import br.ufsc.ine.leb.projetos.estoria.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.*;
 
-public final class TesteAnotacaoAcessorio {
+public final class TesteAnotacaoFixture {
 
 	@Test
 	public void umAcessorioAnotacoesDeclaradas() throws Exception {
@@ -17,7 +17,7 @@ public final class TesteAnotacaoAcessorio {
 		assertEquals("atributo2", classe.getFields()[1].getName());
 		assertEquals(1, classe.getFields()[0].getDeclaredAnnotations().length);
 		assertEquals(0, classe.getFields()[1].getDeclaredAnnotations().length);
-		assertEquals(Acessorio.class, classe.getFields()[0].getDeclaredAnnotations()[0].annotationType());
+		assertEquals(Fixture.class, classe.getFields()[0].getDeclaredAnnotations()[0].annotationType());
 	}
 
 	@Test
@@ -28,7 +28,7 @@ public final class TesteAnotacaoAcessorio {
 		assertEquals("atributo2", classe.getFields()[1].getName());
 		assertEquals(1, classe.getFields()[0].getAnnotations().length);
 		assertEquals(0, classe.getFields()[1].getAnnotations().length);
-		assertEquals(Acessorio.class, classe.getFields()[0].getAnnotations()[0].annotationType());
+		assertEquals(Fixture.class, classe.getFields()[0].getAnnotations()[0].annotationType());
 	}
 
 	@Test
@@ -39,8 +39,8 @@ public final class TesteAnotacaoAcessorio {
 		assertEquals("atributo2", classe.getFields()[1].getName());
 		assertEquals(1, classe.getFields()[0].getAnnotations().length);
 		assertEquals(1, classe.getFields()[1].getAnnotations().length);
-		assertEquals(Acessorio.class, classe.getFields()[0].getAnnotations()[0].annotationType());
-		assertEquals(Acessorio.class, classe.getFields()[1].getAnnotations()[0].annotationType());
+		assertEquals(Fixture.class, classe.getFields()[0].getAnnotations()[0].annotationType());
+		assertEquals(Fixture.class, classe.getFields()[1].getAnnotations()[0].annotationType());
 	}
 
 	@Test
@@ -51,8 +51,8 @@ public final class TesteAnotacaoAcessorio {
 		assertEquals("atributo2", classe.getFields()[1].getName());
 		assertEquals(1, classe.getFields()[0].getAnnotations().length);
 		assertEquals(1, classe.getFields()[1].getAnnotations().length);
-		assertEquals(Acessorio.class, classe.getFields()[0].getAnnotations()[0].annotationType());
-		assertEquals(Acessorio.class, classe.getFields()[1].getAnnotations()[0].annotationType());
+		assertEquals(Fixture.class, classe.getFields()[0].getAnnotations()[0].annotationType());
+		assertEquals(Fixture.class, classe.getFields()[1].getAnnotations()[0].annotationType());
 	}
 
 }

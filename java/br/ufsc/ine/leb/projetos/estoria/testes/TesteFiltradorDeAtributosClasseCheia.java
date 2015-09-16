@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.Acessorio;
+import br.ufsc.ine.leb.projetos.estoria.Fixture;
 import br.ufsc.ine.leb.projetos.estoria.FiltradorDeAtributos;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseCheia;
 
@@ -34,7 +34,7 @@ public final class TesteFiltradorDeAtributosClasseCheia {
 
 	@Test
 	public void filtrarAtributosAnotadosComAcessorio() throws Exception {
-		filtrador.removerAtributosAnotadosCom(Acessorio.class);
+		filtrador.removerAtributosAnotadosCom(Fixture.class);
 		List<Field> atributos = filtrador.obterAtributos();
 		assertEquals(4, atributos.size());
 		assertEquals("atributoDefault", atributos.get(0).getName());
@@ -45,7 +45,7 @@ public final class TesteFiltradorDeAtributosClasseCheia {
 
 	@Test
 	public void filtrarAtributosNaoAnotadosComAcessorio() throws Exception {
-		filtrador.removerAtributosNaoAnotadosCom(Acessorio.class);
+		filtrador.removerAtributosNaoAnotadosCom(Fixture.class);
 		List<Field> atributos = filtrador.obterAtributos();
 		assertEquals(1, atributos.size());
 		assertEquals("atributoAnotadoComAcessorio", atributos.get(0).getName());

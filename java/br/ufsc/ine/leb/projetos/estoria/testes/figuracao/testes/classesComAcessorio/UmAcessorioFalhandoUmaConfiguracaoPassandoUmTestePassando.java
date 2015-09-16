@@ -7,16 +7,16 @@ import org.junit.*;
 import br.ufsc.ine.leb.projetos.estoria.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.*;
 
-@Acessorios(UmaConfiguracaoFalhandoUmTesteFalhando.class)
+@FixtureSetup(UmaConfiguracaoFalhandoUmTesteFalhando.class)
 public class UmAcessorioFalhandoUmaConfiguracaoPassandoUmTestePassando {
 
 	private int meuAcessorioBefore10;
 	private int meuAcessorioBefore20Test30;
 	private int meuAcessorioTest40;
 	
-	@Acessorio private int acessorioBefore10;
-	@Acessorio private int acessorioBefore20Test30;
-	@Acessorio private int acessorioTest40;
+	@Fixture private int acessorioBefore10;
+	@Fixture private int acessorioBefore20Test30;
+	@Fixture private int acessorioTest40;
 
 	@Before
 	public void configurar() {
