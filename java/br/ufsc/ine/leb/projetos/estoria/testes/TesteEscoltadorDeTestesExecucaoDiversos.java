@@ -1,23 +1,30 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteFalha;
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteFinalizado;
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteIgnorado;
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteIniciado;
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTestesFinalizados;
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTestesIniciados;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
+import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.*;
+import static org.junit.Assert.*;
 
-import java.util.*;
+import java.util.Iterator;
 
-import org.junit.*;
-import org.junit.runner.notification.*;
+import org.junit.Test;
+import org.junit.runner.notification.RunNotifier;
 
-import br.ufsc.ine.leb.projetos.estoria.*;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.*;
+import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
+import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
+import br.ufsc.ine.leb.projetos.estoria.Notificacao;
+import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.DoisAcessoriosPassandoPassandoUmaConfiguracaoPassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.DuasConfiguracoesFalhandoPassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.DuasConfiguracoesPassandoPassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.TresTestesPassandoIgnoradoFalhando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmTesteFalhandoExcecaoEsperada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmTesteFalhandoExcecaoEsperadaSubclasse;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmTesteFalhandoExcecaoLancada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmTesteIgnorado;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmTestePassandoExcecaoEsperada;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmTestePassandoExcecaoEsperadaSuperClasse;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado;
 
-public final class TesteEscoltadorDeTestesExecucao {
+public final class TesteEscoltadorDeTestesExecucaoDiversos {
 
 	private Class<?> suite;
 	private Iterator<Notificacao> notificacoes;
@@ -141,6 +148,16 @@ public final class TesteEscoltadorDeTestesExecucao {
 		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha configurada"));
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
 		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 1, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void doisAcessoriosPassandoPassandoUmaConfiguracaoPassandoUmTestePassando() throws Exception {
+		configurar(DoisAcessoriosPassandoPassandoUmaConfiguracaoPassandoUmTestePassando.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 0, 0));
 		assertFalse(notificacoes.hasNext());
 	}
 
