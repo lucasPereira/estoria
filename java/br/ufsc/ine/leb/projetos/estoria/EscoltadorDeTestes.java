@@ -37,10 +37,10 @@ public class EscoltadorDeTestes extends Runner {
 			for (MetodoDeTeste metodoDeTeste : classeDeTeste.obterMetodosDeTeste()) {
 				TratadorDeInvocacao tratadorDeTeste = new TratadorDeInvocacaoDeTeste(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
 				TratadorDeInvocacao tratadorDeConfiguracao = new TratadorDeInvocacaoDeConfiguracao(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
-				InvocadorDeMetodo invocadorParaClasseDeTeste = new InvocadorDeMetodo(classeDeTeste.obterClasse());
+				InvocadorDeMetodo<?> invocadorParaClasseDeTeste = new InvocadorDeMetodo<>(classeDeTeste.obterClasse());
 				mensageiroDeEscolta.fireTestStarted(metodoDeTeste.obterDescricao());
 				for (ClasseDeTeste acessorio : classeDeTeste.obterAcessorios()) {
-					InvocadorDeMetodo invocadorParaAcessorio = new InvocadorDeMetodo(acessorio.obterClasse());
+					InvocadorDeMetodo<?> invocadorParaAcessorio = new InvocadorDeMetodo<>(acessorio.obterClasse());
 					for (MetodoDeConfiguracao metodoDeConfiguracao : acessorio.obterMetodosDeConfiguracao()) {
 						invocadorParaAcessorio.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao);
 					}
