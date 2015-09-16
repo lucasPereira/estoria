@@ -16,11 +16,12 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcesso
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioFalhandoUmaConfiguracaoFalhandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioFalhandoUmaConfiguracaoPassandoUmTesteFalhando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioFalhandoUmaConfiguracaoPassandoUmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoFalhandoUmTesteFalhando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoFalhandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTesteFalhando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorioIndireto.UmAcessorioFalhandoUmAcessorioIndiretoFalhandoUmaConfiguracaoFalhandoUmTesteFalhando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorioIndireto.UmAcessorioPassandoUmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoFalhandoUmTesteFalhando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoFalhandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTesteFalhando;
@@ -202,12 +203,26 @@ public final class TesteEscoltadorDeTestesExecucaoBasicos {
 	}
 
 	@Test
-	public void umAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando() throws Exception {
-		configurar(UmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando.class);
+	public void umAcessorioPassandoUmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando() throws Exception {
+		configurar(UmAcessorioPassandoUmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando.class);
 		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
 		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
 		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 0, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void umAcessorioFalhandoUmAcessorioIndiretoFalhandoUmaConfiguracaoFalahandoUmTesteFalhando() throws Exception {
+		configurar(UmAcessorioFalhandoUmAcessorioIndiretoFalhandoUmaConfiguracaoFalhandoUmTesteFalhando.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha configurada"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha pai configurada"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha indireta configurada"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha indireta induzida"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 4, 0));
 		assertFalse(notificacoes.hasNext());
 	}
 

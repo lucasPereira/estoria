@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio;
+package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorioIndireto;
 
 import static org.junit.Assert.*;
 
@@ -7,9 +7,10 @@ import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.Fixture;
 import br.ufsc.ine.leb.projetos.estoria.FixtureSetup;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioFalhandoUmaConfiguracaoFalhandoUmTesteFalhando;
 
-@FixtureSetup(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class)
-public class UmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando {
+@FixtureSetup(UmAcessorioFalhandoUmaConfiguracaoFalhandoUmTesteFalhando.class)
+public class UmAcessorioFalhandoUmAcessorioIndiretoFalhandoUmaConfiguracaoFalhandoUmTesteFalhando {
 
 	private int meuIndiretoAcessorioBefore10;
 	private int meuIndiretoAcessorioBefore20Test30;
@@ -39,6 +40,8 @@ public class UmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando {
 		assertEquals(10, acessorioBefore10);
 		assertEquals(20, acessorioBefore20Test30);
 		assertEquals(0, acessorioTest40);
+
+		fail("falha indireta configurada");
 	}
 
 	@Test
@@ -57,6 +60,8 @@ public class UmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando {
 		assertEquals(10, acessorioBefore10);
 		assertEquals(20, acessorioBefore20Test30);
 		assertEquals(0, acessorioTest40);
+
+		fail("falha indireta induzida");
 	}
 
 }
