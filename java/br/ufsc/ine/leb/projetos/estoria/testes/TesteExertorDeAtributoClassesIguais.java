@@ -12,7 +12,7 @@ import br.ufsc.ine.leb.projetos.estoria.EnxertorDeAtributo;
 import br.ufsc.ine.leb.projetos.estoria.FiltradorDeAtributos;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComDoisAtributosDoisMetodos;
 
-public class TesteExertorDeAtributoClassesIguais {
+public final class TesteExertorDeAtributoClassesIguais {
 
 	private ClasseComDoisAtributosDoisMetodos origem;
 	private ClasseComDoisAtributosDoisMetodos destino;

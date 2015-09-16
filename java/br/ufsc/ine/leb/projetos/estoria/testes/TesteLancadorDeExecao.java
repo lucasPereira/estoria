@@ -5,7 +5,7 @@ import org.junit.Test;
 import br.ufsc.ine.leb.projetos.estoria.ExcecaoChecadaQueNaoDeveriaSerLancada;
 import br.ufsc.ine.leb.projetos.estoria.LancadorDeExcecao;
 
-public class TesteLancadorDeExecao {
+public final class TesteLancadorDeExecao {
 
 	@Test(expected = ExcecaoChecadaQueNaoDeveriaSerLancada.class)
 	public void testar() {

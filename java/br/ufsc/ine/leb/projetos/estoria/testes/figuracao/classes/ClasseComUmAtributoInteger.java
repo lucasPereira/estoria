@@ -2,18 +2,18 @@ package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
 
 public class ClasseComUmAtributoInteger {
 
-	private Integer atributoInteiro;
+	private Integer atributo;
 
 	public ClasseComUmAtributoInteger() {
-		atributoInteiro = 100;
+		atributo = 100;
 	}
 
 	public Integer obterAtributo() {
-		return atributoInteiro;
+		return atributo;
 	}
 
 	public void mudarPara50() {
-		atributoInteiro = 50;
+		atributo = 50;
 	}
 
 }

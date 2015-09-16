@@ -2,18 +2,18 @@ package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
 
 public class ClasseComUmAtributoNumberLong {
 
-	private Number atributoNumero;
+	private Number atributo;
 
 	public ClasseComUmAtributoNumberLong() {
-		atributoNumero = 200L;
+		atributo = new Long(200);
 	}
 
 	public Number obterAtributo() {
-		return atributoNumero;
+		return atributo;
 	}
 
 	public void mudarPara150() {
-		atributoNumero = 150L;
+		atributo = new Long(150);
 	}
 
 }

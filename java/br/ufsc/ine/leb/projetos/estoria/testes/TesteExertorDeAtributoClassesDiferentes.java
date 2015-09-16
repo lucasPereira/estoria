@@ -14,7 +14,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmAtri
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmAtributoNumberInteger;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmAtributoNumberLong;
 
-public class TesteExertorDeAtributoClassesDiferentes {
+public final class TesteExertorDeAtributoClassesDiferentes {
 
 	private ClasseComUmAtributoInteger comInteiro100;
 	private ClasseComUmAtributoInteger comInteiro50;
@@ -50,18 +50,21 @@ public class TesteExertorDeAtributoClassesDiferentes {
 		assertEquals(inteiro50, comInteiro100.obterAtributo());
 	}
 
+	@Test
 	public void enxertarInteiroEmNumeroInteiro() throws Exception {
 		new EnxertorDeAtributo(comInteiro50, comNumeroInteiro200).enxertar(atributoDeInteiro, atributoDeNumeroInteiro);
 		assertEquals(inteiro50, comInteiro50.obterAtributo());
 		assertEquals(inteiro50, comNumeroInteiro200.obterAtributo());
 	}
 
+	@Test
 	public void enxertarInteiroEmNumeroLongo() throws Exception {
 		new EnxertorDeAtributo(comInteiro50, comNumeroLongo200).enxertar(atributoDeInteiro, atributoDeNumeroLongo);
 		assertEquals(inteiro50, comInteiro50.obterAtributo());
 		assertEquals(inteiro50, comNumeroLongo200.obterAtributo());
 	}
 
+	@Test
 	public void enxertarNumeroInteiroEmInteiro() throws Exception {
 		new EnxertorDeAtributo(comNumeroInteiro200, comInteiro100).enxertar(atributoDeNumeroInteiro, atributoDeInteiro);
 		assertEquals(numeroInteiro200, comNumeroInteiro200.obterAtributo());

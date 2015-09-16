@@ -10,6 +10,8 @@ public final class ClasseDeTeste {
 	private List<MetodoDeTeste> metodosDeTeste;
 	private List<MetodoDeTeste> metodosDeTesteIgnorados;
 	private List<MetodoDeConfiguracao> metodosDeConfiguracao;
+	private List<AtributoProprio> atributosProprios;
+	private List<AtributoAcessorio> atributosAcessorios;
 
 	public ClasseDeTeste(Class<?> classe) {
 		this.classe = classe;
@@ -17,11 +19,15 @@ public final class ClasseDeTeste {
 		this.metodosDeTeste = new LinkedList<>();
 		this.metodosDeTesteIgnorados = new LinkedList<>();
 		this.metodosDeConfiguracao = new LinkedList<>();
+		this.atributosProprios = new LinkedList<>();
+		this.atributosAcessorios = new LinkedList<>();
 		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(classe);
 		seletor.obterMetodosTeste().forEach(metodo -> metodosDeTeste.add(new MetodoDeTeste(this, metodo)));
 		seletor.obterMetodosDeTesteIgnorados().forEach(metodo -> metodosDeTesteIgnorados.add(new MetodoDeTeste(this, metodo)));
 		seletor.obterMetodosDeConfiguracao().forEach(metodo -> metodosDeConfiguracao.add(new MetodoDeConfiguracao(metodo)));
 		seletor.obterAcessorios().forEach(classeDoAcessorio -> acessorios.add(new ClasseDeTeste(classeDoAcessorio)));
+		seletor.obterAtributosProprios().forEach(atributo -> atributosProprios.add(new AtributoProprio(atributo)));
+		seletor.obterAtributosAcessorios().forEach(atributo -> atributosAcessorios.add(new AtributoAcessorio(atributo)));
 	}
 
 	public Class<?> obterClasse() {
@@ -42,6 +48,14 @@ public final class ClasseDeTeste {
 
 	public List<ClasseDeTeste> obterAcessorios() {
 		return acessorios;
+	}
+
+	public List<AtributoProprio> obterAtributosProprios() {
+		return atributosProprios;
+	}
+
+	public List<AtributoAcessorio> obterAtributosAcessorios() {
+		return atributosAcessorios;
 	}
 
 }

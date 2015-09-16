@@ -10,14 +10,13 @@ public final class InvocadorDeMetodo<T> {
 
 	public InvocadorDeMetodo(Class<T> classe) {
 		this.classe = classe;
-		this.instancia = null;
+		criarInstancia();
 	}
 
 	public void executar(Method metodo, TratadorDeInvocacao tratador) {
 		try {
-			T objeto = criarInstancia();
-			invocar(metodo, objeto, tratador);
-		} catch (IllegalAccessException | IllegalArgumentException | SecurityException | InstantiationException excecao) {
+			invocar(metodo, instancia, tratador);
+		} catch (IllegalAccessException excecao) {
 			new LancadorDeExcecao().lancar(excecao);
 		}
 	}
@@ -31,8 +30,12 @@ public final class InvocadorDeMetodo<T> {
 		}
 	}
 
-	private T criarInstancia() throws InstantiationException, IllegalAccessException {
-		return (instancia == null) ? instancia = classe.newInstance() : instancia;
+	private void criarInstancia() {
+		try {
+			instancia = (instancia == null) ? classe.newInstance() : instancia;
+		} catch (InstantiationException | IllegalAccessException excecao) {
+			new LancadorDeExcecao().lancar(excecao);
+		}
 	}
 
 	public T obterInstancia() {

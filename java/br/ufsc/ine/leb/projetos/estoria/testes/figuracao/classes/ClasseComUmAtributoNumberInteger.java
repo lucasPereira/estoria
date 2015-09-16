@@ -2,18 +2,18 @@ package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes;
 
 public class ClasseComUmAtributoNumberInteger {
 
-	private Number atributoNumero;
+	private Number atributo;
 
 	public ClasseComUmAtributoNumberInteger() {
-		atributoNumero = 200;
+		atributo = new Integer(200);
 	}
 
 	public Number obterAtributo() {
-		return atributoNumero;
+		return atributo;
 	}
 
 	public void mudarPara150() {
-		atributoNumero = 150;
+		atributo = new Integer(150);
 	}
 
 }

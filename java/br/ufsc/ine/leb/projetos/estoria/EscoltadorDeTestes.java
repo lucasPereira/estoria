@@ -39,10 +39,18 @@ public class EscoltadorDeTestes extends Runner {
 				TratadorDeInvocacao tratadorDeConfiguracao = new TratadorDeInvocacaoDeConfiguracao(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
 				InvocadorDeMetodo<?> invocadorParaClasseDeTeste = new InvocadorDeMetodo<>(classeDeTeste.obterClasse());
 				mensageiroDeEscolta.fireTestStarted(metodoDeTeste.obterDescricao());
-				for (ClasseDeTeste acessorio : classeDeTeste.obterAcessorios()) {
-					InvocadorDeMetodo<?> invocadorParaAcessorio = new InvocadorDeMetodo<>(acessorio.obterClasse());
-					for (MetodoDeConfiguracao metodoDeConfiguracao : acessorio.obterMetodosDeConfiguracao()) {
+				for (ClasseDeTeste classeAcessorio : classeDeTeste.obterAcessorios()) {
+					InvocadorDeMetodo<?> invocadorParaAcessorio = new InvocadorDeMetodo<>(classeAcessorio.obterClasse());
+					EnxertorDeAtributo enxertador = new EnxertorDeAtributo(invocadorParaAcessorio.obterInstancia(), invocadorParaClasseDeTeste.obterInstancia());
+					for (MetodoDeConfiguracao metodoDeConfiguracao : classeAcessorio.obterMetodosDeConfiguracao()) {
 						invocadorParaAcessorio.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao);
+					}
+					for (AtributoProprio atributoProprio : classeAcessorio.obterAtributosProprios()) {
+						for (AtributoAcessorio atributoAcessorio : classeDeTeste.obterAtributosAcessorios()) {
+							if (atributoAcessorio.compativelCom(atributoProprio)) {
+								enxertador.enxertar(atributoProprio.obterAtributo(), atributoAcessorio.obterAtributo());
+							}
+						}
 					}
 				}
 				for (MetodoDeConfiguracao metodoDeConfiguracao : classeDeTeste.obterMetodosDeConfiguracao()) {
