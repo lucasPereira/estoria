@@ -16,6 +16,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcesso
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioFalhandoUmaConfiguracaoFalhandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioFalhandoUmaConfiguracaoPassandoUmTesteFalhando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioFalhandoUmaConfiguracaoPassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoFalhandoUmTesteFalhando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoFalhandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTesteFalhando;
@@ -197,6 +198,16 @@ public final class TesteEscoltadorDeTestesExecucaoBasicos {
 		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha pai induzida"));
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
 		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 3, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void umAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando() throws Exception {
+		configurar(UmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 0, 0));
 		assertFalse(notificacoes.hasNext());
 	}
 

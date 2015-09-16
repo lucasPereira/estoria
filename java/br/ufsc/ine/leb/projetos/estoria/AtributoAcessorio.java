@@ -8,7 +8,7 @@ public final class AtributoAcessorio extends Atributo {
 		super(atributo);
 	}
 
-	public Boolean compativelCom(AtributoProprio atributoProprio) {
+	public Boolean compativelCom(Atributo atributoProprio) {
 		Class<?> tipoDoDestipo = obterAtributo().getType();
 		Class<?> tipoDaOrigem = atributoProprio.obterAtributo().getType();
 		Boolean nomeCompativel = obterNome().equals(atributoProprio.obterNome());

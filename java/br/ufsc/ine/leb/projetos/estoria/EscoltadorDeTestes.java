@@ -70,7 +70,7 @@ public class EscoltadorDeTestes extends Runner {
 	private void executarConfiguracaoDaClasseDeTeste(ClasseDeTeste classeDeTeste, TratadorDeInvocacao tratadorDeConfiguracao, InvocadorDeMetodo<?> invocadorParaClasseDeTeste) {
 		for (ClasseDeTeste classeAcessorio : classeDeTeste.obterAcessorios()) {
 			InvocadorDeMetodo<?> invocadorParaAcessorio = new InvocadorDeMetodo<>(classeAcessorio.obterClasse());
-			executarConfiguracaoDaClasseAcessorio(classeAcessorio, tratadorDeConfiguracao, invocadorParaAcessorio);
+			executarConfiguracaoDaClasseDeTeste(classeAcessorio, tratadorDeConfiguracao, invocadorParaAcessorio);
 			enxertarAcessorios(classeDeTeste, classeAcessorio, invocadorParaClasseDeTeste, invocadorParaAcessorio);
 		}
 		for (MetodoDeConfiguracao metodoDeConfiguracao : classeDeTeste.obterMetodosDeConfiguracao()) {
@@ -78,19 +78,20 @@ public class EscoltadorDeTestes extends Runner {
 		}
 	}
 
-	private void executarConfiguracaoDaClasseAcessorio(ClasseDeTeste classeAcessorio, TratadorDeInvocacao tratadorDeConfiguracao, InvocadorDeMetodo<?> invocadorParaAcessorio) {
-		for (MetodoDeConfiguracao metodoDeConfiguracao : classeAcessorio.obterMetodosDeConfiguracao()) {
-			invocadorParaAcessorio.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao);
-		}
-	}
-
 	private void enxertarAcessorios(ClasseDeTeste classeDeTeste, ClasseDeTeste classeAcessorio, InvocadorDeMetodo<?> invocadorParaClasseDeTeste, InvocadorDeMetodo<?> invocadorParaAcessorio) {
 		EnxertorDeAtributo enxertador = new EnxertorDeAtributo(invocadorParaAcessorio.obterInstancia(), invocadorParaClasseDeTeste.obterInstancia());
 		for (AtributoProprio atributoProprio : classeAcessorio.obterAtributosProprios()) {
-			for (AtributoAcessorio atributoAcessorio : classeDeTeste.obterAtributosAcessorios()) {
-				if (atributoAcessorio.compativelCom(atributoProprio)) {
-					enxertador.enxertar(atributoProprio.obterAtributo(), atributoAcessorio.obterAtributo());
-				}
+			enxertarAcessorio(classeDeTeste, enxertador, atributoProprio);
+		}
+		for (AtributoAcessorio atributoAcessorio : classeAcessorio.obterAtributosAcessorios()) {
+			enxertarAcessorio(classeDeTeste, enxertador, atributoAcessorio);
+		}
+	}
+
+	private void enxertarAcessorio(ClasseDeTeste classeDeTeste, EnxertorDeAtributo enxertador, Atributo atributoProprio) {
+		for (AtributoAcessorio atributoAcessorio : classeDeTeste.obterAtributosAcessorios()) {
+			if (atributoAcessorio.compativelCom(atributoProprio)) {
+				enxertador.enxertar(atributoProprio.obterAtributo(), atributoAcessorio.obterAtributo());
 			}
 		}
 	}
