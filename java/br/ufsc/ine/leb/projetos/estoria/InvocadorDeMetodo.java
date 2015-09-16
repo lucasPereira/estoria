@@ -18,7 +18,7 @@ public final class InvocadorDeMetodo<T> {
 			T objeto = criarInstancia();
 			invocar(metodo, objeto, tratador);
 		} catch (IllegalAccessException | IllegalArgumentException | SecurityException | InstantiationException excecao) {
-			excecao.printStackTrace();
+			new LancadorDeExcecao().lancar(excecao);
 		}
 	}
 
