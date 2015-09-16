@@ -6,13 +6,13 @@ import java.util.*;
 import org.junit.*;
 import org.junit.runners.Suite.SuiteClasses;
 
-public final class SeletorDeComponentesDeClasse {
+public final class SeletorDeComponentesDeTeste {
 
 	private Class<?> classe;
 	private FiltradorDeMetodos filtradorDeMetodos;
 	private FiltradorDeAtributos filtradorDeAtributos;
 
-	public SeletorDeComponentesDeClasse(Class<?> classe) {
+	public SeletorDeComponentesDeTeste(Class<?> classe) {
 		this.classe = classe;
 	}
 

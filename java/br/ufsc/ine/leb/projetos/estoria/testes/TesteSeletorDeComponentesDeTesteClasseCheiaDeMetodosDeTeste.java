@@ -8,16 +8,16 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeClasse;
+import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseCheiaDeMetodosDeTeste;
 
-public final class TesteSeletorDeComponentesDeClasseEmClasseCheiaDeMetodosDeTeste {
+public final class TesteSeletorDeComponentesDeTesteClasseCheiaDeMetodosDeTeste {
 
-	private SeletorDeComponentesDeClasse seletor;
+	private SeletorDeComponentesDeTeste seletor;
 
 	@Before
 	public void prepararCenario() {
-		seletor = new SeletorDeComponentesDeClasse(ClasseCheiaDeMetodosDeTeste.class);
+		seletor = new SeletorDeComponentesDeTeste(ClasseCheiaDeMetodosDeTeste.class);
 	}
 
 	@Test

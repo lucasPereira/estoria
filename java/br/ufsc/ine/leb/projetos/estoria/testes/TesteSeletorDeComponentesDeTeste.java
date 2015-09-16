@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeClasse;
+import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseVazia;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
@@ -15,11 +15,11 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmTeste
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.DuasClassesZeroAcessoriosZeroConfiguracoesDoisTestes;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.ZeroClasses;
 
-public final class TesteSeletorDeComponentesDeClasse {
+public final class TesteSeletorDeComponentesDeTeste {
 
 	@Test
 	public void vazio() throws Exception {
-		SeletorDeComponentesDeClasse seletor = new SeletorDeComponentesDeClasse(ClasseVazia.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ClasseVazia.class);
 		assertEquals(0, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -32,7 +32,7 @@ public final class TesteSeletorDeComponentesDeClasse {
 
 	@Test
 	public void UmTeste() throws Exception {
-		SeletorDeComponentesDeClasse seletor = new SeletorDeComponentesDeClasse(UmTestePassando.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(UmTestePassando.class);
 		assertEquals(1, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -46,7 +46,7 @@ public final class TesteSeletorDeComponentesDeClasse {
 
 	@Test
 	public void UmTesteIgnorado() throws Exception {
-		SeletorDeComponentesDeClasse seletor = new SeletorDeComponentesDeClasse(UmTesteIgnorado.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(UmTesteIgnorado.class);
 		assertEquals(0, seletor.obterMetodosTeste().size());
 		assertEquals(1, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -60,7 +60,7 @@ public final class TesteSeletorDeComponentesDeClasse {
 
 	@Test
 	public void doisTestes() throws Exception {
-		SeletorDeComponentesDeClasse seletor = new SeletorDeComponentesDeClasse(DoisTestesPassandoPassando.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(DoisTestesPassandoPassando.class);
 		assertEquals(2, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -75,7 +75,7 @@ public final class TesteSeletorDeComponentesDeClasse {
 
 	@Test
 	public void umaConfiguracaoUmTeste() throws Exception {
-		SeletorDeComponentesDeClasse seletor = new SeletorDeComponentesDeClasse(UmaConfiguracaoPassandoUmTestePassando.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(UmaConfiguracaoPassandoUmTestePassando.class);
 		assertEquals(1, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(1, seletor.obterMetodosDeConfiguracao().size());
@@ -93,7 +93,7 @@ public final class TesteSeletorDeComponentesDeClasse {
 
 	@Test
 	public void umaClasseDeSuiteTeste() throws Exception {
-		SeletorDeComponentesDeClasse seletor = new SeletorDeComponentesDeClasse(DuasClassesZeroAcessoriosZeroConfiguracoesDoisTestes.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(DuasClassesZeroAcessoriosZeroConfiguracoesDoisTestes.class);
 		assertEquals(0, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -107,7 +107,7 @@ public final class TesteSeletorDeComponentesDeClasse {
 
 	@Test
 	public void zeroClassesDeSuiteTeste() throws Exception {
-		SeletorDeComponentesDeClasse seletor = new SeletorDeComponentesDeClasse(ZeroClasses.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ZeroClasses.class);
 		assertEquals(0, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -119,7 +119,7 @@ public final class TesteSeletorDeComponentesDeClasse {
 
 	@Test
 	public void umAcessorio() throws Exception {
-		SeletorDeComponentesDeClasse seletor = new SeletorDeComponentesDeClasse(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class);
 		assertEquals(1, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(1, seletor.obterMetodosDeConfiguracao().size());

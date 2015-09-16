@@ -11,19 +11,19 @@ import org.junit.Test;
 import br.ufsc.ine.leb.projetos.estoria.EspiaoDeInvocacao;
 import br.ufsc.ine.leb.projetos.estoria.FiltradorDeMetodos;
 import br.ufsc.ine.leb.projetos.estoria.InvocadorDeMetodo;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComDoisMetodos;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComDoisAtributosDoisMetodos;
 
 public final class TesteInvocadorDeMetodo {
 
 	private List<Method> metodos;
 	private EspiaoDeInvocacao espiaoDeInvocao;
-	private InvocadorDeMetodo<ClasseComDoisMetodos> invocador;
+	private InvocadorDeMetodo<ClasseComDoisAtributosDoisMetodos> invocador;
 
 	@Before
 	public void prepararCenario() {
-		metodos = new FiltradorDeMetodos(ClasseComDoisMetodos.class).removerMetodosComRetorno().obterMetodos();
+		metodos = new FiltradorDeMetodos(ClasseComDoisAtributosDoisMetodos.class).removerMetodosComRetorno().obterMetodos();
 		espiaoDeInvocao = new EspiaoDeInvocacao();
-		invocador = new InvocadorDeMetodo<>(ClasseComDoisMetodos.class);
+		invocador = new InvocadorDeMetodo<>(ClasseComDoisAtributosDoisMetodos.class);
 	}
 
 	@Test

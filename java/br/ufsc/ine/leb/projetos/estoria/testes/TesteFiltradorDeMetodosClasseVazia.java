@@ -23,16 +23,7 @@ public final class TesteFiltradorDeMetodosClasseVazia {
 	@Test
 	public void classeVazia() throws Exception {
 		List<Method> metodos = filtrador.obterMetodos();
-		assertTrue(filtrador.vazio());
 		assertEquals(0, metodos.size());
-	}
-
-	@Test
-	public void reduzir() throws Exception {
-		String reduzido = filtrador.reduzir(metodo -> metodo.getName());
-		assertTrue(filtrador.vazio());
-		assertEquals(0, filtrador.obterMetodos().size());
-		assertNull(reduzido);
 	}
 
 }

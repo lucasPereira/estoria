@@ -26,7 +26,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 	public void semFiltro() throws Exception {
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(20, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
@@ -55,7 +54,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosAbstratos();
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(19, metodos.size());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnoreTest", iterador.next().getName());
@@ -83,7 +81,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosNaoAnotadosCom(Test.class);
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(4, metodos.size());
 		assertEquals("metodoAnotadoComIgnoreTest", iterador.next().getName());
 		assertEquals("metodoAnotadoComTest", iterador.next().getName());
@@ -97,10 +94,8 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		FiltradorDeMetodos filtradorClone = filtrador.clonar();
 		filtrador.removerMetodosAnotadosCom(Ignore.class);
 		filtradorClone.removerMetodosNaoAnotadosCom(Ignore.class);
-		assertFalse(filtrador.vazio());
 		assertEquals(1, filtrador.obterMetodos().size());
 		assertEquals("metodoAnotadoComTest", filtrador.obterMetodos().get(0).getName());
-		assertFalse(filtradorClone.vazio());
 		assertEquals(3, filtradorClone.obterMetodos().size());
 		assertEquals("metodoAnotadoComIgnoreTest", filtradorClone.obterMetodos().get(0).getName());
 		assertEquals("metodoAnotadoComTestIgnore", filtradorClone.obterMetodos().get(1).getName());
@@ -112,7 +107,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosAnotadosCom(Ignore.class);
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(16, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComTest", iterador.next().getName());
@@ -137,7 +131,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosComRetorno();
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(16, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
@@ -162,7 +155,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosDefault();
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(19, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
@@ -190,7 +182,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosEstaticos();
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(19, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
@@ -218,7 +209,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosGenericos();
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(18, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
@@ -245,7 +235,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosNativos();
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(19, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
@@ -273,7 +262,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosParametrizados();
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(18, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
@@ -300,7 +288,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosPrivados();
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(19, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
@@ -328,7 +315,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosProtegidos();
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(19, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
@@ -356,7 +342,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		filtrador.removerMetodosSincronizados();
 		List<Method> metodos = filtrador.obterMetodos();
 		Iterator<Method> iterador = metodos.iterator();
-		assertFalse(filtrador.vazio());
 		assertEquals(19, metodos.size());
 		assertEquals("metodoAbstrato", iterador.next().getName());
 		assertEquals("metodoAnotadoComIgnore", iterador.next().getName());
@@ -377,16 +362,6 @@ public final class TesteFiltradorDeMetodosClasseCheia {
 		assertEquals("metodoParametrizado", iterador.next().getName());
 		assertEquals("metodoPrivado", iterador.next().getName());
 		assertEquals("metodoProtegido", iterador.next().getName());
-	}
-
-	@Test
-	public void reduzir() throws Exception {
-		String reduzido = filtrador.reduzir(metodo -> metodo.getName());
-		List<Method> metodos = filtrador.obterMetodos();
-		assertFalse(filtrador.vazio());
-		assertEquals(1, metodos.size());
-		assertEquals("metodoAbstrato", metodos.get(0).getName());
-		assertEquals("metodoAbstrato", reduzido);
 	}
 
 }
