@@ -62,9 +62,9 @@ public final class TesteAnotacaoAcessorios {
 		assertEquals(1, anotacoesAcessorios.length);
 		assertEquals(Acessorios.class, anotacoes[0].annotationType());
 		assertEquals(ClasseComUmMetodo.class, anotacoesAcessorios[0].value()[0]);
-		assertEquals(ClasseSemMetodos.class, anotacoesAcessorios[0].value()[1]);
+		assertEquals(ClasseVazia.class, anotacoesAcessorios[0].value()[1]);
 		assertEquals(ClasseComUmMetodo.class, anotacaoAcessorios.value()[0]);
-		assertEquals(ClasseSemMetodos.class, anotacaoAcessorios.value()[1]);
+		assertEquals(ClasseVazia.class, anotacaoAcessorios.value()[1]);
 	}
 
 	@Test
@@ -82,9 +82,9 @@ public final class TesteAnotacaoAcessorios {
 		assertEquals(1, anotacoesAcessorios.length);
 		assertEquals(Acessorios.class, anotacoes[0].annotationType());
 		assertEquals(ClasseComUmMetodo.class, anotacoesAcessorios[0].value()[0]);
-		assertEquals(ClasseSemMetodos.class, anotacoesAcessorios[0].value()[1]);
+		assertEquals(ClasseVazia.class, anotacoesAcessorios[0].value()[1]);
 		assertEquals(ClasseComUmMetodo.class, anotacaoAcessorios.value()[0]);
-		assertEquals(ClasseSemMetodos.class, anotacaoAcessorios.value()[1]);
+		assertEquals(ClasseVazia.class, anotacaoAcessorios.value()[1]);
 	}
 
 }

@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.FiltradorDeMetodos;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseSemMetodos;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseVazia;
 
 public final class TesteFiltradorDeMetodosClasseVazia {
 
@@ -17,7 +17,7 @@ public final class TesteFiltradorDeMetodosClasseVazia {
 
 	@Before
 	public void prepararCenario() {
-		filtrador = new FiltradorDeMetodos(ClasseSemMetodos.class);
+		filtrador = new FiltradorDeMetodos(ClasseVazia.class);
 	}
 
 	@Test

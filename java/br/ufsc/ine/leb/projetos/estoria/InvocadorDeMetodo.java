@@ -3,26 +3,26 @@ package br.ufsc.ine.leb.projetos.estoria;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public final class InvocadorDeMetodo {
+public final class InvocadorDeMetodo<T> {
 
-	private Class<?> classe;
-	private Object instancia;
+	private Class<T> classe;
+	private T instancia;
 
-	public InvocadorDeMetodo(Class<?> classe) {
+	public InvocadorDeMetodo(Class<T> classe) {
 		this.classe = classe;
 		this.instancia = null;
 	}
 
 	public void executar(Method metodo, TratadorDeInvocacao tratador) {
 		try {
-			Object objeto = obterInstancia();
+			T objeto = criarInstancia();
 			invocar(metodo, objeto, tratador);
 		} catch (IllegalAccessException | IllegalArgumentException | SecurityException | InstantiationException excecao) {
 			excecao.printStackTrace();
 		}
 	}
 
-	private void invocar(Method metodo, Object objeto, TratadorDeInvocacao tratador) throws IllegalAccessException {
+	private void invocar(Method metodo, T objeto, TratadorDeInvocacao tratador) throws IllegalAccessException {
 		try {
 			metodo.invoke(objeto);
 			tratador.tratarInvocacaoSemExcecao(metodo);
@@ -31,8 +31,12 @@ public final class InvocadorDeMetodo {
 		}
 	}
 
-	private Object obterInstancia() throws InstantiationException, IllegalAccessException {
+	private T criarInstancia() throws InstantiationException, IllegalAccessException {
 		return (instancia == null) ? instancia = classe.newInstance() : instancia;
+	}
+
+	public T obterInstancia() {
+		return instancia;
 	}
 
 }

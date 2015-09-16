@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -8,16 +8,16 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeTestes;
+import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeClasse;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseCheiaDeMetodosDeTeste;
 
-public final class TesteSeletorDeComponentesDeTestesClasseCheia {
+public final class TesteSeletorDeComponentesDeClasseEmClasseCheiaDeMetodosDeTeste {
 
-	private SeletorDeComponentesDeTestes seletor;
+	private SeletorDeComponentesDeClasse seletor;
 
 	@Before
 	public void prepararCenario() {
-		seletor = new SeletorDeComponentesDeTestes(ClasseCheiaDeMetodosDeTeste.class);
+		seletor = new SeletorDeComponentesDeClasse(ClasseCheiaDeMetodosDeTeste.class);
 	}
 
 	@Test
@@ -59,6 +59,16 @@ public final class TesteSeletorDeComponentesDeTestesClasseCheia {
 	@Test
 	public void acessorios() throws Exception {
 		assertEquals(0, seletor.obterAcessorios().size());
+	}
+
+	@Test
+	public void atributosProprios() throws Exception {
+		assertEquals(0, seletor.obterAtributosProprios().size());
+	}
+
+	@Test
+	public void atributosAcessorios() throws Exception {
+		assertEquals(0, seletor.obterAtributosAcessorios().size());
 	}
 
 }

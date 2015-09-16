@@ -11,7 +11,7 @@ public final class SuiteDeTeste {
 	public SuiteDeTeste(Class<?> suite) {
 		this.classesDeTeste = new LinkedList<>();
 		this.suite = suite;
-		SeletorDeComponentesDeTestes seletor = new SeletorDeComponentesDeTestes(suite);
+		SeletorDeComponentesDeClasse seletor = new SeletorDeComponentesDeClasse(suite);
 		seletor.obterClassesDeSuite().forEach(classe -> adicionarClasse(classe));
 	}
 

@@ -3,6 +3,7 @@ package br.ufsc.ine.leb.projetos.estoria;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,19 +14,20 @@ public final class FiltradorDeMetodos {
 	private List<Method> metodos;
 
 	public FiltradorDeMetodos(Class<?> classe) {
-		metodos = new LinkedList<>();
-		for (Method metodo : classe.getDeclaredMethods()) {
-			metodos.add(metodo);
-		}
+		this(Arrays.asList(classe.getDeclaredMethods()));
 	}
 
 	private FiltradorDeMetodos(List<Method> metodos) {
 		this.metodos = new LinkedList<Method>(metodos);
+		ComparadorDeMetodos comparador = new ComparadorDeMetodos();
+		Collections.sort(this.metodos, comparador);
+	}
+
+	public FiltradorDeMetodos clonar() {
+		return new FiltradorDeMetodos(metodos);
 	}
 
 	public List<Method> obterMetodos() {
-		ComparadorDeMetodos comparador = new ComparadorDeMetodos();
-		Collections.sort(metodos, comparador);
 		return metodos;
 	}
 
@@ -103,10 +105,6 @@ public final class FiltradorDeMetodos {
 
 	public Boolean vazio() {
 		return metodos.isEmpty();
-	}
-
-	public FiltradorDeMetodos clonar() {
-		return new FiltradorDeMetodos(metodos);
 	}
 
 }

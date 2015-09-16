@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseSemMetodos;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseVazia;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
@@ -44,7 +44,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(UmaClasseZeroAcessoriosZeroConfiguracoesZeroTestes.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
 
-		assertEquals(ClasseSemMetodos.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(ClasseVazia.class, suite.obterClassesDeTeste().get(0).obterClasse());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());

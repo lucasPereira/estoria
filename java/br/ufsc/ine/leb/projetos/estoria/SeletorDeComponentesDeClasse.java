@@ -6,30 +6,38 @@ import java.util.*;
 import org.junit.*;
 import org.junit.runners.Suite.SuiteClasses;
 
-public final class SeletorDeComponentesDeTestes {
+public final class SeletorDeComponentesDeClasse {
 
 	private Class<?> classe;
-	private FiltradorDeMetodos filtradorBase;
+	private FiltradorDeMetodos filtradorDeMetodos;
+	private FiltradorDeAtributos filtradorDeAtributos;
 
-	public SeletorDeComponentesDeTestes(Class<?> classe) {
+	public SeletorDeComponentesDeClasse(Class<?> classe) {
 		this.classe = classe;
 	}
 
 	private FiltradorDeMetodos construirFiltradorBase() {
-		if (filtradorBase == null) {
-			filtradorBase = new FiltradorDeMetodos(classe);
-			filtradorBase.removerMetodosAbstratos();
-			filtradorBase.removerMetodosNativos();
-			filtradorBase.removerMetodosComRetorno();
-			filtradorBase.removerMetodosPrivados();
-			filtradorBase.removerMetodosDefault();
-			filtradorBase.removerMetodosProtegidos();
-			filtradorBase.removerMetodosEstaticos();
-			filtradorBase.removerMetodosGenericos();
-			filtradorBase.removerMetodosParametrizados();
-			filtradorBase.removerMetodosSincronizados();
+		if (filtradorDeMetodos == null) {
+			filtradorDeMetodos = new FiltradorDeMetodos(classe);
+			filtradorDeMetodos.removerMetodosAbstratos();
+			filtradorDeMetodos.removerMetodosNativos();
+			filtradorDeMetodos.removerMetodosComRetorno();
+			filtradorDeMetodos.removerMetodosPrivados();
+			filtradorDeMetodos.removerMetodosDefault();
+			filtradorDeMetodos.removerMetodosProtegidos();
+			filtradorDeMetodos.removerMetodosEstaticos();
+			filtradorDeMetodos.removerMetodosGenericos();
+			filtradorDeMetodos.removerMetodosParametrizados();
+			filtradorDeMetodos.removerMetodosSincronizados();
 		}
-		return filtradorBase.clonar();
+		return filtradorDeMetodos.clonar();
+	}
+
+	private FiltradorDeAtributos construirFiltradorDeAtributosBase() {
+		if (filtradorDeAtributos == null) {
+		filtradorDeAtributos = new FiltradorDeAtributos(classe);
+		}
+		return filtradorDeAtributos.clonar();
 	}
 
 	public List<Method> obterMetodosTeste() {
@@ -42,6 +50,14 @@ public final class SeletorDeComponentesDeTestes {
 
 	public List<Method> obterMetodosDeConfiguracao() {
 		return construirFiltradorBase().removerMetodosNaoAnotadosCom(Before.class).obterMetodos();
+	}
+
+	public List<Field> obterAtributosProprios() {
+		return construirFiltradorDeAtributosBase().removerAtributosAnotadosCom(Acessorio.class).obterAtributos();
+	}
+
+	public List<Field> obterAtributosAcessorios() {
+		return construirFiltradorDeAtributosBase().removerAtributosNaoAnotadosCom(Acessorio.class).obterAtributos();
 	}
 
 	public List<Class<?>> obterClassesDeSuite() {

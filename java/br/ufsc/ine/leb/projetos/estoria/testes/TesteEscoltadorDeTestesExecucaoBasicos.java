@@ -35,17 +35,6 @@ public final class TesteEscoltadorDeTestesExecucaoBasicos {
 	}
 
 	@Test
-	public void umTesteFalhando() throws Exception {
-		configurar(UmTesteFalhando.class);
-		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
-		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
-		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha induzida"));
-		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
-		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 1, 0));
-		assertFalse(notificacoes.hasNext());
-	}
-
-	@Test
 	public void umTestePassando() throws Exception {
 		configurar(UmTestePassando.class);
 		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
@@ -56,31 +45,8 @@ public final class TesteEscoltadorDeTestesExecucaoBasicos {
 	}
 
 	@Test
-	public void umaConfiguracaoFalhandoUmTesteFalhando() throws Exception {
-		configurar(UmaConfiguracaoFalhandoUmTesteFalhando.class);
-		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
-		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
-		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha configurada"));
-		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha induzida"));
-		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
-		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 2, 0));
-		assertFalse(notificacoes.hasNext());
-	}
-
-	@Test
-	public void umaConfiguracaoFalhandoUmTestePassando() throws Exception {
-		configurar(UmaConfiguracaoFalhandoUmTestePassando.class);
-		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
-		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
-		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha configurada"));
-		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
-		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 1, 0));
-		assertFalse(notificacoes.hasNext());
-	}
-
-	@Test
-	public void umaConfiguracaoPassandoUmTesteFalhando() throws Exception {
-		configurar(UmaConfiguracaoPassandoUmTesteFalhando.class);
+	public void umTesteFalhando() throws Exception {
+		configurar(UmTesteFalhando.class);
 		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
 		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha induzida"));
@@ -99,7 +65,40 @@ public final class TesteEscoltadorDeTestesExecucaoBasicos {
 		assertFalse(notificacoes.hasNext());
 	}
 
-	@Ignore
+	@Test
+	public void umaConfiguracaoPassandoUmTesteFalhando() throws Exception {
+		configurar(UmaConfiguracaoPassandoUmTesteFalhando.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha induzida"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 1, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void umaConfiguracaoFalhandoUmTestePassando() throws Exception {
+		configurar(UmaConfiguracaoFalhandoUmTestePassando.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha configurada"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 1, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void umaConfiguracaoFalhandoUmTesteFalhando() throws Exception {
+		configurar(UmaConfiguracaoFalhandoUmTesteFalhando.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha configurada"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha induzida"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 2, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
 	@Test
 	public void umAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando() throws Exception {
 		configurar(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class);
@@ -107,6 +106,40 @@ public final class TesteEscoltadorDeTestesExecucaoBasicos {
 		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
 		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 0, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void umAcessorioPassandoUmaConfiguracaoPassandoUmTesteFalhando() throws Exception {
+		configurar(UmAcessorioPassandoUmaConfiguracaoPassandoUmTesteFalhando.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha pai induzida"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 1, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void umAcessorioPassandoUmaConfiguracaoFalhandoUmTestePassando() throws Exception {
+		configurar(UmAcessorioPassandoUmaConfiguracaoFalhandoUmTestePassando.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha pai configurada"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 1, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void umAcessorioPassandoUmaConfiguracaoFalhandoUmTesteFalhando() throws Exception {
+		configurar(UmAcessorioPassandoUmaConfiguracaoFalhandoUmTesteFalhando.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha pai configurada"));
+		assertThat(notificacoes.next(), combinaComTesteFalha(suite, "testar", AssertionError.class, "falha pai induzida"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 1, 0));
 		assertFalse(notificacoes.hasNext());
 	}
 

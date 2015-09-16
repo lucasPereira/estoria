@@ -16,29 +16,35 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComDoisMe
 public final class TesteInvocadorDeMetodo {
 
 	private List<Method> metodos;
+	private EspiaoDeInvocacao espiaoDeInvocao;
+	private InvocadorDeMetodo<ClasseComDoisMetodos> invocador;
 
 	@Before
 	public void prepararCenario() {
-		metodos = new FiltradorDeMetodos(ClasseComDoisMetodos.class).obterMetodos();
+		metodos = new FiltradorDeMetodos(ClasseComDoisMetodos.class).removerMetodosComRetorno().obterMetodos();
+		espiaoDeInvocao = new EspiaoDeInvocacao();
+		invocador = new InvocadorDeMetodo<>(ClasseComDoisMetodos.class);
 	}
 
 	@Test
-	public void comExcecao() throws Exception {
-		EspiaoDeInvocacao espiaoDeInvocao = new EspiaoDeInvocacao();
-		InvocadorDeMetodo invocador = new InvocadorDeMetodo(ClasseComDoisMetodos.class);
+	public void executarMetodoComExcecao() throws Exception {
 		invocador.executar(metodos.get(0), espiaoDeInvocao);
+		assertEquals("comExcecao", metodos.get(0).getName());
 		assertFalse(espiaoDeInvocao.executouSemExcecao());
 		assertTrue(espiaoDeInvocao.executouComExcecao());
 		assertEquals(RuntimeException.class, espiaoDeInvocao.obterExcecao().getClass());
+		assertEquals(0, invocador.obterInstancia().obterAtributo1());
+		assertEquals(20, invocador.obterInstancia().obterAtributo2());
 	}
 
 	@Test
-	public void semExcecao() throws Exception {
-		EspiaoDeInvocacao espiaoDeInvocao = new EspiaoDeInvocacao();
-		InvocadorDeMetodo invocador = new InvocadorDeMetodo(ClasseComDoisMetodos.class);
+	public void executarMetodoSemExcecao() throws Exception {
 		invocador.executar(metodos.get(1), espiaoDeInvocao);
+		assertEquals("semExcecao", metodos.get(1).getName());
 		assertTrue(espiaoDeInvocao.executouSemExcecao());
 		assertFalse(espiaoDeInvocao.executouComExcecao());
+		assertEquals(10, invocador.obterInstancia().obterAtributo1());
+		assertEquals(0, invocador.obterInstancia().obterAtributo2());
 	}
 
 }
