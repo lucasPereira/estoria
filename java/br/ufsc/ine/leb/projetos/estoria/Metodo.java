@@ -18,4 +18,9 @@ public abstract class Metodo {
 		return metodo;
 	}
 
+	@Override
+	public String toString() {
+		return obterNome();
+	}
+
 }

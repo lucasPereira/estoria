@@ -12,6 +12,7 @@ import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
 import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorioIndireto.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.DoisAcessoriosPassandoPassandoUmaConfiguracaoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.DuasConfiguracoesFalhandoPassandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.DuasConfiguracoesPassandoPassandoUmTestePassando;
@@ -154,6 +155,16 @@ public final class TesteEscoltadorDeTestesExecucaoDiversos {
 	@Test
 	public void doisAcessoriosPassandoPassandoUmaConfiguracaoPassandoUmTestePassando() throws Exception {
 		configurar(DoisAcessoriosPassandoPassandoUmaConfiguracaoPassandoUmTestePassando.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 0, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void doisAcessoriosPassandoFalhandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando() throws Exception {
+		configurar(DoisAcessoriosPassandoFalhandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando.class);
 		assertThat(notificacoes.next(), combinaComTestesIniciados(suite));
 		assertThat(notificacoes.next(), combinaComTesteIniciado(suite, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(suite, "testar"));

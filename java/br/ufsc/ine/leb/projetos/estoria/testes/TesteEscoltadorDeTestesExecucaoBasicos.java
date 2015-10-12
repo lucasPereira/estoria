@@ -20,8 +20,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcesso
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoFalhandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTesteFalhando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorioIndireto.UmAcessorioFalhandoUmAcessorioIndiretoFalhandoUmaConfiguracaoFalhandoUmTesteFalhando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorioIndireto.UmAcessorioPassandoUmAcessorioIndiretoPassandoUmaConfiguracaoPassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorioIndireto.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoFalhandoUmTesteFalhando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoFalhandoUmTestePassando;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTesteFalhando;

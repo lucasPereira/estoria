@@ -63,4 +63,23 @@ public final class ClasseDeTeste {
 		return compartilhada;
 	}
 
+	@Override
+	public boolean equals(Object objeto) {
+		if (objeto instanceof ClasseDeTeste) {
+			ClasseDeTeste outra = (ClasseDeTeste) objeto;
+			return classe.equals(outra.classe);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return classe.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return classe.getSimpleName();
+	}
+	
 }

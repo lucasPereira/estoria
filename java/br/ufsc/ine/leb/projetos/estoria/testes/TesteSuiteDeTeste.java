@@ -176,11 +176,11 @@ public final class TesteSuiteDeTeste {
 
 	@Test
 	public void classeDoisAcessoriosUmAcessorioIndiretoCompartilhadoUmTeste() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(DoisAcessoriosPassandoPassandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando.class);
-		assertEquals(DoisAcessoriosPassandoPassandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(DoisAcessoriosPassandoFalhandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando.class);
+		assertEquals(DoisAcessoriosPassandoFalhandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
 
-		assertEquals(DoisAcessoriosPassandoPassandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(DoisAcessoriosPassandoFalhandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterClasse());
 		assertEquals(2, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosProprios().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().size());

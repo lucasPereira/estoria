@@ -17,6 +17,7 @@ public class UmAcessorioCompartilhadoPassandoUmaConfiguracaoPassandoUmTestePassa
 	@Before
 	public void configurar() {
 		numeros.add(1);
+		assertTrue(numeros.contains(1));
 	}
 
 	@Test

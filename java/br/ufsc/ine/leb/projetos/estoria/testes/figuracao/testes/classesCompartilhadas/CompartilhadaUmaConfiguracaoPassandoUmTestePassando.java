@@ -11,7 +11,7 @@ import br.ufsc.ine.leb.projetos.estoria.*;
 @Shared
 public class CompartilhadaUmaConfiguracaoPassandoUmTestePassando {
 
-	private LinkedList<Integer> numeros;
+	private List<Integer> numeros;
 
 	@Before
 	public void configurar() {

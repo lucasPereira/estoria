@@ -18,4 +18,9 @@ public abstract class Atributo {
 		return atributo;
 	}
 
+	@Override
+	public String toString() {
+		return obterNome();
+	}
+	
 }

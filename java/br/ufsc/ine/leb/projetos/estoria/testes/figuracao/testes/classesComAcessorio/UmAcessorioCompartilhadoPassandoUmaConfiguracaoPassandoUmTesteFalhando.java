@@ -17,12 +17,13 @@ public class UmAcessorioCompartilhadoPassandoUmaConfiguracaoPassandoUmTesteFalha
 	@Before
 	public void configurar() {
 		numeros.add(2);
+		assertTrue(numeros.contains(2));
 	}
 
 	@Test
 	public void testar() throws Exception {
 		assertTrue(numeros.contains(2));
-		fail("falha induzida");
+		fail("falha compartilhamento induzida");
 	}
 
 }

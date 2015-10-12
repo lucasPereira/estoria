@@ -10,7 +10,7 @@ import br.ufsc.ine.leb.projetos.estoria.*;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.*;
 
 @FixtureSetup({ UmAcessorioCompartilhadoPassandoUmaConfiguracaoPassandoUmTestePassando.class, UmAcessorioCompartilhadoPassandoUmaConfiguracaoPassandoUmTesteFalhando.class })
-public class DoisAcessoriosPassandoPassandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando {
+public class DoisAcessoriosPassandoFalhandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando {
 
 	@Fixture private List<Integer> numeros;
 
