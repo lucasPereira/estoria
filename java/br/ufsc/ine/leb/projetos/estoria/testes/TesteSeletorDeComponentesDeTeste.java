@@ -29,7 +29,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals(ClasseVazia.class, seletor.obterClassesDeSuite().get(0));
-		assertFalse(seletor.possuiConfiguracoesCompartilhadas());
+		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals(UmTestePassando.class, seletor.obterClassesDeSuite().get(0));
-		assertFalse(seletor.possuiConfiguracoesCompartilhadas());
+		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals("testar", seletor.obterMetodosDeTesteIgnorados().get(0).getName());
 		assertEquals(UmTesteIgnorado.class, seletor.obterClassesDeSuite().get(0));
-		assertFalse(seletor.possuiConfiguracoesCompartilhadas());
+		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
@@ -75,7 +75,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals("testar1", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals("testar2", seletor.obterMetodosTeste().get(1).getName());
 		assertEquals(DoisTestesPassandoPassando.class, seletor.obterClassesDeSuite().get(0));
-		assertFalse(seletor.possuiConfiguracoesCompartilhadas());
+		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
@@ -94,7 +94,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals("acessorioBefore20Test30", seletor.obterAtributosProprios().get(1).getName());
 		assertEquals("acessorioTest40", seletor.obterAtributosProprios().get(2).getName());
 		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, seletor.obterClassesDeSuite().get(0));
-		assertFalse(seletor.possuiConfiguracoesCompartilhadas());
+		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
@@ -109,7 +109,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals(UmTestePassando.class, seletor.obterClassesDeSuite().get(0));
 		assertEquals(UmTestePassandoVazio.class, seletor.obterClassesDeSuite().get(1));
-		assertFalse(seletor.possuiConfiguracoesCompartilhadas());
+		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAcessorios().size());
 		assertEquals(0, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
-		assertFalse(seletor.possuiConfiguracoesCompartilhadas());
+		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
@@ -135,7 +135,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(1, seletor.obterAcessorios().size());
 		assertEquals(3, seletor.obterAtributosProprios().size());
 		assertEquals(3, seletor.obterAtributosAcessorios().size());
-		assertFalse(seletor.possuiConfiguracoesCompartilhadas());
+		assertFalse(seletor.classeCompartilhada());
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals("configurar", seletor.obterMetodosDeConfiguracao().get(0).getName());
 		assertEquals("acessorioBefore10", seletor.obterAtributosAcessorios().get(0).getName());
@@ -149,17 +149,19 @@ public final class TesteSeletorDeComponentesDeTeste {
 	}
 
 	@Test
-	public void compartilhada() throws Exception {
-		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(UmaConfiguracaoCompartilhada.class);
-		assertEquals(0, seletor.obterMetodosTeste().size());
+	public void classeCompartilhada() throws Exception {
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(CompartilhadaUmaConfiguracaoPassandoUmTestePassando.class);
+		assertEquals(1, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
-		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
+		assertEquals(1, seletor.obterMetodosDeConfiguracao().size());
 		assertEquals(1, seletor.obterClassesDeSuite().size());
 		assertEquals(0, seletor.obterAcessorios().size());
-		assertEquals(0, seletor.obterAtributosProprios().size());
+		assertEquals(1, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
-		assertEquals(UmaConfiguracaoCompartilhada.class, seletor.obterClassesDeSuite().get(0));
-		assertTrue(seletor.possuiConfiguracoesCompartilhadas());
+		assertTrue(seletor.classeCompartilhada());
+		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
+		assertEquals("configurar", seletor.obterMetodosDeConfiguracao().get(0).getName());
+		assertEquals("numeros", seletor.obterAtributosProprios().get(0).getName());
 	}
 
 }

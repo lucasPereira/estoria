@@ -1,11 +1,11 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public final class ClasseDeTeste {
 
 	private Class<?> classe;
+	private Boolean compartilhada;
 	private List<ClasseDeTeste> acessorios;
 	private List<MetodoDeTeste> metodosDeTeste;
 	private List<MetodoDeTeste> metodosDeTesteIgnorados;
@@ -22,12 +22,13 @@ public final class ClasseDeTeste {
 		this.atributosProprios = new LinkedList<>();
 		this.atributosAcessorios = new LinkedList<>();
 		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(classe);
+		seletor.obterAcessorios().forEach(classeDoAcessorio -> acessorios.add(new ClasseDeTeste(classeDoAcessorio)));
 		seletor.obterMetodosTeste().forEach(metodo -> metodosDeTeste.add(new MetodoDeTeste(this, metodo)));
 		seletor.obterMetodosDeTesteIgnorados().forEach(metodo -> metodosDeTesteIgnorados.add(new MetodoDeTeste(this, metodo)));
 		seletor.obterMetodosDeConfiguracao().forEach(metodo -> metodosDeConfiguracao.add(new MetodoDeConfiguracao(metodo)));
-		seletor.obterAcessorios().forEach(classeDoAcessorio -> acessorios.add(new ClasseDeTeste(classeDoAcessorio)));
 		seletor.obterAtributosProprios().forEach(atributo -> atributosProprios.add(new AtributoProprio(atributo)));
 		seletor.obterAtributosAcessorios().forEach(atributo -> atributosAcessorios.add(new AtributoAcessorio(atributo)));
+		this.compartilhada = seletor.classeCompartilhada();
 	}
 
 	public Class<?> obterClasse() {
@@ -56,6 +57,10 @@ public final class ClasseDeTeste {
 
 	public List<AtributoAcessorio> obterAtributosAcessorios() {
 		return atributosAcessorios;
+	}
+
+	public Boolean compartilhada() {
+		return compartilhada;
 	}
 
 }

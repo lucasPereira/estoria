@@ -72,7 +72,7 @@ public final class SeletorDeComponentesDeTeste {
 		return acessorios;
 	}
 
-	public Boolean possuiConfiguracoesCompartilhadas() {
+	public Boolean classeCompartilhada() {
 		return classe.getDeclaredAnnotation(Shared.class) != null;
 	}
 
