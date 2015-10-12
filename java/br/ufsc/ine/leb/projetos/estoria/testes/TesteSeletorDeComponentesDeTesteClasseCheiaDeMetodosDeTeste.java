@@ -71,4 +71,9 @@ public final class TesteSeletorDeComponentesDeTesteClasseCheiaDeMetodosDeTeste {
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 	}
 
+	@Test
+	public void configuracoesCompartilhadas() throws Exception {
+		assertFalse(seletor.possuiConfiguracoesCompartilhadas());
+	}
+
 }

@@ -35,7 +35,7 @@ public final class SeletorDeComponentesDeTeste {
 
 	private FiltradorDeAtributos construirFiltradorDeAtributosBase() {
 		if (filtradorDeAtributos == null) {
-		filtradorDeAtributos = new FiltradorDeAtributos(classe);
+			filtradorDeAtributos = new FiltradorDeAtributos(classe);
 		}
 		return filtradorDeAtributos.clonar();
 	}
@@ -70,6 +70,10 @@ public final class SeletorDeComponentesDeTeste {
 		List<FixtureSetup> anotacoesAcessorios = Arrays.asList(classe.getDeclaredAnnotationsByType(FixtureSetup.class));
 		anotacoesAcessorios.forEach(anotacaoAcessorio -> Arrays.asList(anotacaoAcessorio.value()).forEach(classeAcessorio -> acessorios.add(classeAcessorio)));
 		return acessorios;
+	}
+
+	public Boolean possuiConfiguracoesCompartilhadas() {
+		return classe.getDeclaredAnnotation(Shared.class) != null;
 	}
 
 }
