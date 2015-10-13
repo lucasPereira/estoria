@@ -3,10 +3,11 @@ package br.ufsc.ine.leb.projetos.estoria.testes;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import org.junit.*;
+import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.*;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.*;
+import br.ufsc.ine.leb.projetos.estoria.ClasseDeTeste;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseCheia;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseVazia;
 
 public final class TesteClasseDeTeste {
 

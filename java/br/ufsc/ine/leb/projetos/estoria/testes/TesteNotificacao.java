@@ -1,6 +1,8 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +13,7 @@ import org.junit.runner.notification.Failure;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.jUnit.SuiteDoJUnitDuasClassesZeroConfiguracoesDoisTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste101;
 
 public final class TesteNotificacao {
 
@@ -23,7 +25,7 @@ public final class TesteNotificacao {
 	@Before
 	public void prepararCenario() {
 		resultado = new Result();
-		descricaoDeTeste = Description.createTestDescription(UmTestePassando.class, "testar");
+		descricaoDeTeste = Description.createTestDescription(ClasseDeTeste101.class, "testar");
 		descricaoDeSuite = Description.createSuiteDescription(SuiteDoJUnitDuasClassesZeroConfiguracoesDoisTestes.class);
 		descricaoDeSuite.addChild(descricaoDeTeste);
 		falha = new Failure(descricaoDeTeste, null);

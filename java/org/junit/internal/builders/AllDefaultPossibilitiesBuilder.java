@@ -1,11 +1,12 @@
 package org.junit.internal.builders;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
-import org.junit.runner.*;
-import org.junit.runners.model.*;
+import org.junit.runner.Runner;
+import org.junit.runners.model.RunnerBuilder;
 
-import br.ufsc.ine.leb.projetos.estoria.*;
+import br.ufsc.ine.leb.projetos.estoria.ConstrutorDoEstoria;
 
 public class AllDefaultPossibilitiesBuilder extends RunnerBuilder {
 

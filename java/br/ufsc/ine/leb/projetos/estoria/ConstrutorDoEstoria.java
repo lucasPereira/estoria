@@ -1,7 +1,7 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
-import org.junit.runner.*;
-import org.junit.runners.model.*;
+import org.junit.runner.Runner;
+import org.junit.runners.model.RunnerBuilder;
 
 public class ConstrutorDoEstoria extends RunnerBuilder {
 

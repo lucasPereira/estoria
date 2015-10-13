@@ -4,11 +4,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste101;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		UmTestePassando.class
+		ClasseDeTeste101.class
 })
 public class SuiteDoJUnitUmaClasseZeroConfiguracoesUmTeste {
 

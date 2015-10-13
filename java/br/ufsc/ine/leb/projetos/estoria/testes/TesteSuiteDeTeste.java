@@ -1,32 +1,36 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseVazia;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.*;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorioIndireto.*;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesCompartilhadas.*;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.TresTestesPassandoIgnoradoFalhando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.DuasClassesZeroAcessoriosUmaConfiguracaoSeisTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.UmaClasseZeroAcessoriosZeroConfiguracoesUmTeste;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.UmaClasseZeroAcessoriosZeroConfiguracoesZeroTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.ZeroClasses;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste101;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste111;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste112;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste116;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste119;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste130;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste131;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste132;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste133;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste11;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste12;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste13;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste17;
 
 public final class TesteSuiteDeTeste {
 
 	@Test
 	public void classeZeroAcessoriosZeroConfiguracoesUmTestes() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(UmTestePassando.class);
-		assertEquals(UmTestePassando.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(ClasseDeTeste101.class);
+		assertEquals(ClasseDeTeste101.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
 
-		assertEquals(UmTestePassando.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(ClasseDeTeste101.class, suite.obterClassesDeTeste().get(0).obterClasse());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosProprios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().size());
@@ -39,15 +43,15 @@ public final class TesteSuiteDeTeste {
 
 	@Test
 	public void suiteZeroClasses() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(ZeroClasses.class);
-		assertEquals(ZeroClasses.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(SuiteDeTeste11.class);
+		assertEquals(SuiteDeTeste11.class, suite.obterSuite());
 		assertEquals(0, suite.obterClassesDeTeste().size());
 	}
 
 	@Test
 	public void suiteUmaClasseZeroAcessoriosZeroConfiguracoesZeroTestes() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(UmaClasseZeroAcessoriosZeroConfiguracoesZeroTestes.class);
-		assertEquals(UmaClasseZeroAcessoriosZeroConfiguracoesZeroTestes.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(SuiteDeTeste12.class);
+		assertEquals(SuiteDeTeste12.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
 
 		assertEquals(ClasseVazia.class, suite.obterClassesDeTeste().get(0).obterClasse());
@@ -62,11 +66,11 @@ public final class TesteSuiteDeTeste {
 
 	@Test
 	public void suiteUmaClasseZeroAcessoriosZeroConfiguracoesUmTestes() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(UmaClasseZeroAcessoriosZeroConfiguracoesUmTeste.class);
-		assertEquals(UmaClasseZeroAcessoriosZeroConfiguracoesUmTeste.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(SuiteDeTeste13.class);
+		assertEquals(SuiteDeTeste13.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
 
-		assertEquals(UmTestePassando.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(ClasseDeTeste101.class, suite.obterClassesDeTeste().get(0).obterClasse());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosProprios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().size());
@@ -79,11 +83,11 @@ public final class TesteSuiteDeTeste {
 
 	@Test
 	public void suiteUmaClasseZeroAcessoriosUmaConfiguracaoSeisTestes() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(DuasClassesZeroAcessoriosUmaConfiguracaoSeisTestes.class);
-		assertEquals(DuasClassesZeroAcessoriosUmaConfiguracaoSeisTestes.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(SuiteDeTeste17.class);
+		assertEquals(SuiteDeTeste17.class, suite.obterSuite());
 		assertEquals(2, suite.obterClassesDeTeste().size());
 
-		assertEquals(TresTestesPassandoIgnoradoFalhando.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(ClasseDeTeste111.class, suite.obterClassesDeTeste().get(0).obterClasse());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosProprios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().size());
@@ -91,11 +95,11 @@ public final class TesteSuiteDeTeste {
 		assertEquals(2, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
 		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
-		assertEquals("testarFalhando", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(0).obterNome());
-		assertEquals("testarPassando", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(1).obterNome());
-		assertEquals("testarIgnorado", suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().get(0).obterNome());
+		assertEquals("testar1", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(0).obterNome());
+		assertEquals("testar3", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(1).obterNome());
+		assertEquals("testar2", suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().get(0).obterNome());
 
-		assertEquals(UmaConfiguracaoPassandoTresTestesPassandoFalhandoIgnorado.class, suite.obterClassesDeTeste().get(1).obterClasse());
+		assertEquals(ClasseDeTeste116.class, suite.obterClassesDeTeste().get(1).obterClasse());
 		assertEquals(0, suite.obterClassesDeTeste().get(1).obterAcessorios().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(1).obterAtributosProprios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(1).obterAtributosAcessorios().size());
@@ -112,11 +116,11 @@ public final class TesteSuiteDeTeste {
 
 	@Test
 	public void classeUmAcessorioUmaConfiguracaoUmTeste() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class);
-		assertEquals(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(ClasseDeTeste119.class);
+		assertEquals(ClasseDeTeste119.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
 
-		assertEquals(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(ClasseDeTeste119.class, suite.obterClassesDeTeste().get(0).obterClasse());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
 		assertEquals(3, suite.obterClassesDeTeste().get(0).obterAtributosProprios().size());
 		assertEquals(3, suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().size());
@@ -124,7 +128,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
 		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
-		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(0).obterClasse());
+		assertEquals(ClasseDeTeste112.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(0).obterClasse());
 		assertEquals("meuAcessorioBefore10", suite.obterClassesDeTeste().get(0).obterAtributosProprios().get(0).obterNome());
 		assertEquals("meuAcessorioBefore20Test30", suite.obterClassesDeTeste().get(0).obterAtributosProprios().get(1).obterNome());
 		assertEquals("meuAcessorioTest40", suite.obterClassesDeTeste().get(0).obterAtributosProprios().get(2).obterNome());
@@ -137,11 +141,11 @@ public final class TesteSuiteDeTeste {
 
 	@Test
 	public void classeCompartilhadaUmaConfiguracaoUmTeste() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(CompartilhadaUmaConfiguracaoPassandoUmTestePassando.class);
-		assertEquals(CompartilhadaUmaConfiguracaoPassandoUmTestePassando.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(ClasseDeTeste130.class);
+		assertEquals(ClasseDeTeste130.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
 
-		assertEquals(CompartilhadaUmaConfiguracaoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(ClasseDeTeste130.class, suite.obterClassesDeTeste().get(0).obterClasse());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterAtributosProprios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().size());
@@ -156,11 +160,11 @@ public final class TesteSuiteDeTeste {
 
 	@Test
 	public void classeUmAcessorioCompartilhadoUmaConfiguracaoUmTeste() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(UmAcessorioCompartilhadoPassandoUmaConfiguracaoPassandoUmTestePassando.class);
-		assertEquals(UmAcessorioCompartilhadoPassandoUmaConfiguracaoPassandoUmTestePassando.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(ClasseDeTeste131.class);
+		assertEquals(ClasseDeTeste131.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
 
-		assertEquals(UmAcessorioCompartilhadoPassandoUmaConfiguracaoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(ClasseDeTeste131.class, suite.obterClassesDeTeste().get(0).obterClasse());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosProprios().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().size());
@@ -168,7 +172,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
 		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
-		assertEquals(CompartilhadaUmaConfiguracaoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(0).obterClasse());
+		assertEquals(ClasseDeTeste130.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(0).obterClasse());
 		assertEquals("numeros", suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().get(0).obterNome());
 		assertEquals("configurar", suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().get(0).obterNome());
 		assertEquals("testar", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(0).obterNome());
@@ -176,11 +180,11 @@ public final class TesteSuiteDeTeste {
 
 	@Test
 	public void classeDoisAcessoriosUmAcessorioIndiretoCompartilhadoUmTeste() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(DoisAcessoriosPassandoFalhandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando.class);
-		assertEquals(DoisAcessoriosPassandoFalhandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(ClasseDeTeste133.class);
+		assertEquals(ClasseDeTeste133.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
 
-		assertEquals(DoisAcessoriosPassandoFalhandoUmAcessorioIndiretoCompartilhadoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(ClasseDeTeste133.class, suite.obterClassesDeTeste().get(0).obterClasse());
 		assertEquals(2, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosProprios().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().size());
@@ -188,8 +192,8 @@ public final class TesteSuiteDeTeste {
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
 		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
-		assertEquals(UmAcessorioCompartilhadoPassandoUmaConfiguracaoPassandoUmTestePassando.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(0).obterClasse());
-		assertEquals(UmAcessorioCompartilhadoPassandoUmaConfiguracaoPassandoUmTesteFalhando.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(1).obterClasse());
+		assertEquals(ClasseDeTeste131.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(0).obterClasse());
+		assertEquals(ClasseDeTeste132.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(1).obterClasse());
 		assertEquals("numeros", suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().get(0).obterNome());
 		assertEquals("testar", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(0).obterNome());
 	}

@@ -1,20 +1,22 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseVazia;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComConfiguracao.UmaConfiguracaoPassandoUmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesCompartilhadas.*;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.DoisTestesPassandoPassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmTesteIgnorado;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.UmTestePassandoVazio;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.DuasClassesZeroAcessoriosZeroConfiguracoesDoisTestes;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.suites.ZeroClasses;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste101;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste103;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste104;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste110;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste112;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste119;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste130;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste11;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste15;
 
 public final class TesteSeletorDeComponentesDeTeste {
 
@@ -34,7 +36,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 
 	@Test
 	public void UmTeste() throws Exception {
-		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(UmTestePassando.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ClasseDeTeste101.class);
 		assertEquals(1, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -43,13 +45,13 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
-		assertEquals(UmTestePassando.class, seletor.obterClassesDeSuite().get(0));
+		assertEquals(ClasseDeTeste101.class, seletor.obterClassesDeSuite().get(0));
 		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
 	public void UmTesteIgnorado() throws Exception {
-		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(UmTesteIgnorado.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ClasseDeTeste103.class);
 		assertEquals(0, seletor.obterMetodosTeste().size());
 		assertEquals(1, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -58,13 +60,13 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals("testar", seletor.obterMetodosDeTesteIgnorados().get(0).getName());
-		assertEquals(UmTesteIgnorado.class, seletor.obterClassesDeSuite().get(0));
+		assertEquals(ClasseDeTeste103.class, seletor.obterClassesDeSuite().get(0));
 		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
 	public void doisTestes() throws Exception {
-		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(DoisTestesPassandoPassando.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ClasseDeTeste110.class);
 		assertEquals(2, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -74,13 +76,13 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals("testar1", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals("testar2", seletor.obterMetodosTeste().get(1).getName());
-		assertEquals(DoisTestesPassandoPassando.class, seletor.obterClassesDeSuite().get(0));
+		assertEquals(ClasseDeTeste110.class, seletor.obterClassesDeSuite().get(0));
 		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
 	public void umaConfiguracaoUmTeste() throws Exception {
-		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(UmaConfiguracaoPassandoUmTestePassando.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ClasseDeTeste112.class);
 		assertEquals(1, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(1, seletor.obterMetodosDeConfiguracao().size());
@@ -93,13 +95,13 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals("acessorioBefore10", seletor.obterAtributosProprios().get(0).getName());
 		assertEquals("acessorioBefore20Test30", seletor.obterAtributosProprios().get(1).getName());
 		assertEquals("acessorioTest40", seletor.obterAtributosProprios().get(2).getName());
-		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, seletor.obterClassesDeSuite().get(0));
+		assertEquals(ClasseDeTeste112.class, seletor.obterClassesDeSuite().get(0));
 		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
 	public void umaClasseDeSuiteTeste() throws Exception {
-		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(DuasClassesZeroAcessoriosZeroConfiguracoesDoisTestes.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(SuiteDeTeste15.class);
 		assertEquals(0, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -107,14 +109,14 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAcessorios().size());
 		assertEquals(0, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
-		assertEquals(UmTestePassando.class, seletor.obterClassesDeSuite().get(0));
-		assertEquals(UmTestePassandoVazio.class, seletor.obterClassesDeSuite().get(1));
+		assertEquals(ClasseDeTeste101.class, seletor.obterClassesDeSuite().get(0));
+		assertEquals(ClasseDeTeste104.class, seletor.obterClassesDeSuite().get(1));
 		assertFalse(seletor.classeCompartilhada());
 	}
 
 	@Test
 	public void zeroClassesDeSuiteTeste() throws Exception {
-		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ZeroClasses.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(SuiteDeTeste11.class);
 		assertEquals(0, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
@@ -127,7 +129,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 
 	@Test
 	public void umAcessorio() throws Exception {
-		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ClasseDeTeste119.class);
 		assertEquals(1, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(1, seletor.obterMetodosDeConfiguracao().size());
@@ -144,13 +146,13 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals("meuAcessorioBefore10", seletor.obterAtributosProprios().get(0).getName());
 		assertEquals("meuAcessorioBefore20Test30", seletor.obterAtributosProprios().get(1).getName());
 		assertEquals("meuAcessorioTest40", seletor.obterAtributosProprios().get(2).getName());
-		assertEquals(UmaConfiguracaoPassandoUmTestePassando.class, seletor.obterAcessorios().get(0));
-		assertEquals(UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class, seletor.obterClassesDeSuite().get(0));
+		assertEquals(ClasseDeTeste112.class, seletor.obterAcessorios().get(0));
+		assertEquals(ClasseDeTeste119.class, seletor.obterClassesDeSuite().get(0));
 	}
 
 	@Test
 	public void classeCompartilhada() throws Exception {
-		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(CompartilhadaUmaConfiguracaoPassandoUmTestePassando.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ClasseDeTeste130.class);
 		assertEquals(1, seletor.obterMetodosTeste().size());
 		assertEquals(0, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(1, seletor.obterMetodosDeConfiguracao().size());

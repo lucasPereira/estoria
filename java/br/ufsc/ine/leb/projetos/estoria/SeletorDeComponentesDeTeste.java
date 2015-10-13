@@ -1,9 +1,14 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runners.Suite.SuiteClasses;
 
 public final class SeletorDeComponentesDeTeste {

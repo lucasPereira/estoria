@@ -3,12 +3,13 @@ package br.ufsc.ine.leb.projetos.estoria.testes;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Annotation;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.*;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.*;
+import br.ufsc.ine.leb.projetos.estoria.Shared;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste130;
 
 public final class TesteAnotacaoShared {
 
@@ -16,7 +17,7 @@ public final class TesteAnotacaoShared {
 
 	@Before
 	public void configurar() {
-		classe = ClasseCompartilhada.class;
+		classe = ClasseDeTeste130.class;
 	}
 
 	@Test
@@ -31,7 +32,7 @@ public final class TesteAnotacaoShared {
 	}
 
 	@Test
-	public void anotacoesShared() throws Exception {
+	public void anotacaoShared() throws Exception {
 		Shared anotacaoShared = classe.getAnnotation(Shared.class);
 		Shared[] anotacoesShared = classe.getAnnotationsByType(Shared.class);
 		Annotation[] anotacoes = classe.getAnnotations();

@@ -1,6 +1,7 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.runner.Description;
 import org.junit.runner.Result;

@@ -1,6 +1,7 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public final class ClasseDeTeste {
 

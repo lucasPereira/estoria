@@ -4,17 +4,17 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 
 import br.ufsc.ine.leb.projetos.estoria.Estoria;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComAcessorio.UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.classesComTeste.UmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.DoisAcessoriosPassandoPassandoUmaConfiguracaoPassandoUmTestePassando;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.diversos.DuasConfiguracoesPassandoPassandoUmTestePassando;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste101;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste117;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste119;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste127;
 
 @RunWith(Estoria.class)
 @SuiteClasses({
-		UmTestePassando.class,
-		DuasConfiguracoesPassandoPassandoUmTestePassando.class,
-		UmAcessorioPassandoUmaConfiguracaoPassandoUmTestePassando.class,
-		DoisAcessoriosPassandoPassandoUmaConfiguracaoPassandoUmTestePassando.class
+		ClasseDeTeste101.class,
+		ClasseDeTeste117.class,
+		ClasseDeTeste119.class,
+		ClasseDeTeste127.class
 })
 public class SuiteDoEstoriaQuatroClassesTresAcessoriosQuatroConfiguracoesQuatroTestes {
 

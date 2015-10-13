@@ -3,13 +3,15 @@ package br.ufsc.ine.leb.projetos.estoria.testes;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.lang.annotation.*;
-import java.lang.reflect.*;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
-import org.junit.*;
+import org.junit.Ignore;
+import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.*;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.*;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.Anotacao;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.anotacoes.Anotacoes;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseCheia;
 
 public final class TesteAnotacao {
 
