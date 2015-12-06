@@ -14,11 +14,11 @@ public class EscoltadorDeTestes extends Runner {
 	private SuiteDeTeste suiteDeTeste;
 	private Description descricaoDaSuite;
 	private RunNotifier mensageiroDeEscolta;
-	private Map<ClasseDeTeste, InvocadorDeMetodo<?>> classesCompartilhadasExecutadas;
+	private Map<ClasseDeTeste, InvocadorDeMetodo<?>> classesSingularesExecutadas;
 
 	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste) {
 		this.suiteDeTeste = suiteDeTeste;
-		this.classesCompartilhadasExecutadas = new HashMap<>();
+		this.classesSingularesExecutadas = new HashMap<>();
 		this.descricaoDaSuite = Description.createSuiteDescription(suiteDeTeste.obterSuite());
 		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste -> classeDeTeste.obterMetodosDeTesteIgnorados().forEach(metodoDeTeste -> descricaoDaSuite.addChild(metodoDeTeste.obterDescricao())));
 		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste -> classeDeTeste.obterMetodosDeTeste().forEach(metodoDeTeste -> descricaoDaSuite.addChild(metodoDeTeste.obterDescricao())));
@@ -75,17 +75,17 @@ public class EscoltadorDeTestes extends Runner {
 
 	private void executarConfiguracaoDaClasseDeTeste(ClasseDeTeste classeDeTeste, TratadorDeInvocacao tratadorDeConfiguracao, InvocadorDeMetodo<?> invocadorParaClasseDeTeste) {
 		for (ClasseDeTeste classeAcessorio : classeDeTeste.obterAcessorios()) {
-			InvocadorDeMetodo<?> invocadorParaAcessorio = classesCompartilhadasExecutadas.containsKey(classeAcessorio) ? classesCompartilhadasExecutadas.get(classeAcessorio) : new InvocadorDeMetodo<>(classeAcessorio.obterClasse());
+			InvocadorDeMetodo<?> invocadorParaAcessorio = classesSingularesExecutadas.containsKey(classeAcessorio) ? classesSingularesExecutadas.get(classeAcessorio) : new InvocadorDeMetodo<>(classeAcessorio.obterClasse());
 			executarConfiguracaoDaClasseDeTeste(classeAcessorio, tratadorDeConfiguracao, invocadorParaAcessorio);
 			enxertarAcessorios(classeDeTeste, classeAcessorio, invocadorParaClasseDeTeste, invocadorParaAcessorio);
 		}
-		if (!classesCompartilhadasExecutadas.containsKey(classeDeTeste)) {
+		if (!classesSingularesExecutadas.containsKey(classeDeTeste)) {
 			for (MetodoDeConfiguracao metodoDeConfiguracao : classeDeTeste.obterMetodosDeConfiguracao()) {
 				invocadorParaClasseDeTeste.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao);
 				System.out.println(String.format("Configuração %s.%s", classeDeTeste, metodoDeConfiguracao));
 			}
-			if (classeDeTeste.compartilhada()) {
-				classesCompartilhadasExecutadas.put(classeDeTeste, invocadorParaClasseDeTeste);
+			if (classeDeTeste.singular()) {
+				classesSingularesExecutadas.put(classeDeTeste, invocadorParaClasseDeTeste);
 			}
 		}
 	}

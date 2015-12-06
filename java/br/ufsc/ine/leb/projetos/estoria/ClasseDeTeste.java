@@ -6,7 +6,7 @@ import java.util.List;
 public final class ClasseDeTeste {
 
 	private Class<?> classe;
-	private Boolean compartilhada;
+	private Boolean singular;
 	private List<ClasseDeTeste> acessorios;
 	private List<MetodoDeTeste> metodosDeTeste;
 	private List<MetodoDeTeste> metodosDeTesteIgnorados;
@@ -29,7 +29,7 @@ public final class ClasseDeTeste {
 		seletor.obterMetodosDeConfiguracao().forEach(metodo -> metodosDeConfiguracao.add(new MetodoDeConfiguracao(metodo)));
 		seletor.obterAtributosProprios().forEach(atributo -> atributosProprios.add(new AtributoProprio(atributo)));
 		seletor.obterAtributosAcessorios().forEach(atributo -> atributosAcessorios.add(new AtributoAcessorio(atributo)));
-		this.compartilhada = seletor.classeCompartilhada();
+		this.singular = seletor.classeSingular();
 	}
 
 	public Class<?> obterClasse() {
@@ -60,8 +60,8 @@ public final class ClasseDeTeste {
 		return atributosAcessorios;
 	}
 
-	public Boolean compartilhada() {
-		return compartilhada;
+	public Boolean singular() {
+		return singular;
 	}
 
 	@Override

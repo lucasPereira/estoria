@@ -37,7 +37,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
-		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
+		assertFalse(suite.obterClassesDeTeste().get(0).singular());
 		assertEquals("testar", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(0).obterNome());
 	}
 
@@ -61,7 +61,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
-		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
+		assertFalse(suite.obterClassesDeTeste().get(0).singular());
 	}
 
 	@Test
@@ -77,7 +77,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
-		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
+		assertFalse(suite.obterClassesDeTeste().get(0).singular());
 		assertEquals("testar", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(0).obterNome());
 	}
 
@@ -94,7 +94,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().size());
 		assertEquals(2, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
-		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
+		assertFalse(suite.obterClassesDeTeste().get(0).singular());
 		assertEquals("testar1", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(0).obterNome());
 		assertEquals("testar3", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(1).obterNome());
 		assertEquals("testar2", suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().get(0).obterNome());
@@ -106,7 +106,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(1, suite.obterClassesDeTeste().get(1).obterMetodosDeConfiguracao().size());
 		assertEquals(2, suite.obterClassesDeTeste().get(1).obterMetodosDeTeste().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(1).obterMetodosDeTesteIgnorados().size());
-		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
+		assertFalse(suite.obterClassesDeTeste().get(0).singular());
 		assertEquals("numero", suite.obterClassesDeTeste().get(1).obterAtributosProprios().get(0).obterNome());
 		assertEquals("configurar", suite.obterClassesDeTeste().get(1).obterMetodosDeConfiguracao().get(0).obterNome());
 		assertEquals("testar1", suite.obterClassesDeTeste().get(1).obterMetodosDeTeste().get(0).obterNome());
@@ -127,7 +127,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
-		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
+		assertFalse(suite.obterClassesDeTeste().get(0).singular());
 		assertEquals(ClasseDeTeste112.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(0).obterClasse());
 		assertEquals("meuAcessorioBefore10", suite.obterClassesDeTeste().get(0).obterAtributosProprios().get(0).obterNome());
 		assertEquals("meuAcessorioBefore20Test30", suite.obterClassesDeTeste().get(0).obterAtributosProprios().get(1).obterNome());
@@ -140,7 +140,7 @@ public final class TesteSuiteDeTeste {
 	}
 
 	@Test
-	public void classeCompartilhadaUmaConfiguracaoUmTeste() throws Exception {
+	public void classeSingularUmaConfiguracaoUmTeste() throws Exception {
 		SuiteDeTeste suite = new SuiteDeTeste(ClasseDeTeste130.class);
 		assertEquals(ClasseDeTeste130.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
@@ -152,7 +152,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
-		assertTrue(suite.obterClassesDeTeste().get(0).compartilhada());
+		assertTrue(suite.obterClassesDeTeste().get(0).singular());
 		assertEquals("numeros", suite.obterClassesDeTeste().get(0).obterAtributosProprios().get(0).obterNome());
 		assertEquals("configurar", suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().get(0).obterNome());
 		assertEquals("testar", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(0).obterNome());
@@ -171,7 +171,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
-		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
+		assertFalse(suite.obterClassesDeTeste().get(0).singular());
 		assertEquals(ClasseDeTeste130.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(0).obterClasse());
 		assertEquals("numeros", suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().get(0).obterNome());
 		assertEquals("configurar", suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().get(0).obterNome());
@@ -191,7 +191,7 @@ public final class TesteSuiteDeTeste {
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeConfiguracao().size());
 		assertEquals(1, suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterMetodosDeTesteIgnorados().size());
-		assertFalse(suite.obterClassesDeTeste().get(0).compartilhada());
+		assertFalse(suite.obterClassesDeTeste().get(0).singular());
 		assertEquals(ClasseDeTeste131.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(0).obterClasse());
 		assertEquals(ClasseDeTeste132.class, suite.obterClassesDeTeste().get(0).obterAcessorios().get(1).obterClasse());
 		assertEquals("numeros", suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().get(0).obterNome());

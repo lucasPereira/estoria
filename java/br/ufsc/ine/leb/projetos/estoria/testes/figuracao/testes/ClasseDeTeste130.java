@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ufsc.ine.leb.projetos.estoria.Shared;
+import br.ufsc.ine.leb.projetos.estoria.Singular;
 
-@Shared
+@Singular
 public class ClasseDeTeste130 {
 
 	private List<Integer> numeros;

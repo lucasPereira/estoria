@@ -31,7 +31,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals(ClasseVazia.class, seletor.obterClassesDeSuite().get(0));
-		assertFalse(seletor.classeCompartilhada());
+		assertFalse(seletor.classeSingular());
 	}
 
 	@Test
@@ -46,7 +46,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals(ClasseDeTeste101.class, seletor.obterClassesDeSuite().get(0));
-		assertFalse(seletor.classeCompartilhada());
+		assertFalse(seletor.classeSingular());
 	}
 
 	@Test
@@ -61,7 +61,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals("testar", seletor.obterMetodosDeTesteIgnorados().get(0).getName());
 		assertEquals(ClasseDeTeste103.class, seletor.obterClassesDeSuite().get(0));
-		assertFalse(seletor.classeCompartilhada());
+		assertFalse(seletor.classeSingular());
 	}
 
 	@Test
@@ -77,7 +77,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals("testar1", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals("testar2", seletor.obterMetodosTeste().get(1).getName());
 		assertEquals(ClasseDeTeste110.class, seletor.obterClassesDeSuite().get(0));
-		assertFalse(seletor.classeCompartilhada());
+		assertFalse(seletor.classeSingular());
 	}
 
 	@Test
@@ -96,7 +96,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals("acessorioBefore20Test30", seletor.obterAtributosProprios().get(1).getName());
 		assertEquals("acessorioTest40", seletor.obterAtributosProprios().get(2).getName());
 		assertEquals(ClasseDeTeste112.class, seletor.obterClassesDeSuite().get(0));
-		assertFalse(seletor.classeCompartilhada());
+		assertFalse(seletor.classeSingular());
 	}
 
 	@Test
@@ -111,7 +111,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals(ClasseDeTeste101.class, seletor.obterClassesDeSuite().get(0));
 		assertEquals(ClasseDeTeste104.class, seletor.obterClassesDeSuite().get(1));
-		assertFalse(seletor.classeCompartilhada());
+		assertFalse(seletor.classeSingular());
 	}
 
 	@Test
@@ -124,7 +124,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAcessorios().size());
 		assertEquals(0, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
-		assertFalse(seletor.classeCompartilhada());
+		assertFalse(seletor.classeSingular());
 	}
 
 	@Test
@@ -137,7 +137,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(1, seletor.obterAcessorios().size());
 		assertEquals(3, seletor.obterAtributosProprios().size());
 		assertEquals(3, seletor.obterAtributosAcessorios().size());
-		assertFalse(seletor.classeCompartilhada());
+		assertFalse(seletor.classeSingular());
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals("configurar", seletor.obterMetodosDeConfiguracao().get(0).getName());
 		assertEquals("acessorioBefore10", seletor.obterAtributosAcessorios().get(0).getName());
@@ -160,7 +160,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAcessorios().size());
 		assertEquals(1, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
-		assertTrue(seletor.classeCompartilhada());
+		assertTrue(seletor.classeSingular());
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals("configurar", seletor.obterMetodosDeConfiguracao().get(0).getName());
 		assertEquals("numeros", seletor.obterAtributosProprios().get(0).getName());

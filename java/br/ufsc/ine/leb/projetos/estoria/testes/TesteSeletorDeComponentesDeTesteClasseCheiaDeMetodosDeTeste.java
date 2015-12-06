@@ -74,7 +74,7 @@ public final class TesteSeletorDeComponentesDeTesteClasseCheiaDeMetodosDeTeste {
 
 	@Test
 	public void classeCompartilhada() throws Exception {
-		assertFalse(seletor.classeCompartilhada());
+		assertFalse(seletor.classeSingular());
 	}
 
 }
