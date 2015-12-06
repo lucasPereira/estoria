@@ -14,11 +14,9 @@ public class EscoltadorDeTestes extends Runner {
 	private SuiteDeTeste suiteDeTeste;
 	private Description descricaoDaSuite;
 	private RunNotifier mensageiroDeEscolta;
-	private Map<ClasseDeTeste, InvocadorDeMetodo<?>> classesSingularesExecutadas;
 
 	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste) {
 		this.suiteDeTeste = suiteDeTeste;
-		this.classesSingularesExecutadas = new HashMap<>();
 		this.descricaoDaSuite = Description.createSuiteDescription(suiteDeTeste.obterSuite());
 		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste -> classeDeTeste.obterMetodosDeTesteIgnorados().forEach(metodoDeTeste -> descricaoDaSuite.addChild(metodoDeTeste.obterDescricao())));
 		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste -> classeDeTeste.obterMetodosDeTeste().forEach(metodoDeTeste -> descricaoDaSuite.addChild(metodoDeTeste.obterDescricao())));
@@ -63,23 +61,24 @@ public class EscoltadorDeTestes extends Runner {
 	}
 
 	private void executarMetodoDeTeste(ClasseDeTeste classeDeTeste, MetodoDeTeste metodoDeTeste) {
+		Map<ClasseDeTeste, InvocadorDeMetodo<?>> classesSingularesExecutadas = new HashMap<>();
 		TratadorDeInvocacao tratadorDeTeste = new TratadorDeInvocacaoDeTeste(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
 		TratadorDeInvocacao tratadorDeConfiguracao = new TratadorDeInvocacaoDeConfiguracao(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
 		InvocadorDeMetodo<?> invocadorParaClasseDeTeste = new InvocadorDeMetodo<>(classeDeTeste.obterClasse());
 		mensageiroDeEscolta.fireTestStarted(metodoDeTeste.obterDescricao());
-		executarConfiguracaoDaClasseDeTeste(classeDeTeste, tratadorDeConfiguracao, invocadorParaClasseDeTeste);
+		executarConfiguracaoDaClasseDeTeste(classeDeTeste, tratadorDeConfiguracao, invocadorParaClasseDeTeste, classesSingularesExecutadas);
 		invocadorParaClasseDeTeste.executar(metodoDeTeste.obterMetodo(), tratadorDeTeste);
 		System.out.println(String.format("Teste %s.%s", classeDeTeste, metodoDeTeste));
 		mensageiroDeEscolta.fireTestFinished(metodoDeTeste.obterDescricao());
 	}
 
-	private void executarConfiguracaoDaClasseDeTeste(ClasseDeTeste classeDeTeste, TratadorDeInvocacao tratadorDeConfiguracao, InvocadorDeMetodo<?> invocadorParaClasseDeTeste) {
-		for (ClasseDeTeste classeAcessorio : classeDeTeste.obterAcessorios()) {
-			InvocadorDeMetodo<?> invocadorParaAcessorio = classesSingularesExecutadas.containsKey(classeAcessorio) ? classesSingularesExecutadas.get(classeAcessorio) : new InvocadorDeMetodo<>(classeAcessorio.obterClasse());
-			executarConfiguracaoDaClasseDeTeste(classeAcessorio, tratadorDeConfiguracao, invocadorParaAcessorio);
-			enxertarAcessorios(classeDeTeste, classeAcessorio, invocadorParaClasseDeTeste, invocadorParaAcessorio);
-		}
+	private void executarConfiguracaoDaClasseDeTeste(ClasseDeTeste classeDeTeste, TratadorDeInvocacao tratadorDeConfiguracao, InvocadorDeMetodo<?> invocadorParaClasseDeTeste, Map<ClasseDeTeste, InvocadorDeMetodo<?>> classesSingularesExecutadas) {
 		if (!classesSingularesExecutadas.containsKey(classeDeTeste)) {
+			for (ClasseDeTeste classeAcessorio : classeDeTeste.obterAcessorios()) {
+				InvocadorDeMetodo<?> invocadorParaAcessorio = classesSingularesExecutadas.containsKey(classeAcessorio) ? classesSingularesExecutadas.get(classeAcessorio) : new InvocadorDeMetodo<>(classeAcessorio.obterClasse());
+				executarConfiguracaoDaClasseDeTeste(classeAcessorio, tratadorDeConfiguracao, invocadorParaAcessorio, classesSingularesExecutadas);
+				enxertarAcessorios(classeDeTeste, classeAcessorio, invocadorParaClasseDeTeste, invocadorParaAcessorio);
+			}
 			for (MetodoDeConfiguracao metodoDeConfiguracao : classeDeTeste.obterMetodosDeConfiguracao()) {
 				invocadorParaClasseDeTeste.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao);
 				System.out.println(String.format("Configuração %s.%s", classeDeTeste, metodoDeConfiguracao));
