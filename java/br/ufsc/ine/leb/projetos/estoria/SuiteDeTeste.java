@@ -6,6 +6,7 @@ import java.util.List;
 public final class SuiteDeTeste {
 
 	private Class<?> suite;
+	private Boolean ignorada;
 	private List<ClasseDeTeste> classesDeTeste;
 
 	public SuiteDeTeste(Class<?> suite) {
@@ -13,6 +14,7 @@ public final class SuiteDeTeste {
 		this.suite = suite;
 		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(suite);
 		seletor.obterClassesDeSuite().forEach(classe -> adicionarClasse(classe));
+		this.ignorada = seletor.classeIgnorada();
 	}
 
 	private void adicionarClasse(Class<?> suite) {
@@ -25,6 +27,10 @@ public final class SuiteDeTeste {
 
 	public List<ClasseDeTeste> obterClassesDeTeste() {
 		return classesDeTeste;
+	}
+
+	public Boolean ignorada() {
+		return ignorada;
 	}
 
 }

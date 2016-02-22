@@ -81,4 +81,8 @@ public final class SeletorDeComponentesDeTeste {
 		return classe.getDeclaredAnnotation(Singular.class) != null;
 	}
 
+	public Boolean classeIgnorada() {
+		return classe.getDeclaredAnnotation(Ignore.class) != null;
+	}
+
 }

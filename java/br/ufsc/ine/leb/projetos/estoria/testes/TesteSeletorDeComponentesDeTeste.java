@@ -15,6 +15,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste110
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste112;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste119;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste130;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste135;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste11;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste15;
 
@@ -32,6 +33,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals(ClasseVazia.class, seletor.obterClassesDeSuite().get(0));
 		assertFalse(seletor.classeSingular());
+		assertFalse(seletor.classeIgnorada());
 	}
 
 	@Test
@@ -47,6 +49,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals(ClasseDeTeste101.class, seletor.obterClassesDeSuite().get(0));
 		assertFalse(seletor.classeSingular());
+		assertFalse(seletor.classeIgnorada());
 	}
 
 	@Test
@@ -62,6 +65,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals("testar", seletor.obterMetodosDeTesteIgnorados().get(0).getName());
 		assertEquals(ClasseDeTeste103.class, seletor.obterClassesDeSuite().get(0));
 		assertFalse(seletor.classeSingular());
+		assertFalse(seletor.classeIgnorada());
 	}
 
 	@Test
@@ -78,6 +82,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals("testar2", seletor.obterMetodosTeste().get(1).getName());
 		assertEquals(ClasseDeTeste110.class, seletor.obterClassesDeSuite().get(0));
 		assertFalse(seletor.classeSingular());
+		assertFalse(seletor.classeIgnorada());
 	}
 
 	@Test
@@ -97,6 +102,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals("acessorioTest40", seletor.obterAtributosProprios().get(2).getName());
 		assertEquals(ClasseDeTeste112.class, seletor.obterClassesDeSuite().get(0));
 		assertFalse(seletor.classeSingular());
+		assertFalse(seletor.classeIgnorada());
 	}
 
 	@Test
@@ -112,6 +118,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(ClasseDeTeste101.class, seletor.obterClassesDeSuite().get(0));
 		assertEquals(ClasseDeTeste104.class, seletor.obterClassesDeSuite().get(1));
 		assertFalse(seletor.classeSingular());
+		assertFalse(seletor.classeIgnorada());
 	}
 
 	@Test
@@ -125,6 +132,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertFalse(seletor.classeSingular());
+		assertFalse(seletor.classeIgnorada());
 	}
 
 	@Test
@@ -138,6 +146,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(3, seletor.obterAtributosProprios().size());
 		assertEquals(3, seletor.obterAtributosAcessorios().size());
 		assertFalse(seletor.classeSingular());
+		assertFalse(seletor.classeIgnorada());
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals("configurar", seletor.obterMetodosDeConfiguracao().get(0).getName());
 		assertEquals("acessorioBefore10", seletor.obterAtributosAcessorios().get(0).getName());
@@ -161,9 +170,26 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(1, seletor.obterAtributosProprios().size());
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertTrue(seletor.classeSingular());
+		assertFalse(seletor.classeIgnorada());
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals("configurar", seletor.obterMetodosDeConfiguracao().get(0).getName());
 		assertEquals("numeros", seletor.obterAtributosProprios().get(0).getName());
+	}
+
+	@Test
+	public void classeIgnorada() throws Exception {
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ClasseDeTeste135.class);
+		assertEquals(1, seletor.obterMetodosTeste().size());
+		assertEquals(1, seletor.obterMetodosDeTesteIgnorados().size());
+		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());
+		assertEquals(1, seletor.obterClassesDeSuite().size());
+		assertEquals(0, seletor.obterAcessorios().size());
+		assertEquals(0, seletor.obterAtributosProprios().size());
+		assertEquals(0, seletor.obterAtributosAcessorios().size());
+		assertFalse(seletor.classeSingular());
+		assertTrue(seletor.classeIgnorada());
+		assertEquals("testar1", seletor.obterMetodosTeste().get(0).getName());
+		assertEquals("testar2", seletor.obterMetodosDeTesteIgnorados().get(0).getName());
 	}
 
 }

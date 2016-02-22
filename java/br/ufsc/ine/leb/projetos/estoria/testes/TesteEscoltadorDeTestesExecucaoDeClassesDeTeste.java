@@ -52,6 +52,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste131
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste132;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste133;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste134;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste135;
 
 public final class TesteEscoltadorDeTestesExecucaoDeClassesDeTeste {
 
@@ -443,6 +444,16 @@ public final class TesteEscoltadorDeTestesExecucaoDeClassesDeTeste {
 		assertThat(notificacoes.next(), combinaComTesteIniciado(classeDeTeste, "testar2"));
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(classeDeTeste, "testar2"));
 		assertThat(notificacoes.next(), combinaComTestesFinalizados(2, 0, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void classeDeTeste135() throws Exception {
+		configurar(ClasseDeTeste135.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(classeDeTeste));
+		assertThat(notificacoes.next(), combinaComTesteIgnorado(classeDeTeste, "testar2"));
+		assertThat(notificacoes.next(), combinaComTesteIgnorado(classeDeTeste, "testar1"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(0, 0, 2));
 		assertFalse(notificacoes.hasNext());
 	}
 

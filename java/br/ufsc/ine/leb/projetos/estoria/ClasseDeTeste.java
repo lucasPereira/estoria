@@ -7,6 +7,7 @@ public final class ClasseDeTeste {
 
 	private Class<?> classe;
 	private Boolean singular;
+	private Boolean ignorada;
 	private List<ClasseDeTeste> acessorios;
 	private List<MetodoDeTeste> metodosDeTeste;
 	private List<MetodoDeTeste> metodosDeTesteIgnorados;
@@ -30,6 +31,7 @@ public final class ClasseDeTeste {
 		seletor.obterAtributosProprios().forEach(atributo -> atributosProprios.add(new AtributoProprio(atributo)));
 		seletor.obterAtributosAcessorios().forEach(atributo -> atributosAcessorios.add(new AtributoAcessorio(atributo)));
 		this.singular = seletor.classeSingular();
+		this.ignorada = seletor.classeIgnorada();
 	}
 
 	public Class<?> obterClasse() {
@@ -64,6 +66,10 @@ public final class ClasseDeTeste {
 		return singular;
 	}
 
+	public Boolean ignorada() {
+		return ignorada;
+	}
+
 	@Override
 	public boolean equals(Object objeto) {
 		if (objeto instanceof ClasseDeTeste) {
@@ -82,5 +88,5 @@ public final class ClasseDeTeste {
 	public String toString() {
 		return classe.getSimpleName();
 	}
-	
+
 }
