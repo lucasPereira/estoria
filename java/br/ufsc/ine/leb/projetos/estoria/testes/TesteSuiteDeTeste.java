@@ -1,8 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -17,7 +15,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste130
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste131;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste132;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste133;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste135;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste136;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste11;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste12;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste13;
@@ -144,7 +142,7 @@ public final class TesteSuiteDeTeste {
 		assertFalse(suite.obterClassesDeTeste().get(0).ignorada());
 		assertEquals("testar", suite.obterClassesDeTeste().get(0).obterMetodosDeTeste().get(0).obterNome());
 
-		assertEquals(ClasseDeTeste135.class, suite.obterClassesDeTeste().get(1).obterClasse());
+		assertEquals(ClasseDeTeste136.class, suite.obterClassesDeTeste().get(1).obterClasse());
 		assertEquals(0, suite.obterClassesDeTeste().get(1).obterAcessorios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(1).obterAtributosProprios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(1).obterAtributosAcessorios().size());
@@ -251,12 +249,12 @@ public final class TesteSuiteDeTeste {
 
 	@Test
 	public void classeIgnoradaUmTesteUmTesteIgnorado() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(ClasseDeTeste135.class);
-		assertEquals(ClasseDeTeste135.class, suite.obterSuite());
+		SuiteDeTeste suite = new SuiteDeTeste(ClasseDeTeste136.class);
+		assertEquals(ClasseDeTeste136.class, suite.obterSuite());
 		assertEquals(1, suite.obterClassesDeTeste().size());
 		assertTrue(suite.ignorada());
 
-		assertEquals(ClasseDeTeste135.class, suite.obterClassesDeTeste().get(0).obterClasse());
+		assertEquals(ClasseDeTeste136.class, suite.obterClassesDeTeste().get(0).obterClasse());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAcessorios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosProprios().size());
 		assertEquals(0, suite.obterClassesDeTeste().get(0).obterAtributosAcessorios().size());

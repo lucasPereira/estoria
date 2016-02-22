@@ -1,8 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -15,7 +13,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste110
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste112;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste119;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste130;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste135;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste136;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste11;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste15;
 
@@ -178,7 +176,7 @@ public final class TesteSeletorDeComponentesDeTeste {
 
 	@Test
 	public void classeIgnorada() throws Exception {
-		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ClasseDeTeste135.class);
+		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(ClasseDeTeste136.class);
 		assertEquals(1, seletor.obterMetodosTeste().size());
 		assertEquals(1, seletor.obterMetodosDeTesteIgnorados().size());
 		assertEquals(0, seletor.obterMetodosDeConfiguracao().size());

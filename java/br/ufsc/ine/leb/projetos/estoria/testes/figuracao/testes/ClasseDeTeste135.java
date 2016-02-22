@@ -1,16 +1,20 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes;
 
-import org.junit.Ignore;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-@Ignore
+import br.ufsc.ine.leb.projetos.estoria.Fixture;
+import br.ufsc.ine.leb.projetos.estoria.FixtureSetup;
+
+@FixtureSetup({ ClasseDeTeste116.class, ClasseDeTeste117.class })
 public class ClasseDeTeste135 {
 
-	@Test
-	public void testar1() throws Exception {}
+	@Fixture private int numero;
 
-	@Ignore
 	@Test
-	public void testar2() throws Exception {}
+	public void testar() throws Exception {
+		assertEquals(10, numero);
+	}
 
 }

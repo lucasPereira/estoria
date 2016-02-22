@@ -1,13 +1,7 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteFalha;
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteFinalizado;
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteIgnorado;
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTesteIniciado;
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTestesFinalizados;
-import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.combinaComTestesIniciados;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
+import static br.ufsc.ine.leb.projetos.estoria.CombinadorDeNotificacao.*;
+import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
@@ -53,6 +47,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste132
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste133;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste134;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste135;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste136;
 
 public final class TesteEscoltadorDeTestesExecucaoDeClassesDeTeste {
 
@@ -450,6 +445,16 @@ public final class TesteEscoltadorDeTestesExecucaoDeClassesDeTeste {
 	@Test
 	public void classeDeTeste135() throws Exception {
 		configurar(ClasseDeTeste135.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(classeDeTeste));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(classeDeTeste, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(classeDeTeste, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(1, 0, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void classeDeTeste136() throws Exception {
+		configurar(ClasseDeTeste136.class);
 		assertThat(notificacoes.next(), combinaComTestesIniciados(classeDeTeste));
 		assertThat(notificacoes.next(), combinaComTesteIgnorado(classeDeTeste, "testar2"));
 		assertThat(notificacoes.next(), combinaComTesteIgnorado(classeDeTeste, "testar1"));
