@@ -26,7 +26,16 @@ public final class InvocadorDeMetodo<T> {
 			metodo.invoke(objeto);
 			tratador.tratarInvocacaoSemExcecao(metodo);
 		} catch (InvocationTargetException excecao) {
-			tratador.tratarInvocacaoComExcecao(metodo, excecao.getCause());
+			Throwable causa = excecao.getTargetException();
+			StackTraceElement[] pilhaExecucaoCausa = causa.getStackTrace();
+			StackTraceElement[] pilhaExecucaoExcecao = excecao.getStackTrace();
+			Integer tamanho = pilhaExecucaoCausa.length - pilhaExecucaoExcecao.length;
+			StackTraceElement[] pilhaDeExecaoCausaSemEstoria = new StackTraceElement[tamanho];
+			for (Integer contador = 0; contador < tamanho; contador++) {
+				pilhaDeExecaoCausaSemEstoria[contador] = pilhaExecucaoCausa[contador];
+			}
+			causa.setStackTrace(pilhaDeExecaoCausaSemEstoria);
+			tratador.tratarInvocacaoComExcecao(metodo, causa);
 		}
 	}
 
