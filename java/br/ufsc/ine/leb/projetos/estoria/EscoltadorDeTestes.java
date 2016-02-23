@@ -1,25 +1,36 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filter;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runner.notification.RunNotifier;
 
-public class EscoltadorDeTestes extends Runner {
+public class EscoltadorDeTestes extends Runner implements Filterable {
 
 	private Result resultado;
 	private SuiteDeTeste suiteDeTeste;
 	private Description descricaoDaSuite;
 	private RunNotifier mensageiroDeEscolta;
+	private List<Filter> filtros;
 
 	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste) {
 		this.suiteDeTeste = suiteDeTeste;
 		this.descricaoDaSuite = Description.createSuiteDescription(suiteDeTeste.obterSuite());
-		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste -> classeDeTeste.obterMetodosDeTesteIgnorados().forEach(metodoDeTeste -> descricaoDaSuite.addChild(metodoDeTeste.obterDescricao())));
-		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste -> classeDeTeste.obterMetodosDeTeste().forEach(metodoDeTeste -> descricaoDaSuite.addChild(metodoDeTeste.obterDescricao())));
+		this.filtros = new LinkedList<>();
+		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste ->
+				classeDeTeste.obterMetodosDeTesteIgnorados().forEach(metodoDeTeste ->
+						descricaoDaSuite.addChild(metodoDeTeste.obterDescricao())));
+		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste ->
+				classeDeTeste.obterMetodosDeTeste().forEach(metodoDeTeste ->
+						descricaoDaSuite.addChild(metodoDeTeste.obterDescricao())));
 	}
 
 	@Override
@@ -35,6 +46,11 @@ public class EscoltadorDeTestes extends Runner {
 		executarSuite(suiteDeTeste);
 	}
 
+	@Override
+	public void filter(Filter filtro) throws NoTestsRemainException {
+		filtros.add(filtro);
+	}
+
 	private void executarSuite(SuiteDeTeste suiteDeTeste) {
 		mensageiroDeEscolta.fireTestRunStarted(descricaoDaSuite);
 		execuitarTestesIgnorados(suiteDeTeste);
@@ -44,25 +60,31 @@ public class EscoltadorDeTestes extends Runner {
 
 	private void execuitarTestesIgnorados(SuiteDeTeste suiteDeTeste) {
 		for (ClasseDeTeste classeDeteste : suiteDeTeste.obterClassesDeTeste()) {
-			executarClasseDeTesteIgnorados(classeDeteste);
+			for (MetodoDeTeste metodoDeTeste : classeDeteste.obterMetodosDeTesteIgnorados()) {
+				if (!filtrarExecucao(metodoDeTeste)) {
+					executarMetodoDeTesteIgnorado(metodoDeTeste);
+				}
+			}
 		}
 	}
 
 	private void executarTestes(SuiteDeTeste suiteDeTeste) {
 		for (ClasseDeTeste classeDeTeste : suiteDeTeste.obterClassesDeTeste()) {
-			executarClasseDeTeste(classeDeTeste);
+			for (MetodoDeTeste metodoDeTeste : classeDeTeste.obterMetodosDeTeste()) {
+				if (!filtrarExecucao(metodoDeTeste)) {
+					executarMetodoDeTeste(classeDeTeste, metodoDeTeste);
+				}
+			}
 		}
 	}
 
-	private void executarClasseDeTeste(ClasseDeTeste classeDeTeste) {
-		for (MetodoDeTeste metodoDeTeste : classeDeTeste.obterMetodosDeTeste()) {
-			executarMetodoDeTeste(classeDeTeste, metodoDeTeste);
-		}
+	private void executarMetodoDeTesteIgnorado(MetodoDeTeste metodoDeTeste) {
+		mensageiroDeEscolta.fireTestIgnored(metodoDeTeste.obterDescricao());
 	}
 
 	private void executarMetodoDeTeste(ClasseDeTeste classeDeTeste, MetodoDeTeste metodoDeTeste) {
 		if (classeDeTeste.ignorada() || suiteDeTeste.ignorada()) {
-			mensageiroDeEscolta.fireTestIgnored(metodoDeTeste.obterDescricao());
+			executarMetodoDeTesteIgnorado(metodoDeTeste);
 		} else {
 			Map<ClasseDeTeste, InvocadorDeMetodo<?>> classesSingularesExecutadas = new HashMap<>();
 			TratadorDeInvocacao tratadorDeTeste = new TratadorDeInvocacaoDeTeste(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
@@ -114,10 +136,13 @@ public class EscoltadorDeTestes extends Runner {
 		}
 	}
 
-	private void executarClasseDeTesteIgnorados(ClasseDeTeste classeDeteste) {
-		for (MetodoDeTeste metodoDeTeste : classeDeteste.obterMetodosDeTesteIgnorados()) {
-			mensageiroDeEscolta.fireTestIgnored(metodoDeTeste.obterDescricao());
+	private Boolean filtrarExecucao(MetodoDeTeste metodoDeTeste) {
+		for (Filter filtro : filtros) {
+			if (!filtro.shouldRun(metodoDeTeste.obterDescricao())) {
+				return true;
+			}
 		}
+		return false;
 	}
 
 }
