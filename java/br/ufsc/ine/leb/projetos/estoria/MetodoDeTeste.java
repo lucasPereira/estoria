@@ -23,7 +23,9 @@ public final class MetodoDeTeste extends Metodo {
 	public boolean equals(Object objeto) {
 		if (objeto instanceof MetodoDeTeste) {
 			MetodoDeTeste outro = (MetodoDeTeste) objeto;
-			return classeDeTeste.equals(outro.classeDeTeste) && super.equals(outro);
+			Boolean mesmoNome = super.equals(outro);
+			Boolean mesmaClasse = classeDeTeste.equals(outro.classeDeTeste);
+			return mesmoNome && mesmaClasse;
 		}
 		return false;
 	}

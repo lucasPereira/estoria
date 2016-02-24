@@ -36,25 +36,27 @@ public final class SuiteDeTeste {
 		return ignorada;
 	}
 
-	private Boolean classeDeTesteComoSuite() {
-		return classesDeTeste.size() == 1 && suite.equals(classesDeTeste.get(0).obterClasse());
-	}
-
+	@SemTeste
 	public Description obterDescricao(Filter filtro) {
 		Description descricao = Description.createSuiteDescription(suite);
 		classesDeTeste.forEach(classeDeTeste -> classeDeTeste.criarDescricao(descricao, filtro));
-		if (classeDeTesteComoSuite()) {
-			return descricao.getChildren().get(0);
-		}
-		if (classesDeTeste.isEmpty()) {
+		if (semTestes()) {
 			descricao.addChild(Description.EMPTY);
 		}
-		return descricao;
+		return classeDeTesteComoSuite() ? descricao.getChildren().iterator().next() : descricao;
 	}
 
 	@Override
 	public String toString() {
 		return suite.getSimpleName();
+	}
+
+	private Boolean semTestes() {
+		return classesDeTeste.isEmpty();
+	}
+
+	private Boolean classeDeTesteComoSuite() {
+		return classesDeTeste.size() == 1 && suite.equals(classesDeTeste.iterator().next().obterClasse());
 	}
 
 }

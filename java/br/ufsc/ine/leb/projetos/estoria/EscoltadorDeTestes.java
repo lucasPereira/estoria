@@ -23,10 +23,14 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 	private Ata ata;
 
 	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste) {
+		this(suiteDeTeste, new Ata());
+	}
+
+	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste, Ata ata) {
+		this.ata = ata;
 		this.suiteDeTeste = suiteDeTeste;
-		this.descricaoDaSuite = suiteDeTeste.obterDescricao(new FilterVazio());
-		this.filtros = new LinkedList<>();
-		this.ata = new Ata();
+		descricaoDaSuite = suiteDeTeste.obterDescricao(new FilterVazio());
+		filtros = new LinkedList<>();
 	}
 
 	@Override
@@ -36,6 +40,8 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 
 	@Override
 	public final void run(RunNotifier mensageiroDeEscolta) {
+		ata.registrar("Estória");
+		ata.avancarIndentacao();
 		this.mensageiroDeEscolta = mensageiroDeEscolta;
 		resultado = new Result();
 		mensageiroDeEscolta.addListener(resultado.createListener());
@@ -45,7 +51,7 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 	@Override
 	public void filter(Filter filtro) throws NoTestsRemainException {
 		filtros.add(filtro);
-		this.descricaoDaSuite = suiteDeTeste.obterDescricao(filtro);
+		descricaoDaSuite = suiteDeTeste.obterDescricao(filtro);
 	}
 
 	private void executarSuite(SuiteDeTeste suiteDeTeste) {

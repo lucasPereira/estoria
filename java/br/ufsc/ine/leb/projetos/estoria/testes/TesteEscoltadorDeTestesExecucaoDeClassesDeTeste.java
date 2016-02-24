@@ -8,7 +8,9 @@ import java.util.Iterator;
 import org.junit.Test;
 import org.junit.runner.notification.RunNotifier;
 
+import br.ufsc.ine.leb.projetos.estoria.Ata;
 import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestes;
+import br.ufsc.ine.leb.projetos.estoria.EscrivaoMalandro;
 import br.ufsc.ine.leb.projetos.estoria.EspiaoDeEscolta;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
@@ -57,7 +59,7 @@ public final class TesteEscoltadorDeTestesExecucaoDeClassesDeTeste {
 	public void configurar(Class<?> classeDeTeste) {
 		this.classeDeTeste = classeDeTeste;
 		SuiteDeTeste suiteDeTete = new SuiteDeTeste(classeDeTeste);
-		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suiteDeTete);
+		EscoltadorDeTestes escoltador = new EscoltadorDeTestes(suiteDeTete, new Ata(new EscrivaoMalandro()));
 		RunNotifier mensageiroDeEscolta = new RunNotifier();
 		EspiaoDeEscolta espiaoDeEscolta = new EspiaoDeEscolta();
 		mensageiroDeEscolta.addFirstListener(espiaoDeEscolta);

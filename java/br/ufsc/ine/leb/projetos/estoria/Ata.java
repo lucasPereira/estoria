@@ -16,6 +16,10 @@ public final class Ata {
 		this(new EscrivaoPadrao(), SIMBOLO_DE_ESPACAMENTO_PADRAO);
 	}
 
+	public Ata(Escrivao escrivao) {
+		this(escrivao, SIMBOLO_DE_ESPACAMENTO_PADRAO);
+	}
+
 	public Ata(Escrivao escrivao, String simboloDeEspacamento) {
 		this.escrivao = escrivao;
 		this.registros = new LinkedList<>();

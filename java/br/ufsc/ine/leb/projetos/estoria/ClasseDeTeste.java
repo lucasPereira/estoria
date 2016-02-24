@@ -73,21 +73,14 @@ public final class ClasseDeTeste {
 		return ignorada;
 	}
 
+	@SemTeste
 	public void criarDescricao(Description descricaoSuite, Filter filtro) {
 		Description descricao = Description.createSuiteDescription(classe);
-		if (metodosDeTesteIgnorados.isEmpty() && metodosDeTeste.isEmpty()) {
+		if (semTestes()) {
 			descricao.addChild(Description.EMPTY);
 		}
-		metodosDeTesteIgnorados.forEach(metodoDeTeste -> {
-			if (filtro.shouldRun(metodoDeTeste.obterDescricao())) {
-				descricao.addChild(metodoDeTeste.obterDescricao());
-			}
-		});
-		metodosDeTeste.forEach(metodoDeTeste -> {
-			if (filtro.shouldRun(metodoDeTeste.obterDescricao())) {
-				descricao.addChild(metodoDeTeste.obterDescricao());
-			}
-		});
+		metodosDeTesteIgnorados.forEach(metodoDeTeste -> adicionarMetodoNaDescricao(filtro, descricao, metodoDeTeste));
+		metodosDeTeste.forEach(metodoDeTeste -> adicionarMetodoNaDescricao(filtro, descricao, metodoDeTeste));
 		descricaoSuite.addChild(descricao);
 	}
 
@@ -108,6 +101,16 @@ public final class ClasseDeTeste {
 	@Override
 	public String toString() {
 		return classe.getSimpleName();
+	}
+
+	private Boolean semTestes() {
+		return metodosDeTesteIgnorados.isEmpty() && metodosDeTeste.isEmpty();
+	}
+
+	private void adicionarMetodoNaDescricao(Filter filtro, Description descricao, MetodoDeTeste metodoDeTeste) {
+		if (filtro.shouldRun(metodoDeTeste.obterDescricao())) {
+			descricao.addChild(metodoDeTeste.obterDescricao());
+		}
 	}
 
 }
