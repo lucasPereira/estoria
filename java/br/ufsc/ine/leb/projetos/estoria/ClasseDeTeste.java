@@ -3,6 +3,9 @@ package br.ufsc.ine.leb.projetos.estoria;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.runner.Description;
+import org.junit.runner.manipulation.Filter;
+
 public final class ClasseDeTeste {
 
 	private Class<?> classe;
@@ -68,6 +71,24 @@ public final class ClasseDeTeste {
 
 	public Boolean ignorada() {
 		return ignorada;
+	}
+
+	public void criarDescricao(Description descricaoSuite, Filter filtro) {
+		Description descricao = Description.createSuiteDescription(classe);
+		if (metodosDeTesteIgnorados.isEmpty() && metodosDeTeste.isEmpty()) {
+			descricao.addChild(Description.EMPTY);
+		}
+		metodosDeTesteIgnorados.forEach(metodoDeTeste -> {
+			if (filtro.shouldRun(metodoDeTeste.obterDescricao())) {
+				descricao.addChild(metodoDeTeste.obterDescricao());
+			}
+		});
+		metodosDeTeste.forEach(metodoDeTeste -> {
+			if (filtro.shouldRun(metodoDeTeste.obterDescricao())) {
+				descricao.addChild(metodoDeTeste.obterDescricao());
+			}
+		});
+		descricaoSuite.addChild(descricao);
 	}
 
 	@Override

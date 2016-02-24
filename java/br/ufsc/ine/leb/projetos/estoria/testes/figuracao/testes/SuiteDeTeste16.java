@@ -7,6 +7,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 		ClasseDeTeste101.class,
-		ClasseDeTeste110.class,
+		ClasseDeTeste110.class
 })
 public class SuiteDeTeste16 {}

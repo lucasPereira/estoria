@@ -21,9 +21,9 @@ public class AllDefaultPossibilitiesBuilder extends RunnerBuilder {
 		List<RunnerBuilder> builders = Arrays.asList(
 				ignoredBuilder(),
 				annotatedBuilder(),
+				estoriaBuilder(),
 				suiteMethodBuilder(),
 				junit3Builder(),
-				estoriaBuilder(),
 				junit4Builder());
 		for (RunnerBuilder each : builders) {
 			Runner runner = each.safeRunnerForClass(testClass);
