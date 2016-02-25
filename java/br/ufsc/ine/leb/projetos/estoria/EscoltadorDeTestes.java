@@ -29,7 +29,7 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste, Ata ata) {
 		this.ata = ata;
 		this.suiteDeTeste = suiteDeTeste;
-		descricaoDaSuite = suiteDeTeste.obterDescricao(new FilterVazio());
+		descricaoDaSuite = suiteDeTeste.obterDescricao(new FiltroInutil());
 		filtros = new LinkedList<>();
 	}
 

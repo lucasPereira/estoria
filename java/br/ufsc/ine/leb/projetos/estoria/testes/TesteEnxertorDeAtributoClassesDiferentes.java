@@ -14,7 +14,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmAtri
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmAtributoNumberInteger;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmAtributoNumberLong;
 
-public final class TesteExertorDeAtributoClassesDiferentes {
+public final class TesteEnxertorDeAtributoClassesDiferentes {
 
 	private ClasseComUmAtributoInteger comInteiro100;
 	private ClasseComUmAtributoInteger comInteiro50;
