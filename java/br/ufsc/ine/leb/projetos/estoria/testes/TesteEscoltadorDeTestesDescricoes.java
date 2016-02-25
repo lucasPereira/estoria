@@ -315,4 +315,5 @@ public final class TesteEscoltadorDeTestesDescricoes {
 		assertEquals(0, descricaoDoTeste2.getChildren().size());
 		assertEquals(1, descricaoDoTeste2.testCount());
 	}
+
 }
