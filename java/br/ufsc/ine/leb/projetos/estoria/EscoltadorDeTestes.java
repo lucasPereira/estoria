@@ -23,7 +23,7 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 	private Ata ata;
 
 	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste) {
-		this(suiteDeTeste, new Ata());
+		this(suiteDeTeste, new Ata(new EscrivaoMalandro()));
 	}
 
 	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste, Ata ata) {

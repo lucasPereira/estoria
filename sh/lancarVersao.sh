@@ -1,6 +1,6 @@
 #/bin/bash
 
-versao='1.1'
+versao='1.2'
 
 caminho=`pwd`
 cd ..

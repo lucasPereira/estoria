@@ -10,6 +10,11 @@ Esta biblioteca é de domínio público. Você pode copiar, modificar, publicar,
 
 ## Versões
 
+### 1.2 (26/02/2016)
+* Correção de bug em que, nos casos de conflito de nome, a @Fixture injetada era extraída da última dependência e não da primeira.
+* Adição da anotação @Singular que possibilita marcar que uma classe de teste deve ter sua configuração executada uma, e apenas uma, vez para um determinado teste.
+* Remoção do Estória no stacktrace dos testes com falha.
+
 ### 1.1 (16/09/2015)
 * Redifinição da nomenclatura das classes de teste usadas como configuração (de @Acessorio para @FixtureSetup).
 * Adição da anotação @Fixture que possibilita a injeção automática dos atributos configurados em uma classe que esteja dentro da anotação @FixtureSetup.
