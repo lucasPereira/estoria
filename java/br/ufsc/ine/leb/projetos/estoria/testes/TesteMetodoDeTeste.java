@@ -1,9 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.Method;
 
@@ -61,6 +58,12 @@ public final class TesteMetodoDeTeste {
 		assertEquals(new MetodoDeTeste(classeDeTesteInteger, metodoInteger).hashCode(), metodoInteger.hashCode());
 		assertNotEquals(new MetodoDeTeste(classeDeTesteLong, metodoLong).hashCode(), metodoInteger.hashCode());
 		assertNotEquals(new MetodoDeTeste(classeDeTesteInteger, metodoInteger).hashCode(), metodoLong.hashCode());
+	}
+	
+	@Test
+	public void classeDeTeste() throws Exception {
+		assertEquals(new MetodoDeTeste(classeDeTesteLong, metodoLong).obterClasseDeTeste(), classeDeTesteLong);
+		assertEquals(new MetodoDeTeste(classeDeTesteInteger, metodoInteger).obterClasseDeTeste(), classeDeTesteInteger);
 	}
 
 }

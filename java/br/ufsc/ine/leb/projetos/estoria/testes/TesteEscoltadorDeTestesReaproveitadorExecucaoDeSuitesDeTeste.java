@@ -46,7 +46,7 @@ public final class TesteEscoltadorDeTestesReaproveitadorExecucaoDeSuitesDeTeste 
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste112.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste137.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste137.class, "testar"));
-		assertThat(notificacoes.next(), combinaComTestesFinalizados(0, 0, 0));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(2, 0, 0));
 		assertFalse(notificacoes.hasNext());
 	}
 

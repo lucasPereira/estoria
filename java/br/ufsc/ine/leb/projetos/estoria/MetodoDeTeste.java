@@ -19,6 +19,10 @@ public final class MetodoDeTeste extends Metodo {
 		return descricao;
 	}
 
+	public ClasseDeTeste obterClasseDeTeste() {
+		return classeDeTeste;
+	}
+
 	@Override
 	public boolean equals(Object objeto) {
 		if (objeto instanceof MetodoDeTeste) {

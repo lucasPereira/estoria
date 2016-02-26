@@ -1,5 +1,7 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,14 +22,12 @@ public class EscoltadorDeTestesReaproveitador extends Runner implements Filterab
 	private Description descricaoDaSuite;
 	private RunNotifier mensageiroDeEscolta;
 	private List<Filter> filtros;
-	private Ata ata;
 
 	public EscoltadorDeTestesReaproveitador(SuiteDeTeste suiteDeTeste) {
 		this(suiteDeTeste, new Ata());
 	}
 
 	public EscoltadorDeTestesReaproveitador(SuiteDeTeste suiteDeTeste, Ata ata) {
-		this.ata = ata;
 		this.suiteDeTeste = suiteDeTeste;
 		descricaoDaSuite = suiteDeTeste.obterDescricao(new FiltroInutil());
 		filtros = new LinkedList<>();
@@ -40,8 +40,6 @@ public class EscoltadorDeTestesReaproveitador extends Runner implements Filterab
 
 	@Override
 	public final void run(RunNotifier mensageiroDeEscolta) {
-		ata.registrar("Estória");
-		ata.avancarIndentacao();
 		this.mensageiroDeEscolta = mensageiroDeEscolta;
 		resultado = new Result();
 		mensageiroDeEscolta.addListener(resultado.createListener());
@@ -55,97 +53,57 @@ public class EscoltadorDeTestesReaproveitador extends Runner implements Filterab
 	}
 
 	private void executarSuite(SuiteDeTeste suiteDeTeste) {
-		ata.registrar("%s", suiteDeTeste);
-		ata.avancarIndentacao();
 		mensageiroDeEscolta.fireTestRunStarted(descricaoDaSuite);
-		execuitarTestesIgnorados(suiteDeTeste);
 		executarTestes(suiteDeTeste);
 		mensageiroDeEscolta.fireTestRunFinished(resultado);
-		ata.recuarIndentacao();
-	}
-
-	private void execuitarTestesIgnorados(SuiteDeTeste suiteDeTeste) {
-		for (ClasseDeTeste classeDeteste : suiteDeTeste.obterClassesDeTeste()) {
-			for (MetodoDeTeste metodoDeTeste : classeDeteste.obterMetodosDeTesteIgnorados()) {
-				if (!filtrarExecucao(metodoDeTeste)) {
-					executarMetodoDeTesteIgnorado(metodoDeTeste);
-				}
-			}
-		}
 	}
 
 	private void executarTestes(SuiteDeTeste suiteDeTeste) {
-		for (ClasseDeTeste classeDeTeste : suiteDeTeste.obterClassesDeTeste()) {
-			ata.registrar("%s", classeDeTeste);
-			ata.avancarIndentacao();
-			for (MetodoDeTeste metodoDeTeste : classeDeTeste.obterMetodosDeTeste()) {
-				if (!filtrarExecucao(metodoDeTeste)) {
-					executarMetodoDeTeste(classeDeTeste, metodoDeTeste);
+		List<ClasseDeTeste> classesDeTeste = suiteDeTeste.obterClassesDeTeste();
+		Collections.sort(classesDeTeste, new Comparator<ClasseDeTeste>() {
+
+			@Override
+			public int compare(ClasseDeTeste elemento1, ClasseDeTeste elemento2) {
+				Boolean dependente = elemento1.obterAcessorios().contains(elemento2);
+				Boolean dependencia = elemento2.obterAcessorios().contains(elemento1);
+				return dependente ? 1 : dependencia ? -1 : 0;
+			}
+
+		});
+		List<MetodoDeTeste> metodosDeTeste = new LinkedList<>();
+		classesDeTeste.forEach(classeDeTeste -> classeDeTeste.obterMetodosDeTeste().forEach(metodoDeTeste -> metodosDeTeste.add(metodoDeTeste)));
+		Map<ClasseDeTeste, InvocadorDeMetodo<?>> invocadores = new HashMap<>();
+		for (MetodoDeTeste metodoDeTeste : metodosDeTeste) {
+			if (!filtrarExecucao(metodoDeTeste)) {
+				mensageiroDeEscolta.fireTestStarted(metodoDeTeste.obterDescricao());
+				Map<AtributoAcessorio, Boolean> atributosEnxertados = new HashMap<>();
+				ClasseDeTeste classeDeTeste = metodoDeTeste.obterClasseDeTeste();
+				TratadorDeInvocacao tratadorDeTeste = new TratadorDeInvocacaoDeTeste(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
+				TratadorDeInvocacao tratadorDeConfiguracao = new TratadorDeInvocacaoDeConfiguracao(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
+				invocadores.put(classeDeTeste, new InvocadorDeMetodo<>(classeDeTeste.obterClasse()));
+				for (ClasseDeTeste classeAcessorio : classeDeTeste.obterAcessorios()) {
+					Object instanciaClasseAcessorio = invocadores.get(classeAcessorio).obterInstancia();
+					Object instanciaClasseDeTeste = invocadores.get(classeDeTeste).obterInstancia();
+					EnxertorDeAtributo enxertador = new EnxertorDeAtributo(instanciaClasseAcessorio, instanciaClasseDeTeste);
+					for (AtributoProprio atributoProprio : classeAcessorio.obterAtributosProprios()) {
+						enxertarAcessorio(classeDeTeste, classeAcessorio, enxertador, atributoProprio, atributosEnxertados);
+					}
+					for (AtributoAcessorio atributoAcessorio : classeAcessorio.obterAtributosAcessorios()) {
+						enxertarAcessorio(classeDeTeste, classeAcessorio, enxertador, atributoAcessorio, atributosEnxertados);
+					}
 				}
+				for (MetodoDeConfiguracao metodoDeConfiguracao : classeDeTeste.obterMetodosDeConfiguracao()) {
+					invocadores.get(classeDeTeste).executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao);
+				}
+				invocadores.get(classeDeTeste).executar(metodoDeTeste.obterMetodo(), tratadorDeTeste);
+				mensageiroDeEscolta.fireTestFinished(metodoDeTeste.obterDescricao());
 			}
-			ata.recuarIndentacao();
-		}
-	}
-
-	private void executarMetodoDeTesteIgnorado(MetodoDeTeste metodoDeTeste) {
-		ata.registrar("@Ignore %s", metodoDeTeste);
-		mensageiroDeEscolta.fireTestIgnored(metodoDeTeste.obterDescricao());
-	}
-
-	private void executarMetodoDeTeste(ClasseDeTeste classeDeTeste, MetodoDeTeste metodoDeTeste) {
-		if (classeDeTeste.ignorada() || suiteDeTeste.ignorada()) {
-			executarMetodoDeTesteIgnorado(metodoDeTeste);
-		} else {
-			ata.registrar("%s", metodoDeTeste);
-			ata.avancarIndentacao();
-			Map<ClasseDeTeste, InvocadorDeMetodo<?>> classesSingularesExecutadas = new HashMap<>();
-			TratadorDeInvocacao tratadorDeTeste = new TratadorDeInvocacaoDeTeste(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
-			TratadorDeInvocacao tratadorDeConfiguracao = new TratadorDeInvocacaoDeConfiguracao(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
-			InvocadorDeMetodo<?> invocadorParaClasseDeTeste = new InvocadorDeMetodo<>(classeDeTeste.obterClasse());
-			mensageiroDeEscolta.fireTestStarted(metodoDeTeste.obterDescricao());
-			executarConfiguracaoDaClasseDeTeste(classeDeTeste, tratadorDeConfiguracao, invocadorParaClasseDeTeste, classesSingularesExecutadas);
-			invocadorParaClasseDeTeste.executar(metodoDeTeste.obterMetodo(), tratadorDeTeste);
-			ata.registrar("@Test %s", metodoDeTeste);
-			mensageiroDeEscolta.fireTestFinished(metodoDeTeste.obterDescricao());
-			ata.recuarIndentacao();
-		}
-	}
-
-	private void executarConfiguracaoDaClasseDeTeste(ClasseDeTeste classeDeTeste, TratadorDeInvocacao tratadorDeConfiguracao, InvocadorDeMetodo<?> invocadorParaClasseDeTeste, Map<ClasseDeTeste, InvocadorDeMetodo<?>> classesSingularesExecutadas) {
-		Map<AtributoAcessorio, Boolean> atributosEnxertados = new HashMap<>();
-		if (!classesSingularesExecutadas.containsKey(classeDeTeste)) {
-			for (ClasseDeTeste classeAcessorio : classeDeTeste.obterAcessorios()) {
-				ata.registrar("@FixtureSetup %s", classeAcessorio);
-				ata.avancarIndentacao();
-				InvocadorDeMetodo<?> invocadorParaAcessorio = classesSingularesExecutadas.containsKey(classeAcessorio) ? classesSingularesExecutadas.get(classeAcessorio) : new InvocadorDeMetodo<>(classeAcessorio.obterClasse());
-				executarConfiguracaoDaClasseDeTeste(classeAcessorio, tratadorDeConfiguracao, invocadorParaAcessorio, classesSingularesExecutadas);
-				enxertarAcessorios(classeDeTeste, classeAcessorio, invocadorParaClasseDeTeste, invocadorParaAcessorio, atributosEnxertados);
-				ata.recuarIndentacao();
-			}
-			for (MetodoDeConfiguracao metodoDeConfiguracao : classeDeTeste.obterMetodosDeConfiguracao()) {
-				invocadorParaClasseDeTeste.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao);
-				ata.registrar("@Before %s", metodoDeConfiguracao);
-			}
-			if (classeDeTeste.singular()) {
-				classesSingularesExecutadas.put(classeDeTeste, invocadorParaClasseDeTeste);
-			}
-		}
-	}
-
-	private void enxertarAcessorios(ClasseDeTeste classeDeTeste, ClasseDeTeste classeAcessorio, InvocadorDeMetodo<?> invocadorParaClasseDeTeste, InvocadorDeMetodo<?> invocadorParaAcessorio, Map<AtributoAcessorio, Boolean> atributosEnxertados) {
-		EnxertorDeAtributo enxertador = new EnxertorDeAtributo(invocadorParaAcessorio.obterInstancia(), invocadorParaClasseDeTeste.obterInstancia());
-		for (AtributoProprio atributoProprio : classeAcessorio.obterAtributosProprios()) {
-			enxertarAcessorio(classeDeTeste, classeAcessorio, enxertador, atributoProprio, atributosEnxertados);
-		}
-		for (AtributoAcessorio atributoAcessorio : classeAcessorio.obterAtributosAcessorios()) {
-			enxertarAcessorio(classeDeTeste, classeAcessorio, enxertador, atributoAcessorio, atributosEnxertados);
 		}
 	}
 
 	private void enxertarAcessorio(ClasseDeTeste classeDeTeste, ClasseDeTeste classeAcessorio, EnxertorDeAtributo enxertador, Atributo atributoProprio, Map<AtributoAcessorio, Boolean> atributosEnxertados) {
 		for (AtributoAcessorio atributoAcessorio : classeDeTeste.obterAtributosAcessorios()) {
 			if (atributoAcessorio.compativelCom(atributoProprio) && !atributosEnxertados.containsKey(atributoAcessorio)) {
-				ata.registrar("@Fixture %s", atributoProprio);
 				atributosEnxertados.put(atributoAcessorio, true);
 				enxertador.enxertar(atributoProprio.obterAtributo(), atributoAcessorio.obterAtributo());
 			}
