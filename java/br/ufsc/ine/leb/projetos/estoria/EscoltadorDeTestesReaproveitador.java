@@ -13,7 +13,7 @@ import org.junit.runner.manipulation.Filterable;
 import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runner.notification.RunNotifier;
 
-public class EscoltadorDeTestes extends Runner implements Filterable {
+public class EscoltadorDeTestesReaproveitador extends Runner implements Filterable {
 
 	private Result resultado;
 	private SuiteDeTeste suiteDeTeste;
@@ -22,11 +22,11 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 	private List<Filter> filtros;
 	private Ata ata;
 
-	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste) {
+	public EscoltadorDeTestesReaproveitador(SuiteDeTeste suiteDeTeste) {
 		this(suiteDeTeste, new Ata());
 	}
 
-	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste, Ata ata) {
+	public EscoltadorDeTestesReaproveitador(SuiteDeTeste suiteDeTeste, Ata ata) {
 		this.ata = ata;
 		this.suiteDeTeste = suiteDeTeste;
 		descricaoDaSuite = suiteDeTeste.obterDescricao(new FiltroInutil());

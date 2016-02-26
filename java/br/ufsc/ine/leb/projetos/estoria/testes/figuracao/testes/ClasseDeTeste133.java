@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
