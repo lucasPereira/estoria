@@ -6,6 +6,10 @@ public class ClasseDeTeste109 {
 
 	@Test(expected = UnsupportedOperationException.class)
 	public void testar() {
+		lancarExcecao();
+	}
+
+	private void lancarExcecao() {
 		throw new RuntimeException();
 	}
 

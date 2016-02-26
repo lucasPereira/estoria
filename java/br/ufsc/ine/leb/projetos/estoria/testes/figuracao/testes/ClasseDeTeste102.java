@@ -8,6 +8,10 @@ public class ClasseDeTeste102 {
 
 	@Test
 	public void testar() {
+		lancarExcecao();
+	}
+
+	private void lancarExcecao() {
 		fail("102 falha induzida");
 	}
 

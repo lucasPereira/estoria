@@ -6,6 +6,10 @@ public class ClasseDeTeste107 {
 
 	@Test
 	public void testar() {
+		lancarExcecao();
+	}
+
+	private void lancarExcecao() {
 		throw new UnsupportedOperationException();
 	}
 

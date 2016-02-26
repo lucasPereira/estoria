@@ -61,6 +61,7 @@ public final class TratadorDeInvocacaoDeTeste implements TratadorDeInvocacao {
 	private Failure criarFalhaDeExcecaoEsperadaMasNaoLancadaNenhuma(Class<?> excecaoEsperada) {
 		String mensagemDeFalha = String.format("expected exception:<%s>", excecaoEsperada.getName());
 		Throwable excecaoLancada = new AssertionError(mensagemDeFalha);
+		excecaoLancada.setStackTrace(new StackTraceElement[] {});
 		Failure falha = new Failure(descricao, excecaoLancada);
 		return falha;
 	}
@@ -68,6 +69,7 @@ public final class TratadorDeInvocacaoDeTeste implements TratadorDeInvocacao {
 	private Failure criarFalhaDeExcecaoEsperadaMasLancadaOutra(Throwable excecaoLancada, Class<?> excecaoEsperada) {
 		String mesagemDeFalha = String.format("unexpected exception, expected:<%s> but was:<%s>", excecaoEsperada.getName(), excecaoLancada.getClass().getName());
 		Throwable excecaoPaiLancada = new AssertionError(mesagemDeFalha, excecaoLancada);
+		excecaoPaiLancada.setStackTrace(new StackTraceElement[] {});
 		Failure falha = new Failure(descricao, excecaoPaiLancada);
 		return falha;
 	}
