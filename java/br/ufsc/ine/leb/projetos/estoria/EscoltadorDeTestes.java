@@ -1,5 +1,7 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,31 +35,47 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 
 	@Override
 	public final Description getDescription() {
-		Filter filtro = filtros.isEmpty() ? new FiltroInutil() : filtros.iterator().next();
-		Description descricaoDaSuite = Description.createSuiteDescription(suiteDeTeste.obterSuite());
-		for (ClasseDeTeste classeDeTeste : suiteDeTeste.obterClassesDeTeste()) {
-			Description descricaoDaClasse = Description.createSuiteDescription(classeDeTeste.obterClasse());
-			for (Metodo metodoDeTesteIgnorado : classeDeTeste.obterMetodosDeTesteIgnorados()) {
-				Description descricaoDoMetodoDeTesteIgnorado = Description.createTestDescription(classeDeTeste.obterClasse(), metodoDeTesteIgnorado.obterNome());
-				if (filtro.shouldRun(descricaoDoMetodoDeTesteIgnorado)) {
-					descricaoDaClasse.addChild(descricaoDoMetodoDeTesteIgnorado);
-				}
-			}
-			for (Metodo metodoDeTeste : classeDeTeste.obterMetodosDeTeste()) {
-				Description descricaoDoMetodoDeTeste = Description.createTestDescription(classeDeTeste.obterClasse(), metodoDeTeste.obterNome());
-				if (filtro.shouldRun(descricaoDoMetodoDeTeste)) {
-					descricaoDaClasse.addChild(descricaoDoMetodoDeTeste);
-				}
-			}
-			if (classeDeTeste.vazia()) {
-				descricaoDaClasse.addChild(Description.EMPTY);
-			}
-			descricaoDaSuite.addChild(descricaoDaClasse);
+		return suiteDeTeste.classeDeTesteComoSuite() ? criarDescicao(suiteDeTeste.obterClassesDeTeste().iterator().next()) : criarDescricao(suiteDeTeste);
+	}
+
+	private Description criarDescricao(SuiteDeTeste suiteDeTeste) {
+		Description descricao = Description.createSuiteDescription(suiteDeTeste.obterSuite());
+		List<Description> filhos = obterFilhos(suiteDeTeste);
+		filhos.forEach(filho -> descricao.addChild(filho));
+		return descricao;
+	}
+
+	private Description criarDescicao(ClasseDeTeste classeDeTeste) {
+		Description descricao = Description.createSuiteDescription(classeDeTeste.obterClasse());
+		List<Description> filhos = obterFilhos(classeDeTeste);
+		filhos.forEach(filho -> descricao.addChild(filho));
+		return descricao;
+	}
+
+	private List<Description> obterFilhos(SuiteDeTeste suiteDeTeste) {
+		List<Description> filhos = new LinkedList<>();
+		suiteDeTeste.obterClassesDeTeste().forEach(classeDeTeste -> filhos.add(criarDescicao(classeDeTeste)));
+		return filhos.isEmpty() ? Arrays.asList(Description.EMPTY) : filhos;
+	}
+
+	public List<Description> obterFilhos(ClasseDeTeste classeDeTeste) {
+		List<Description> filhos = new LinkedList<>();
+		classeDeTeste.obterMetodosDeTesteIgnorados().forEach(metodo -> filtrar(filhos, criarDescricao(metodo)));
+		classeDeTeste.obterMetodosDeTeste().forEach(metodo -> filtrar(filhos, criarDescricao(metodo)));
+		return filhos.isEmpty() ? Arrays.asList(Description.EMPTY) : filhos;
+	}
+
+	private Description criarDescricao(Metodo metodo) {
+		Description descricao = Description.createTestDescription(metodo.obterClasseDeTeste().obterClasse(), metodo.obterNome());
+		return descricao;
+	}
+
+	private void filtrar(List<Description> filhos, Description descricao) {
+		List<Boolean> filtragens = new ArrayList<>(filtros.size());
+		filtros.forEach(filtro -> filtragens.add(filtro.shouldRun(descricao)));
+		if (!filtragens.contains(false)) {
+			filhos.add(descricao);
 		}
-		if (suiteDeTeste.vazia()) {
-			descricaoDaSuite.addChild(Description.EMPTY);
-		}
-		return suiteDeTeste.classeDeTesteComoSuite() ? descricaoDaSuite.getChildren().iterator().next() : descricaoDaSuite;
 	}
 
 	@Override
