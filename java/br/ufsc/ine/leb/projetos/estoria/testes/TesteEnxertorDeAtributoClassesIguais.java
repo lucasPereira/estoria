@@ -1,12 +1,11 @@
 package br.ufsc.ine.leb.projetos.estoria.testes;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import br.ufsc.ine.leb.projetos.estoria.EnxertorDeAtributo;
@@ -39,7 +38,6 @@ public final class TesteEnxertorDeAtributoClassesIguais {
 		assertEquals(0, destino.obterAtributo2());
 	}
 
-	@Ignore
 	@Test
 	public void enxertar() throws Exception {
 		enxertor.enxertar(atributos.get(0), atributos.get(0));

@@ -27,15 +27,12 @@ public class ClasseDeTeste128 {
 	public void configurar() {
 		meuIndiretoAcessorioBefore10 = 10;
 		meuIndiretoAcessorioBefore20Test30 = 20;
-
 		assertEquals(10, meuIndiretoAcessorioBefore10);
 		assertEquals(20, meuIndiretoAcessorioBefore20Test30);
 		assertEquals(0, meuIndiretoAcessorioTest40);
-
 		assertEquals(10, meuAcessorioBefore10);
 		assertEquals(20, meuAcessorioBefore20Test30);
 		assertEquals(0, meuAcessorioTest40);
-
 		assertEquals(10, acessorioBefore10);
 		assertEquals(20, acessorioBefore20Test30);
 		assertEquals(0, acessorioTest40);
@@ -45,15 +42,12 @@ public class ClasseDeTeste128 {
 	public void testar() {
 		meuIndiretoAcessorioBefore20Test30 = 30;
 		meuIndiretoAcessorioTest40 = 40;
-
 		assertEquals(10, meuIndiretoAcessorioBefore10);
 		assertEquals(30, meuIndiretoAcessorioBefore20Test30);
 		assertEquals(40, meuIndiretoAcessorioTest40);
-
 		assertEquals(10, meuAcessorioBefore10);
 		assertEquals(20, meuAcessorioBefore20Test30);
 		assertEquals(0, meuAcessorioTest40);
-
 		assertEquals(10, acessorioBefore10);
 		assertEquals(20, acessorioBefore20Test30);
 		assertEquals(0, acessorioTest40);

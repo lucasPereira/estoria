@@ -17,7 +17,6 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 
 	private Result resultado;
 	private SuiteDeTeste suiteDeTeste;
-	private Description descricaoDaSuite;
 	private RunNotifier mensageiroDeEscolta;
 	private List<Filter> filtros;
 	private Ata ata;
@@ -29,13 +28,36 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 	public EscoltadorDeTestes(SuiteDeTeste suiteDeTeste, Ata ata) {
 		this.ata = ata;
 		this.suiteDeTeste = suiteDeTeste;
-		descricaoDaSuite = suiteDeTeste.obterDescricao(new FiltroInutil());
-		filtros = new LinkedList<>();
+		this.filtros = new LinkedList<>();
 	}
 
 	@Override
 	public final Description getDescription() {
-		return descricaoDaSuite;
+		Filter filtro = filtros.isEmpty() ? new FiltroInutil() : filtros.iterator().next();
+		Description descricaoDaSuite = Description.createSuiteDescription(suiteDeTeste.obterSuite());
+		for (ClasseDeTeste classeDeTeste : suiteDeTeste.obterClassesDeTeste()) {
+			Description descricaoDaClasse = Description.createSuiteDescription(classeDeTeste.obterClasse());
+			for (Metodo metodoDeTesteIgnorado : classeDeTeste.obterMetodosDeTesteIgnorados()) {
+				Description descricaoDoMetodoDeTesteIgnorado = Description.createTestDescription(classeDeTeste.obterClasse(), metodoDeTesteIgnorado.obterNome());
+				if (filtro.shouldRun(descricaoDoMetodoDeTesteIgnorado)) {
+					descricaoDaClasse.addChild(descricaoDoMetodoDeTesteIgnorado);
+				}
+			}
+			for (Metodo metodoDeTeste : classeDeTeste.obterMetodosDeTeste()) {
+				Description descricaoDoMetodoDeTeste = Description.createTestDescription(classeDeTeste.obterClasse(), metodoDeTeste.obterNome());
+				if (filtro.shouldRun(descricaoDoMetodoDeTeste)) {
+					descricaoDaClasse.addChild(descricaoDoMetodoDeTeste);
+				}
+			}
+			if (classeDeTeste.vazia()) {
+				descricaoDaClasse.addChild(Description.EMPTY);
+			}
+			descricaoDaSuite.addChild(descricaoDaClasse);
+		}
+		if (suiteDeTeste.vazia()) {
+			descricaoDaSuite.addChild(Description.EMPTY);
+		}
+		return suiteDeTeste.classeDeTesteComoSuite() ? descricaoDaSuite.getChildren().iterator().next() : descricaoDaSuite;
 	}
 
 	@Override
@@ -51,13 +73,12 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 	@Override
 	public void filter(Filter filtro) throws NoTestsRemainException {
 		filtros.add(filtro);
-		descricaoDaSuite = suiteDeTeste.obterDescricao(filtro);
 	}
 
 	private void executarSuite(SuiteDeTeste suiteDeTeste) {
 		ata.registrar("%s", suiteDeTeste);
 		ata.avancarIndentacao();
-		mensageiroDeEscolta.fireTestRunStarted(descricaoDaSuite);
+		mensageiroDeEscolta.fireTestRunStarted(getDescription());
 		execuitarTestesIgnorados(suiteDeTeste);
 		executarTestes(suiteDeTeste);
 		mensageiroDeEscolta.fireTestRunFinished(resultado);
@@ -66,7 +87,7 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 
 	private void execuitarTestesIgnorados(SuiteDeTeste suiteDeTeste) {
 		for (ClasseDeTeste classeDeteste : suiteDeTeste.obterClassesDeTeste()) {
-			for (MetodoDeTeste metodoDeTeste : classeDeteste.obterMetodosDeTesteIgnorados()) {
+			for (Metodo metodoDeTeste : classeDeteste.obterMetodosDeTesteIgnorados()) {
 				if (!filtrarExecucao(metodoDeTeste)) {
 					executarMetodoDeTesteIgnorado(metodoDeTeste);
 				}
@@ -78,7 +99,7 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 		for (ClasseDeTeste classeDeTeste : suiteDeTeste.obterClassesDeTeste()) {
 			ata.registrar("%s", classeDeTeste);
 			ata.avancarIndentacao();
-			for (MetodoDeTeste metodoDeTeste : classeDeTeste.obterMetodosDeTeste()) {
+			for (Metodo metodoDeTeste : classeDeTeste.obterMetodosDeTeste()) {
 				if (!filtrarExecucao(metodoDeTeste)) {
 					executarMetodoDeTeste(classeDeTeste, metodoDeTeste);
 				}
@@ -87,34 +108,36 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 		}
 	}
 
-	private void executarMetodoDeTesteIgnorado(MetodoDeTeste metodoDeTeste) {
+	private void executarMetodoDeTesteIgnorado(Metodo metodoDeTeste) {
 		ata.registrar("@Ignore %s", metodoDeTeste);
-		mensageiroDeEscolta.fireTestIgnored(metodoDeTeste.obterDescricao());
+		Description descricaoDoMetodoDeTeste = Description.createTestDescription(metodoDeTeste.obterClasseDeTeste().obterClasse(), metodoDeTeste.obterNome());
+		mensageiroDeEscolta.fireTestIgnored(descricaoDoMetodoDeTeste);
 	}
 
-	private void executarMetodoDeTeste(ClasseDeTeste classeDeTeste, MetodoDeTeste metodoDeTeste) {
+	private void executarMetodoDeTeste(ClasseDeTeste classeDeTeste, Metodo metodoDeTeste) {
 		if (classeDeTeste.ignorada() || suiteDeTeste.ignorada()) {
 			executarMetodoDeTesteIgnorado(metodoDeTeste);
 		} else {
 			ata.registrar("%s", metodoDeTeste);
 			ata.avancarIndentacao();
 			Map<ClasseDeTeste, InvocadorDeMetodo<?>> classesSingularesExecutadas = new HashMap<>();
-			TratadorDeInvocacao tratadorDeTeste = new TratadorDeInvocacaoDeTeste(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
-			TratadorDeInvocacao tratadorDeConfiguracao = new TratadorDeInvocacaoDeConfiguracao(metodoDeTeste.obterDescricao(), mensageiroDeEscolta);
+			Description descricaoDoMetodoDeTeste = Description.createTestDescription(metodoDeTeste.obterClasseDeTeste().obterClasse(), metodoDeTeste.obterNome());
+			TratadorDeInvocacao tratadorDeTeste = new TratadorDeInvocacaoDeTeste(descricaoDoMetodoDeTeste, mensageiroDeEscolta);
+			TratadorDeInvocacao tratadorDeConfiguracao = new TratadorDeInvocacaoDeConfiguracao(descricaoDoMetodoDeTeste, mensageiroDeEscolta);
 			InvocadorDeMetodo<?> invocadorParaClasseDeTeste = new InvocadorDeMetodo<>(classeDeTeste.obterClasse());
-			mensageiroDeEscolta.fireTestStarted(metodoDeTeste.obterDescricao());
+			mensageiroDeEscolta.fireTestStarted(descricaoDoMetodoDeTeste);
 			executarConfiguracaoDaClasseDeTeste(classeDeTeste, tratadorDeConfiguracao, invocadorParaClasseDeTeste, classesSingularesExecutadas);
 			invocadorParaClasseDeTeste.executar(metodoDeTeste.obterMetodo(), tratadorDeTeste);
 			ata.registrar("@Test %s", metodoDeTeste);
-			mensageiroDeEscolta.fireTestFinished(metodoDeTeste.obterDescricao());
+			mensageiroDeEscolta.fireTestFinished(descricaoDoMetodoDeTeste);
 			ata.recuarIndentacao();
 		}
 	}
 
 	private void executarConfiguracaoDaClasseDeTeste(ClasseDeTeste classeDeTeste, TratadorDeInvocacao tratadorDeConfiguracao, InvocadorDeMetodo<?> invocadorParaClasseDeTeste, Map<ClasseDeTeste, InvocadorDeMetodo<?>> classesSingularesExecutadas) {
-		Map<AtributoAcessorio, Boolean> atributosEnxertados = new HashMap<>();
+		Map<Atributo, Boolean> atributosEnxertados = new HashMap<>();
 		if (!classesSingularesExecutadas.containsKey(classeDeTeste)) {
-			for (ClasseDeTeste classeAcessorio : classeDeTeste.obterAcessorios()) {
+			for (ClasseDeTeste classeAcessorio : classeDeTeste.obterClassesProvedoras()) {
 				ata.registrar("@FixtureSetup %s", classeAcessorio);
 				ata.avancarIndentacao();
 				InvocadorDeMetodo<?> invocadorParaAcessorio = classesSingularesExecutadas.containsKey(classeAcessorio) ? classesSingularesExecutadas.get(classeAcessorio) : new InvocadorDeMetodo<>(classeAcessorio.obterClasse());
@@ -122,7 +145,7 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 				enxertarAcessorios(classeDeTeste, classeAcessorio, invocadorParaClasseDeTeste, invocadorParaAcessorio, atributosEnxertados);
 				ata.recuarIndentacao();
 			}
-			for (MetodoDeConfiguracao metodoDeConfiguracao : classeDeTeste.obterMetodosDeConfiguracao()) {
+			for (Metodo metodoDeConfiguracao : classeDeTeste.obterMetodosDeConfiguracao()) {
 				invocadorParaClasseDeTeste.executar(metodoDeConfiguracao.obterMetodo(), tratadorDeConfiguracao);
 				ata.registrar("@Before %s", metodoDeConfiguracao);
 			}
@@ -132,18 +155,18 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 		}
 	}
 
-	private void enxertarAcessorios(ClasseDeTeste classeDeTeste, ClasseDeTeste classeAcessorio, InvocadorDeMetodo<?> invocadorParaClasseDeTeste, InvocadorDeMetodo<?> invocadorParaAcessorio, Map<AtributoAcessorio, Boolean> atributosEnxertados) {
+	private void enxertarAcessorios(ClasseDeTeste classeDeTeste, ClasseDeTeste classeAcessorio, InvocadorDeMetodo<?> invocadorParaClasseDeTeste, InvocadorDeMetodo<?> invocadorParaAcessorio, Map<Atributo, Boolean> atributosEnxertados) {
 		EnxertorDeAtributo enxertador = new EnxertorDeAtributo(invocadorParaAcessorio.obterInstancia(), invocadorParaClasseDeTeste.obterInstancia());
-		for (AtributoProprio atributoProprio : classeAcessorio.obterAtributosProprios()) {
+		for (Atributo atributoProprio : classeAcessorio.obterAtributosProprios()) {
 			enxertarAcessorio(classeDeTeste, classeAcessorio, enxertador, atributoProprio, atributosEnxertados);
 		}
-		for (AtributoAcessorio atributoAcessorio : classeAcessorio.obterAtributosAcessorios()) {
+		for (Atributo atributoAcessorio : classeAcessorio.obterAtributosAcessorios()) {
 			enxertarAcessorio(classeDeTeste, classeAcessorio, enxertador, atributoAcessorio, atributosEnxertados);
 		}
 	}
 
-	private void enxertarAcessorio(ClasseDeTeste classeDeTeste, ClasseDeTeste classeAcessorio, EnxertorDeAtributo enxertador, Atributo atributoProprio, Map<AtributoAcessorio, Boolean> atributosEnxertados) {
-		for (AtributoAcessorio atributoAcessorio : classeDeTeste.obterAtributosAcessorios()) {
+	private void enxertarAcessorio(ClasseDeTeste classeDeTeste, ClasseDeTeste classeAcessorio, EnxertorDeAtributo enxertador, Atributo atributoProprio, Map<Atributo, Boolean> atributosEnxertados) {
+		for (Atributo atributoAcessorio : classeDeTeste.obterAtributosAcessorios()) {
 			if (atributoAcessorio.compativelCom(atributoProprio) && !atributosEnxertados.containsKey(atributoAcessorio)) {
 				ata.registrar("@Fixture %s", atributoProprio);
 				atributosEnxertados.put(atributoAcessorio, true);
@@ -152,9 +175,10 @@ public class EscoltadorDeTestes extends Runner implements Filterable {
 		}
 	}
 
-	private Boolean filtrarExecucao(MetodoDeTeste metodoDeTeste) {
+	private Boolean filtrarExecucao(Metodo metodoDeTeste) {
 		for (Filter filtro : filtros) {
-			if (!filtro.shouldRun(metodoDeTeste.obterDescricao())) {
+			Description descricaoDoMetodoDeTeste = Description.createTestDescription(metodoDeTeste.obterClasseDeTeste().obterClasse(), metodoDeTeste.obterNome());
+			if (!filtro.shouldRun(descricaoDoMetodoDeTeste)) {
 				return true;
 			}
 		}

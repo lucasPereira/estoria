@@ -20,7 +20,9 @@ import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste112;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste137;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste138;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste19;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste20;
 
 public final class TesteEscoltadorDeTestesReaproveitadorExecucaoDeSuitesDeTeste {
 
@@ -46,6 +48,18 @@ public final class TesteEscoltadorDeTestesReaproveitadorExecucaoDeSuitesDeTeste 
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste112.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste137.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste137.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(2, 0, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void suiteDeTeste20() throws Exception {
+		configurar(SuiteDeTeste20.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suiteDeTeste));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste112.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste112.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste138.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste138.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTestesFinalizados(2, 0, 0));
 		assertFalse(notificacoes.hasNext());
 	}

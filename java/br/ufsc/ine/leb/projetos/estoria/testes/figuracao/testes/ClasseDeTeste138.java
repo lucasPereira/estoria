@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,8 +8,8 @@ import org.junit.Test;
 import br.ufsc.ine.leb.projetos.estoria.Fixture;
 import br.ufsc.ine.leb.projetos.estoria.FixtureSetup;
 
-@FixtureSetup(ClasseDeTeste126.class)
-public class ClasseDeTeste129 {
+@FixtureSetup(ClasseDeTeste137.class)
+public class ClasseDeTeste138 {
 
 	private int meuIndiretoAcessorioBefore10;
 	private int meuIndiretoAcessorioBefore20Test30;
@@ -34,9 +34,8 @@ public class ClasseDeTeste129 {
 		assertEquals(20, meuAcessorioBefore20Test30);
 		assertEquals(0, meuAcessorioTest40);
 		assertEquals(10, acessorioBefore10);
-		assertEquals(20, acessorioBefore20Test30);
-		assertEquals(0, acessorioTest40);
-		fail("129 falha configurada");
+		assertEquals(30, acessorioBefore20Test30);
+		assertEquals(40, acessorioTest40);
 	}
 
 	@Test
@@ -50,9 +49,8 @@ public class ClasseDeTeste129 {
 		assertEquals(20, meuAcessorioBefore20Test30);
 		assertEquals(0, meuAcessorioTest40);
 		assertEquals(10, acessorioBefore10);
-		assertEquals(20, acessorioBefore20Test30);
-		assertEquals(0, acessorioTest40);
-		fail("129 falha induzida");
+		assertEquals(30, acessorioBefore20Test30);
+		assertEquals(40, acessorioTest40);
 	}
 
 }

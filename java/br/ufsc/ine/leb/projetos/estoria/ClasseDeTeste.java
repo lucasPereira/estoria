@@ -3,65 +3,65 @@ package br.ufsc.ine.leb.projetos.estoria;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.runner.Description;
-import org.junit.runner.manipulation.Filter;
-
 public final class ClasseDeTeste {
 
 	private Class<?> classe;
 	private Boolean singular;
 	private Boolean ignorada;
-	private List<ClasseDeTeste> acessorios;
-	private List<MetodoDeTeste> metodosDeTeste;
-	private List<MetodoDeTeste> metodosDeTesteIgnorados;
-	private List<MetodoDeConfiguracao> metodosDeConfiguracao;
-	private List<AtributoProprio> atributosProprios;
-	private List<AtributoAcessorio> atributosAcessorios;
+	private List<Metodo> metodosDeTeste;
+	private List<Metodo> metodosDeTesteIgnorados;
+	private List<Metodo> metodosDeConfiguracao;
+	private List<Atributo> atributosProprios;
+	private List<Atributo> atributosAcessorios;
+	private List<ClasseDeTeste> classesProvedoras;
+	private List<ClasseDeTeste> classesConsumidoras;
 
-	public ClasseDeTeste(Class<?> classe) {
+	public ClasseDeTeste(Class<?> classe, RepositorioDeClassesDeTeste repositorio) {
 		this.classe = classe;
-		this.acessorios = new LinkedList<>();
+		this.classesProvedoras = new LinkedList<>();
+		this.classesConsumidoras = new LinkedList<>();
 		this.metodosDeTeste = new LinkedList<>();
 		this.metodosDeTesteIgnorados = new LinkedList<>();
 		this.metodosDeConfiguracao = new LinkedList<>();
 		this.atributosProprios = new LinkedList<>();
 		this.atributosAcessorios = new LinkedList<>();
 		SeletorDeComponentesDeTeste seletor = new SeletorDeComponentesDeTeste(classe);
-		seletor.obterAcessorios().forEach(classeDoAcessorio -> acessorios.add(new ClasseDeTeste(classeDoAcessorio)));
-		seletor.obterMetodosTeste().forEach(metodo -> metodosDeTeste.add(new MetodoDeTeste(this, metodo)));
-		seletor.obterMetodosDeTesteIgnorados().forEach(metodo -> metodosDeTesteIgnorados.add(new MetodoDeTeste(this, metodo)));
-		seletor.obterMetodosDeConfiguracao().forEach(metodo -> metodosDeConfiguracao.add(new MetodoDeConfiguracao(metodo)));
-		seletor.obterAtributosProprios().forEach(atributo -> atributosProprios.add(new AtributoProprio(atributo)));
-		seletor.obterAtributosAcessorios().forEach(atributo -> atributosAcessorios.add(new AtributoAcessorio(atributo)));
+		seletor.obterAcessorios().forEach(classeProvedora -> classesProvedoras.add(repositorio.construir(classeProvedora)));
+		seletor.obterMetodosTeste().forEach(metodo -> metodosDeTeste.add(new Metodo(metodo, repositorio)));
+		seletor.obterMetodosDeTesteIgnorados().forEach(metodo -> metodosDeTesteIgnorados.add(new Metodo(metodo, repositorio)));
+		seletor.obterMetodosDeConfiguracao().forEach(metodo -> metodosDeConfiguracao.add(new Metodo(metodo, repositorio)));
+		seletor.obterAtributosProprios().forEach(atributo -> atributosProprios.add(new Atributo(atributo, repositorio)));
+		seletor.obterAtributosAcessorios().forEach(atributo -> atributosAcessorios.add(new Atributo(atributo, repositorio)));
 		this.singular = seletor.classeSingular();
 		this.ignorada = seletor.classeIgnorada();
+		this.classesProvedoras.forEach(classeProvedora -> classeProvedora.classesConsumidoras.add(this));
 	}
 
 	public Class<?> obterClasse() {
 		return classe;
 	}
 
-	public List<MetodoDeTeste> obterMetodosDeTeste() {
+	public List<Metodo> obterMetodosDeTeste() {
 		return metodosDeTeste;
 	}
 
-	public List<MetodoDeTeste> obterMetodosDeTesteIgnorados() {
+	public List<Metodo> obterMetodosDeTesteIgnorados() {
 		return metodosDeTesteIgnorados;
 	}
 
-	public List<MetodoDeConfiguracao> obterMetodosDeConfiguracao() {
+	public List<Metodo> obterMetodosDeConfiguracao() {
 		return metodosDeConfiguracao;
 	}
 
-	public List<ClasseDeTeste> obterAcessorios() {
-		return acessorios;
+	public List<ClasseDeTeste> obterClassesProvedoras() {
+		return classesProvedoras;
 	}
 
-	public List<AtributoProprio> obterAtributosProprios() {
+	public List<Atributo> obterAtributosProprios() {
 		return atributosProprios;
 	}
 
-	public List<AtributoAcessorio> obterAtributosAcessorios() {
+	public List<Atributo> obterAtributosAcessorios() {
 		return atributosAcessorios;
 	}
 
@@ -73,15 +73,8 @@ public final class ClasseDeTeste {
 		return ignorada;
 	}
 
-	@SemTeste
-	public void criarDescricao(Description descricaoSuite, Filter filtro) {
-		Description descricao = Description.createSuiteDescription(classe);
-		if (semTestes()) {
-			descricao.addChild(Description.EMPTY);
-		}
-		metodosDeTesteIgnorados.forEach(metodoDeTeste -> adicionarMetodoNaDescricao(filtro, descricao, metodoDeTeste));
-		metodosDeTeste.forEach(metodoDeTeste -> adicionarMetodoNaDescricao(filtro, descricao, metodoDeTeste));
-		descricaoSuite.addChild(descricao);
+	public Boolean vazia() {
+		return metodosDeTesteIgnorados.isEmpty() && metodosDeTeste.isEmpty();
 	}
 
 	@Override
@@ -103,14 +96,8 @@ public final class ClasseDeTeste {
 		return classe.getSimpleName();
 	}
 
-	private Boolean semTestes() {
-		return metodosDeTesteIgnorados.isEmpty() && metodosDeTeste.isEmpty();
-	}
-
-	private void adicionarMetodoNaDescricao(Filter filtro, Description descricao, MetodoDeTeste metodoDeTeste) {
-		if (filtro.shouldRun(metodoDeTeste.obterDescricao())) {
-			descricao.addChild(metodoDeTeste.obterDescricao());
-		}
+	public List<ClasseDeTeste> obterClassesConsumidoras() {
+		return classesConsumidoras;
 	}
 
 }

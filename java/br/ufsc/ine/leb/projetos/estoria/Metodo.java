@@ -2,25 +2,26 @@ package br.ufsc.ine.leb.projetos.estoria;
 
 import java.lang.reflect.Method;
 
-public abstract class Metodo {
+public final class Metodo {
 
 	private Method metodo;
+	private RepositorioDeClassesDeTeste repositorio;
 
-	public Metodo(Method metodo) {
+	public Metodo(Method metodo, RepositorioDeClassesDeTeste repositorio) {
 		this.metodo = metodo;
+		this.repositorio = repositorio;
 	}
 
-	public final String obterNome() {
-		return metodo.getName();
+	public ClasseDeTeste obterClasseDeTeste() {
+		return repositorio.construir(metodo.getDeclaringClass());
 	}
 
-	public final Method obterMetodo() {
+	public Method obterMetodo() {
 		return metodo;
 	}
 
-	@Override
-	public String toString() {
-		return obterNome();
+	public String obterNome() {
+		return metodo.getName();
 	}
 
 	@Override
@@ -35,6 +36,11 @@ public abstract class Metodo {
 	@Override
 	public int hashCode() {
 		return metodo.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return metodo.getName();
 	}
 
 }
