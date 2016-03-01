@@ -10,7 +10,9 @@ import static org.junit.Assert.assertThat;
 import java.util.Iterator;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runner.notification.RunNotifier;
+import org.junit.runners.JUnit4;
 
 import br.ufsc.ine.leb.projetos.estoria.Ata;
 import br.ufsc.ine.leb.projetos.estoria.EscoltadorDeTestesReaproveitador;
@@ -24,6 +26,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste138
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste19;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste20;
 
+@RunWith(JUnit4.class)
 public final class TesteEscoltadorDeTestesReaproveitadorExecucaoDeSuitesDeTeste {
 
 	private Class<?> suiteDeTeste;
