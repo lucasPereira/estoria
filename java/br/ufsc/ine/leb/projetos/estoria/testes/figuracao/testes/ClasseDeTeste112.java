@@ -7,26 +7,26 @@ import org.junit.Test;
 
 public class ClasseDeTeste112 {
 
-	private int acessorioBefore10;
-	private int acessorioBefore20Test30;
-	private int acessorioTest40;
+	private int acessorio112Before10;
+	private int acessorio112Before20Test30;
+	private int acessorio112Test40;
 
 	@Before
 	public void configurar() {
-		acessorioBefore10 = 10;
-		acessorioBefore20Test30 = 20;
-		assertEquals(10, acessorioBefore10);
-		assertEquals(20, acessorioBefore20Test30);
-		assertEquals(0, acessorioTest40);
+		acessorio112Before10 = 10;
+		acessorio112Before20Test30 = 20;
+		assertEquals(10, acessorio112Before10);
+		assertEquals(20, acessorio112Before20Test30);
+		assertEquals(0, acessorio112Test40);
 	}
 
 	@Test
 	public void testar() {
-		acessorioBefore20Test30 = 30;
-		acessorioTest40 = 40;
-		assertEquals(10, acessorioBefore10);
-		assertEquals(30, acessorioBefore20Test30);
-		assertEquals(40, acessorioTest40);
+		acessorio112Before20Test30 = 30;
+		acessorio112Test40 = 40;
+		assertEquals(10, acessorio112Before10);
+		assertEquals(30, acessorio112Before20Test30);
+		assertEquals(40, acessorio112Test40);
 	}
 
 }

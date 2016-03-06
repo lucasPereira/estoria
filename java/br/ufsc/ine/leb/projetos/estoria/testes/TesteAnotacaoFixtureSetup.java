@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import java.lang.annotation.Annotation;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import br.ufsc.ine.leb.projetos.estoria.FixtureSetup;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste112;
@@ -13,6 +15,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste117
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste119;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste127;
 
+@RunWith(JUnit4.class)
 public final class TesteAnotacaoFixtureSetup {
 
 	@Test

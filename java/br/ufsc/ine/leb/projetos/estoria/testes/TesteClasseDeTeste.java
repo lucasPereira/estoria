@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import br.ufsc.ine.leb.projetos.estoria.Atributo;
 import br.ufsc.ine.leb.projetos.estoria.ClasseDeTeste;
@@ -19,6 +21,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste132
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste133;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste136;
 
+@RunWith(JUnit4.class)
 public final class TesteClasseDeTeste {
 
 	private Metodo classeDeTeste119Configurar;
@@ -39,12 +42,12 @@ public final class TesteClasseDeTeste {
 	private ClasseDeTeste classeDeTeste136;
 	private ClasseDeTeste classeDeTesteVazia;
 	private ClasseDeTeste classeDeTesteCheia;
-	private Atributo classeDeTeste119MeuAcessorioBefore10;
-	private Atributo classeDeTeste119MeuAcessorioBefore20Test30;
-	private Atributo classeDeTeste119MeuAcessorioTest40;
-	private Atributo classeDeTeste119AcessorioBefore10;
-	private Atributo classeDeTeste119AcessorioBefore20Test30;
-	private Atributo classeDeTeste119AcessorioTest40;
+	private Atributo classeDeTeste119Acessorio119Before10;
+	private Atributo classeDeTeste119Acessorio119Before20Test30;
+	private Atributo classeDeTeste119Acessorio119Test40;
+	private Atributo classeDeTeste119Acessorio112Before10;
+	private Atributo classeDeTeste119Acessorio112Before20Test30;
+	private Atributo classeDeTeste119Acessorio112Test40;
 	private Atributo classeDeTeste130Numeros;
 	private Atributo classeDeTeste131Numeros;
 	private Atributo classeDeTeste133Numeros;
@@ -62,12 +65,12 @@ public final class TesteClasseDeTeste {
 		classeDeTeste136 = new ClasseDeTeste(ClasseDeTeste136.class, repositorio);
 		classeDeTesteVazia = new ClasseDeTeste(ClasseVazia.class, repositorio);
 		classeDeTesteCheia = new ClasseDeTeste(ClasseCheia.class, repositorio);
-		classeDeTeste119MeuAcessorioBefore10 = new Atributo(ClasseDeTeste119.class.getDeclaredField("meuAcessorioBefore10"), repositorio);
-		classeDeTeste119MeuAcessorioBefore20Test30 = new Atributo(ClasseDeTeste119.class.getDeclaredField("meuAcessorioBefore20Test30"), repositorio);
-		classeDeTeste119MeuAcessorioTest40 = new Atributo(ClasseDeTeste119.class.getDeclaredField("meuAcessorioTest40"), repositorio);
-		classeDeTeste119AcessorioBefore10 = new Atributo(ClasseDeTeste119.class.getDeclaredField("acessorioBefore10"), repositorio);
-		classeDeTeste119AcessorioBefore20Test30 = new Atributo(ClasseDeTeste119.class.getDeclaredField("acessorioBefore20Test30"), repositorio);
-		classeDeTeste119AcessorioTest40 = new Atributo(ClasseDeTeste119.class.getDeclaredField("acessorioTest40"), repositorio);
+		classeDeTeste119Acessorio119Before10 = new Atributo(ClasseDeTeste119.class.getDeclaredField("acessorio119Before10"), repositorio);
+		classeDeTeste119Acessorio119Before20Test30 = new Atributo(ClasseDeTeste119.class.getDeclaredField("acessorio119Before20Test30"), repositorio);
+		classeDeTeste119Acessorio119Test40 = new Atributo(ClasseDeTeste119.class.getDeclaredField("acessorio119Test40"), repositorio);
+		classeDeTeste119Acessorio112Before10 = new Atributo(ClasseDeTeste119.class.getDeclaredField("acessorio112Before10"), repositorio);
+		classeDeTeste119Acessorio112Before20Test30 = new Atributo(ClasseDeTeste119.class.getDeclaredField("acessorio112Before20Test30"), repositorio);
+		classeDeTeste119Acessorio112Test40 = new Atributo(ClasseDeTeste119.class.getDeclaredField("acessorio112Test40"), repositorio);
 		classeDeTeste130Numeros = new Atributo(ClasseDeTeste130.class.getDeclaredField("numeros"), repositorio);
 		classeDeTeste131Numeros = new Atributo(ClasseDeTeste131.class.getDeclaredField("numeros"), repositorio);
 		classeDeTeste133Numeros = new Atributo(ClasseDeTeste133.class.getDeclaredField("numeros"), repositorio);
@@ -107,12 +110,12 @@ public final class TesteClasseDeTeste {
 		assertEquals(1, classeDeTeste119.obterMetodosDeTeste().size());
 		assertEquals(0, classeDeTeste119.obterMetodosDeTesteIgnorados().size());
 		assertEquals(classeDeTeste112, classeDeTeste119.obterClassesProvedoras().get(0));
-		assertEquals(classeDeTeste119MeuAcessorioBefore10, classeDeTeste119.obterAtributosProprios().get(0));
-		assertEquals(classeDeTeste119MeuAcessorioBefore20Test30, classeDeTeste119.obterAtributosProprios().get(1));
-		assertEquals(classeDeTeste119MeuAcessorioTest40, classeDeTeste119.obterAtributosProprios().get(2));
-		assertEquals(classeDeTeste119AcessorioBefore10, classeDeTeste119.obterAtributosAcessorios().get(0));
-		assertEquals(classeDeTeste119AcessorioBefore20Test30, classeDeTeste119.obterAtributosAcessorios().get(1));
-		assertEquals(classeDeTeste119AcessorioTest40, classeDeTeste119.obterAtributosAcessorios().get(2));
+		assertEquals(classeDeTeste119Acessorio119Before10, classeDeTeste119.obterAtributosProprios().get(0));
+		assertEquals(classeDeTeste119Acessorio119Before20Test30, classeDeTeste119.obterAtributosProprios().get(1));
+		assertEquals(classeDeTeste119Acessorio119Test40, classeDeTeste119.obterAtributosProprios().get(2));
+		assertEquals(classeDeTeste119Acessorio112Before10, classeDeTeste119.obterAtributosAcessorios().get(0));
+		assertEquals(classeDeTeste119Acessorio112Before20Test30, classeDeTeste119.obterAtributosAcessorios().get(1));
+		assertEquals(classeDeTeste119Acessorio112Test40, classeDeTeste119.obterAtributosAcessorios().get(2));
 		assertEquals(classeDeTeste119Configurar, classeDeTeste119.obterMetodosDeConfiguracao().get(0));
 		assertEquals(classeDeTeste119Testar, classeDeTeste119.obterMetodosDeTeste().get(0));
 		assertFalse(classeDeTeste119.singular());

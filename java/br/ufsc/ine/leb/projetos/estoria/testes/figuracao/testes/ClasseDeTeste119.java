@@ -11,36 +11,36 @@ import br.ufsc.ine.leb.projetos.estoria.FixtureSetup;
 @FixtureSetup(ClasseDeTeste112.class)
 public class ClasseDeTeste119 {
 
-	private int meuAcessorioBefore10;
-	private int meuAcessorioBefore20Test30;
-	private int meuAcessorioTest40;
+	private int acessorio119Before10;
+	private int acessorio119Before20Test30;
+	private int acessorio119Test40;
 	
-	@Fixture private int acessorioBefore10;
-	@Fixture private int acessorioBefore20Test30;
-	@Fixture private int acessorioTest40;
+	@Fixture private int acessorio112Before10;
+	@Fixture private int acessorio112Before20Test30;
+	@Fixture private int acessorio112Test40;
 
 	@Before
 	public void configurar() {
-		meuAcessorioBefore10 = 10;
-		meuAcessorioBefore20Test30 = 20;
-		assertEquals(10, meuAcessorioBefore10);
-		assertEquals(20, meuAcessorioBefore20Test30);
-		assertEquals(0, meuAcessorioTest40);
-		assertEquals(10, acessorioBefore10);
-		assertEquals(20, acessorioBefore20Test30);
-		assertEquals(0, acessorioTest40);
+		acessorio119Before10 = 10;
+		acessorio119Before20Test30 = 20;
+		assertEquals(10, acessorio119Before10);
+		assertEquals(20, acessorio119Before20Test30);
+		assertEquals(0, acessorio119Test40);
+		assertEquals(10, acessorio112Before10);
+		assertEquals(20, acessorio112Before20Test30);
+		assertEquals(0, acessorio112Test40);
 	}
 
 	@Test
 	public void testar() {
-		meuAcessorioBefore20Test30 = 30;
-		meuAcessorioTest40 = 40;
-		assertEquals(10, meuAcessorioBefore10);
-		assertEquals(30, meuAcessorioBefore20Test30);
-		assertEquals(40, meuAcessorioTest40);
-		assertEquals(10, acessorioBefore10);
-		assertEquals(20, acessorioBefore20Test30);
-		assertEquals(0, acessorioTest40);
+		acessorio119Before20Test30 = 30;
+		acessorio119Test40 = 40;
+		assertEquals(10, acessorio119Before10);
+		assertEquals(30, acessorio119Before20Test30);
+		assertEquals(40, acessorio119Test40);
+		assertEquals(10, acessorio112Before10);
+		assertEquals(20, acessorio112Before20Test30);
+		assertEquals(0, acessorio112Test40);
 	}
 
 }

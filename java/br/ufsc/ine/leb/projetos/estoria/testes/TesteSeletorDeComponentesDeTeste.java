@@ -3,6 +3,8 @@ package br.ufsc.ine.leb.projetos.estoria.testes;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import br.ufsc.ine.leb.projetos.estoria.SeletorDeComponentesDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseVazia;
@@ -17,6 +19,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste136
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste11;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste15;
 
+@RunWith(JUnit4.class)
 public final class TesteSeletorDeComponentesDeTeste {
 
 	@Test
@@ -95,9 +98,9 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertEquals(0, seletor.obterAtributosAcessorios().size());
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals("configurar", seletor.obterMetodosDeConfiguracao().get(0).getName());
-		assertEquals("acessorioBefore10", seletor.obterAtributosProprios().get(0).getName());
-		assertEquals("acessorioBefore20Test30", seletor.obterAtributosProprios().get(1).getName());
-		assertEquals("acessorioTest40", seletor.obterAtributosProprios().get(2).getName());
+		assertEquals("acessorio112Before10", seletor.obterAtributosProprios().get(0).getName());
+		assertEquals("acessorio112Before20Test30", seletor.obterAtributosProprios().get(1).getName());
+		assertEquals("acessorio112Test40", seletor.obterAtributosProprios().get(2).getName());
 		assertEquals(ClasseDeTeste112.class, seletor.obterClassesDeSuite().get(0));
 		assertFalse(seletor.classeSingular());
 		assertFalse(seletor.classeIgnorada());
@@ -147,12 +150,12 @@ public final class TesteSeletorDeComponentesDeTeste {
 		assertFalse(seletor.classeIgnorada());
 		assertEquals("testar", seletor.obterMetodosTeste().get(0).getName());
 		assertEquals("configurar", seletor.obterMetodosDeConfiguracao().get(0).getName());
-		assertEquals("acessorioBefore10", seletor.obterAtributosAcessorios().get(0).getName());
-		assertEquals("acessorioBefore20Test30", seletor.obterAtributosAcessorios().get(1).getName());
-		assertEquals("acessorioTest40", seletor.obterAtributosAcessorios().get(2).getName());
-		assertEquals("meuAcessorioBefore10", seletor.obterAtributosProprios().get(0).getName());
-		assertEquals("meuAcessorioBefore20Test30", seletor.obterAtributosProprios().get(1).getName());
-		assertEquals("meuAcessorioTest40", seletor.obterAtributosProprios().get(2).getName());
+		assertEquals("acessorio112Before10", seletor.obterAtributosAcessorios().get(0).getName());
+		assertEquals("acessorio112Before20Test30", seletor.obterAtributosAcessorios().get(1).getName());
+		assertEquals("acessorio112Test40", seletor.obterAtributosAcessorios().get(2).getName());
+		assertEquals("acessorio119Before10", seletor.obterAtributosProprios().get(0).getName());
+		assertEquals("acessorio119Before20Test30", seletor.obterAtributosProprios().get(1).getName());
+		assertEquals("acessorio119Test40", seletor.obterAtributosProprios().get(2).getName());
 		assertEquals(ClasseDeTeste112.class, seletor.obterAcessorios().get(0));
 		assertEquals(ClasseDeTeste119.class, seletor.obterClassesDeSuite().get(0));
 	}

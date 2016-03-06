@@ -4,11 +4,14 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import br.ufsc.ine.leb.projetos.estoria.Ata;
 import br.ufsc.ine.leb.projetos.estoria.EscrivaoMalandro;
 import br.ufsc.ine.leb.projetos.estoria.ExcecaoRecuoDeAtaMaiorDoQuePermitido;
 
+@RunWith(JUnit4.class)
 public final class TesteAta {
 
 	private Ata ata;

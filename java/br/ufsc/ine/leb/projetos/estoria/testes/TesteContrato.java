@@ -2,10 +2,13 @@ package br.ufsc.ine.leb.projetos.estoria.testes;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import br.ufsc.ine.leb.projetos.estoria.Contrato;
 import br.ufsc.ine.leb.projetos.estoria.ExcecaoClausulaDeContratoViolada;
 
+@RunWith(JUnit4.class)
 public final class TesteContrato {
 
 	private Contrato contrato;

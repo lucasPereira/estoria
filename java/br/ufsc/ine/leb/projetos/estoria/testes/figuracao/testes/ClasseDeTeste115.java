@@ -7,27 +7,27 @@ import org.junit.Test;
 
 public class ClasseDeTeste115 {
 
-	private int acessorioBefore10;
-	private int acessorioBefore20Test30;
-	private int acessorioTest40;
+	private int acessorio115Before10;
+	private int acessorio115Before20Test30;
+	private int acessorio115Test40;
 
 	@Before
 	public void configurar() {
-		acessorioBefore10 = 10;
-		acessorioBefore20Test30 = 20;
-		assertEquals(10, acessorioBefore10);
-		assertEquals(20, acessorioBefore20Test30);
-		assertEquals(0, acessorioTest40);
+		acessorio115Before10 = 10;
+		acessorio115Before20Test30 = 20;
+		assertEquals(10, acessorio115Before10);
+		assertEquals(20, acessorio115Before20Test30);
+		assertEquals(0, acessorio115Test40);
 		fail("115 falha configurada");
 	}
 
 	@Test
 	public void testar() {
-		acessorioBefore20Test30 = 30;
-		acessorioTest40 = 40;
-		assertEquals(10, acessorioBefore10);
-		assertEquals(30, acessorioBefore20Test30);
-		assertEquals(40, acessorioTest40);
+		acessorio115Before20Test30 = 30;
+		acessorio115Test40 = 40;
+		assertEquals(10, acessorio115Before10);
+		assertEquals(30, acessorio115Before20Test30);
+		assertEquals(40, acessorio115Test40);
 		fail("115 falha induzida");
 	}
 

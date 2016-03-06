@@ -4,11 +4,14 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import br.ufsc.ine.leb.projetos.estoria.ClasseDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.RepositorioDeClassesDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste101;
 
+@RunWith(JUnit4.class)
 public class TesteRepositorioDeClassesDeTeste {
 
 	private RepositorioDeClassesDeTeste repositorio;

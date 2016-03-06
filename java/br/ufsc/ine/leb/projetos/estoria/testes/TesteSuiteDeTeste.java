@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import br.ufsc.ine.leb.projetos.estoria.ClasseDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.RepositorioDeClassesDeTeste;
@@ -11,7 +13,6 @@ import br.ufsc.ine.leb.projetos.estoria.SuiteDeTeste;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseVazia;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste101;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste111;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste112;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste116;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste119;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste130;
@@ -19,18 +20,19 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste131
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste133;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste136;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste137;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste140;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste11;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste12;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste13;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste17;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste18;
-import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste19;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste20;
 
+@RunWith(JUnit4.class)
 public final class TesteSuiteDeTeste {
 
 	private ClasseDeTeste classeDeTeste101;
 	private ClasseDeTeste classeDeTeste111;
-	private ClasseDeTeste classeDeTeste112;
 	private ClasseDeTeste classeDeTeste116;
 	private ClasseDeTeste classeDeTeste119;
 	private ClasseDeTeste classeDeTeste130;
@@ -38,6 +40,7 @@ public final class TesteSuiteDeTeste {
 	private ClasseDeTeste classeDeTeste133;
 	private ClasseDeTeste classeDeTeste136;
 	private ClasseDeTeste classeDeTeste137;
+	private ClasseDeTeste classeDeTeste140;
 	private ClasseDeTeste classeDeTesteVazia;
 
 	@Before
@@ -45,7 +48,6 @@ public final class TesteSuiteDeTeste {
 		RepositorioDeClassesDeTeste repositorio = new RepositorioDeClassesDeTeste();
 		classeDeTeste101 = new ClasseDeTeste(ClasseDeTeste101.class, repositorio);
 		classeDeTeste111 = new ClasseDeTeste(ClasseDeTeste111.class, repositorio);
-		classeDeTeste112 = new ClasseDeTeste(ClasseDeTeste112.class, repositorio);
 		classeDeTeste116 = new ClasseDeTeste(ClasseDeTeste116.class, repositorio);
 		classeDeTeste119 = new ClasseDeTeste(ClasseDeTeste119.class, repositorio);
 		classeDeTeste130 = new ClasseDeTeste(ClasseDeTeste130.class, repositorio);
@@ -53,6 +55,7 @@ public final class TesteSuiteDeTeste {
 		classeDeTeste133 = new ClasseDeTeste(ClasseDeTeste133.class, repositorio);
 		classeDeTeste136 = new ClasseDeTeste(ClasseDeTeste136.class, repositorio);
 		classeDeTeste137 = new ClasseDeTeste(ClasseDeTeste137.class, repositorio);
+		classeDeTeste140 = new ClasseDeTeste(ClasseDeTeste140.class, repositorio);
 		classeDeTesteVazia = new ClasseDeTeste(ClasseVazia.class, repositorio);
 	}
 
@@ -113,17 +116,16 @@ public final class TesteSuiteDeTeste {
 	}
 
 	@Test
-	public void suiteDeTeste19() throws Exception {
-		SuiteDeTeste suite = new SuiteDeTeste(SuiteDeTeste19.class);
-		assertEquals(SuiteDeTeste19.class, suite.obterSuite());
+	public void suiteDeTeste20() throws Exception {
+		SuiteDeTeste suite = new SuiteDeTeste(SuiteDeTeste20.class);
+		assertEquals(SuiteDeTeste20.class, suite.obterSuite());
 		assertEquals(2, suite.obterClassesDeTeste().size());
 		assertEquals(classeDeTeste137, suite.obterClassesDeTeste().get(0));
-		assertEquals(classeDeTeste112, suite.obterClassesDeTeste().get(1));
+		assertEquals(classeDeTeste140, suite.obterClassesDeTeste().get(1));
 		assertFalse(suite.ignorada());
 		assertFalse(suite.vazia());
 		assertFalse(suite.classeDeTesteComoSuite());
-		assertSame(suite.obterClassesDeTeste().get(0).obterClassesProvedoras().get(0), suite.obterClassesDeTeste().get(1));
-		assertSame(suite.obterClassesDeTeste().get(1).obterClassesConsumidoras().get(0), suite.obterClassesDeTeste().get(0));
+		assertSame(suite.obterClassesDeTeste().get(0).obterClassesConsumidoras().get(0), suite.obterClassesDeTeste().get(1).obterClassesProvedoras().get(0));
 	}
 
 	@Test

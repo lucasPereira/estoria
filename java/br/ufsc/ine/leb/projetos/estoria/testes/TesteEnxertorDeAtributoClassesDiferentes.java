@@ -6,6 +6,8 @@ import java.lang.reflect.Field;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import br.ufsc.ine.leb.projetos.estoria.EnxertorDeAtributo;
 import br.ufsc.ine.leb.projetos.estoria.ExcecaoChecadaQueNaoDeveriaSerLancada;
@@ -14,6 +16,7 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmAtri
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmAtributoNumberInteger;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.classes.ClasseComUmAtributoNumberLong;
 
+@RunWith(JUnit4.class)
 public final class TesteEnxertorDeAtributoClassesDiferentes {
 
 	private ClasseComUmAtributoInteger comInteiro100;

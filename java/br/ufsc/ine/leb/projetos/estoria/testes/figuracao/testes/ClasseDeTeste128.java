@@ -11,46 +11,46 @@ import br.ufsc.ine.leb.projetos.estoria.FixtureSetup;
 @FixtureSetup(ClasseDeTeste119.class)
 public class ClasseDeTeste128 {
 
-	private int meuIndiretoAcessorioBefore10;
-	private int meuIndiretoAcessorioBefore20Test30;
-	private int meuIndiretoAcessorioTest40;
+	private int acessorio128Before10;
+	private int acessorio128Before20Test30;
+	private int acessorio128Test40;
 
-	@Fixture private int meuAcessorioBefore10;
-	@Fixture private int meuAcessorioBefore20Test30;
-	@Fixture private int meuAcessorioTest40;
+	@Fixture private int acessorio119Before10;
+	@Fixture private int acessorio119Before20Test30;
+	@Fixture private int acessorio119Test40;
 
-	@Fixture private int acessorioBefore10;
-	@Fixture private int acessorioBefore20Test30;
-	@Fixture private int acessorioTest40;
+	@Fixture private int acessorio112Before10;
+	@Fixture private int acessorio112Before20Test30;
+	@Fixture private int acessorio112Test40;
 
 	@Before
 	public void configurar() {
-		meuIndiretoAcessorioBefore10 = 10;
-		meuIndiretoAcessorioBefore20Test30 = 20;
-		assertEquals(10, meuIndiretoAcessorioBefore10);
-		assertEquals(20, meuIndiretoAcessorioBefore20Test30);
-		assertEquals(0, meuIndiretoAcessorioTest40);
-		assertEquals(10, meuAcessorioBefore10);
-		assertEquals(20, meuAcessorioBefore20Test30);
-		assertEquals(0, meuAcessorioTest40);
-		assertEquals(10, acessorioBefore10);
-		assertEquals(20, acessorioBefore20Test30);
-		assertEquals(0, acessorioTest40);
+		acessorio128Before10 = 10;
+		acessorio128Before20Test30 = 20;
+		assertEquals(10, acessorio128Before10);
+		assertEquals(20, acessorio128Before20Test30);
+		assertEquals(0, acessorio128Test40);
+		assertEquals(10, acessorio119Before10);
+		assertEquals(20, acessorio119Before20Test30);
+		assertEquals(0, acessorio119Test40);
+		assertEquals(10, acessorio112Before10);
+		assertEquals(20, acessorio112Before20Test30);
+		assertEquals(0, acessorio112Test40);
 	}
 
 	@Test
 	public void testar() {
-		meuIndiretoAcessorioBefore20Test30 = 30;
-		meuIndiretoAcessorioTest40 = 40;
-		assertEquals(10, meuIndiretoAcessorioBefore10);
-		assertEquals(30, meuIndiretoAcessorioBefore20Test30);
-		assertEquals(40, meuIndiretoAcessorioTest40);
-		assertEquals(10, meuAcessorioBefore10);
-		assertEquals(20, meuAcessorioBefore20Test30);
-		assertEquals(0, meuAcessorioTest40);
-		assertEquals(10, acessorioBefore10);
-		assertEquals(20, acessorioBefore20Test30);
-		assertEquals(0, acessorioTest40);
+		acessorio128Before20Test30 = 30;
+		acessorio128Test40 = 40;
+		assertEquals(10, acessorio128Before10);
+		assertEquals(30, acessorio128Before20Test30);
+		assertEquals(40, acessorio128Test40);
+		assertEquals(10, acessorio119Before10);
+		assertEquals(20, acessorio119Before20Test30);
+		assertEquals(0, acessorio119Test40);
+		assertEquals(10, acessorio112Before10);
+		assertEquals(20, acessorio112Before20Test30);
+		assertEquals(0, acessorio112Test40);
 	}
 
 }

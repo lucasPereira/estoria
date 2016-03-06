@@ -4,13 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.Result;
+import org.junit.runner.RunWith;
 import org.junit.runner.notification.Failure;
+import org.junit.runners.JUnit4;
 
 import br.ufsc.ine.leb.projetos.estoria.ExcecaoClausulaDeContratoViolada;
 import br.ufsc.ine.leb.projetos.estoria.Notificacao;
 import br.ufsc.ine.leb.projetos.estoria.TipoDeNotificacao;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste101;
 
+@RunWith(JUnit4.class)
 public final class TesteNotificacaoExcecoes {
 
 	private Failure falha;
