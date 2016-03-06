@@ -20,8 +20,10 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste137
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste138;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste139;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste140;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste141;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste19;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste20;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste21;
 
 @RunWith(JUnit4.class)
 public final class TesteEscoltadorDeTestesReaproveitadorExecucaoDeSuitesDeTeste {
@@ -62,6 +64,18 @@ public final class TesteEscoltadorDeTestesReaproveitadorExecucaoDeSuitesDeTeste 
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste137.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste140.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste140.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(2, 0, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void suiteDeTeste21() throws Exception {
+		configurar(SuiteDeTeste21.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suiteDeTeste));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste138.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste138.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste141.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste141.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTestesFinalizados(2, 0, 0));
 		assertFalse(notificacoes.hasNext());
 	}
