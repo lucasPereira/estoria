@@ -21,9 +21,13 @@ import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste138
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste139;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste140;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste141;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste142;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.ClasseDeTeste143;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste19;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste20;
 import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste21;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste22;
+import br.ufsc.ine.leb.projetos.estoria.testes.figuracao.testes.SuiteDeTeste23;
 
 @RunWith(JUnit4.class)
 public final class TesteEscoltadorDeTestesReaproveitadorExecucaoDeSuitesDeTeste {
@@ -77,6 +81,34 @@ public final class TesteEscoltadorDeTestesReaproveitadorExecucaoDeSuitesDeTeste 
 		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste141.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste141.class, "testar"));
 		assertThat(notificacoes.next(), combinaComTestesFinalizados(2, 0, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void suiteDeTeste22() throws Exception {
+		configurar(SuiteDeTeste22.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suiteDeTeste));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste137.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste137.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste142.class, "testar1"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste142.class, "testar1"));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste142.class, "testar2"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste142.class, "testar2"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(3, 0, 0));
+		assertFalse(notificacoes.hasNext());
+	}
+
+	@Test
+	public void suiteDeTeste23() throws Exception {
+		configurar(SuiteDeTeste23.class);
+		assertThat(notificacoes.next(), combinaComTestesIniciados(suiteDeTeste));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste137.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste137.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste140.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste140.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteIniciado(ClasseDeTeste143.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTesteFinalizado(ClasseDeTeste143.class, "testar"));
+		assertThat(notificacoes.next(), combinaComTestesFinalizados(3, 0, 0));
 		assertFalse(notificacoes.hasNext());
 	}
 

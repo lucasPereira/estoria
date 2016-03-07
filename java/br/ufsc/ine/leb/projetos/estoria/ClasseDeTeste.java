@@ -57,6 +57,10 @@ public final class ClasseDeTeste {
 		return classesProvedoras;
 	}
 
+	public List<ClasseDeTeste> obterClassesConsumidoras() {
+		return classesConsumidoras;
+	}
+
 	public List<Atributo> obterAtributosProprios() {
 		return atributosProprios;
 	}
@@ -94,10 +98,6 @@ public final class ClasseDeTeste {
 	@Override
 	public String toString() {
 		return classe.getSimpleName();
-	}
-
-	public List<ClasseDeTeste> obterClassesConsumidoras() {
-		return classesConsumidoras;
 	}
 
 }

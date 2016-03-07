@@ -1,6 +1,9 @@
 package br.ufsc.ine.leb.projetos.estoria;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -62,8 +65,12 @@ public class EscoltadorDeTestesReaproveitador extends Runner implements Filterab
 	}
 
 	private void executar() {
-		Set<ClasseDeTeste> ramosDeExecucao = obterRamosDeExecucao();
-		Set<Metodo> testes = obterTestes();
+		List<ClasseDeTeste> ramosDeExecucao = new ArrayList<>(obterRamosDeExecucao());
+		List<Metodo> testes = new ArrayList<>(obterTestes());
+		Collections.sort(ramosDeExecucao, construirOrdenadorDeRamoDeExecucao());
+		Collections.sort(testes, construirComparadorDeMetodo());
+		System.out.println(ramosDeExecucao);
+		System.out.println(testes);
 		ramosDeExecucao.forEach(classeDeTeste -> {
 			Map<ClasseDeTeste, InvocadorDeMetodo<?>> invocadores = new HashMap<>();
 			executar(classeDeTeste, testes, invocadores);
@@ -74,7 +81,7 @@ public class EscoltadorDeTestesReaproveitador extends Runner implements Filterab
 		});
 	}
 
-	private void executar(ClasseDeTeste classeDeTeste, Set<Metodo> testes, Map<ClasseDeTeste, InvocadorDeMetodo<?>> invocadores) {
+	private void executar(ClasseDeTeste classeDeTeste, List<Metodo> testes, Map<ClasseDeTeste, InvocadorDeMetodo<?>> invocadores) {
 		if (!invocadores.containsKey(classeDeTeste)) {
 			InvocadorDeMetodo<?> invocador = new InvocadorDeMetodo<>(classeDeTeste.obterClasse());
 			invocadores.put(classeDeTeste, invocador);
@@ -93,7 +100,7 @@ public class EscoltadorDeTestesReaproveitador extends Runner implements Filterab
 		});
 	}
 
-	private void executar(Metodo metodoDeTeste, Set<Metodo> testes, Map<ClasseDeTeste, InvocadorDeMetodo<?>> invocadores) {
+	private void executar(Metodo metodoDeTeste, List<Metodo> testes, Map<ClasseDeTeste, InvocadorDeMetodo<?>> invocadores) {
 		if (testes.contains(metodoDeTeste)) {
 			Description descricao = criarDescricao(metodoDeTeste);
 			mensageiroDeEscolta.fireTestStarted(descricao);
@@ -171,6 +178,31 @@ public class EscoltadorDeTestesReaproveitador extends Runner implements Filterab
 
 	private void filtrar(List<Description> filhos, Description descricao) {
 		filhos.add(descricao);
+	}
+
+	private Comparator<Metodo> construirComparadorDeMetodo() {
+		return new Comparator<Metodo>() {
+
+			@Override
+			public int compare(Metodo metodo1, Metodo metodo2) {
+				Integer nomeClasseDeTeste = metodo1.obterClasseDeTeste().obterClasse().getSimpleName().compareTo(metodo2.obterClasseDeTeste().obterClasse().getSimpleName());
+				Integer nomeMetodo = metodo1.obterNome().compareTo(metodo2.obterNome());
+				return nomeClasseDeTeste == 0 ? nomeMetodo : nomeClasseDeTeste;
+			}
+
+		};
+	}
+
+	private Comparator<ClasseDeTeste> construirOrdenadorDeRamoDeExecucao() {
+		return new Comparator<ClasseDeTeste>() {
+
+			@Override
+			public int compare(ClasseDeTeste classeDeTeste1, ClasseDeTeste classeDeTeste2) {
+				Integer nomeClasseDeTeste = classeDeTeste1.obterClasse().getSimpleName().compareTo(classeDeTeste2.obterClasse().getSimpleName());
+				return nomeClasseDeTeste;
+			}
+
+		};
 	}
 
 }
